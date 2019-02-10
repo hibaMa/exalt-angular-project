@@ -1,0 +1,90 @@
+.container{
+  width: 100%;
+  height: 100%;
+  background-image: url("../../assets/images/beaches.jpg");
+}
+.container .signUp-container{
+  padding: 20px 22px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  width:320px ;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.container .header{
+  display: flex;
+
+}
+
+.container .header .logo{
+  width:30px ;
+  height:30px ;
+  position: relative;
+  top: 3px;
+}
+.container .header .logo img{
+  width: 100%;
+  height: 100%;
+}
+
+.container .header .companyName{
+  padding-left: 10px;
+}
+.container .header .title1{
+  font-family: Roboto;
+  font-size: 12px;
+  color: #5a5a5a;
+}
+.container .header .title2{
+  font-family: Roboto;
+  font-size: 18px;
+  color: #5a5a5a;
+}
+.container .signUp-form .title{
+  padding:20px 0 10px 0;
+  font-family: Roboto;
+  font-size: 18px;
+  color: #0096d6;
+}
+.container .signUp-form input[type="email"],
+.container .signUp-form input[type="password"]
+{
+  border: none;
+  border-bottom: 1px solid #f2f2f2;
+  width: 100%;
+  height:26px;
+}
+.container .signUp-form input::placeholder{
+  color: #b9b9b9;
+  font-size: 12px;
+}
+
+
+.container .signUp-form .signUpBtn{
+  background-color: #0096d6;
+  border: none;
+  width: 100%;
+  color: white;
+  margin-top: 32px;
+  height: 26px;
+  font-size: 12px;
+  font-family: Roboto;
+
+}
+.container .signUp-form .signUpBtn:hover{
+  cursor: pointer;
+}
+
+.container .signUp-container .copy-right{
+  margin-top: auto;
+  font-family: Roboto;
+  font-size: 10px;
+  color: #5a5a5a;
+  text-align: center;
+
+}

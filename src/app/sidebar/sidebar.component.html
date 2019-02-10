@@ -1,0 +1,19 @@
+
+
+
+<div class="sidebar-container" >
+  <div [class.selected]="selectedTap[myRequestTap]" (click)="selectTap(myRequestTap)">
+    <a routerLink="myRequest" >
+     <i class="fa fa-file-text-o" aria-hidden="true"></i>
+     <div class="font inline-block">My Requests</div>
+    </a>
+  </div>
+
+  <div  [class.selected]="selectedTap[workPlanTap]" (click)="selectTap(workPlanTap)">
+    <a routerLink="workPlan" >
+      <i class="fa fa-files-o" aria-hidden="true"></i>
+      <div class="font inline-block">Weekly Work Plan</div>
+    </a>
+  </div>
+</div>
+

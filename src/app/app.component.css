@@ -1,0 +1,46 @@
+
+.main-container{
+  display: grid;
+  grid-template-rows:50px auto;
+  height: 100%;
+}
+.header{
+  grid-column: 1/-1;
+
+}
+
+.content-container{
+  display: flex;
+  align-items: stretch;
+
+}
+
+.sidebar{
+  position: absolute;
+  top:50px;
+  bottom: 0;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: #ffffff;
+  display: block;
+  width: 247px;
+  transform: translate(0px,0px);
+  transition: transform 1s ease;
+
+}
+
+.content{
+  justify-self: stretch;
+  background: rgba(50,50,50,0.1);
+  flex: auto;
+
+}
+
+.hiddenSidebar .sidebar{
+  transform: translate(-247px,0px);
+  transition: transform 1s ease;
+
+
+}
+
+.hiddenSidebar .content{
+}

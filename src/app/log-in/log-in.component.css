@@ -1,0 +1,145 @@
+.container{
+  width: 100%;
+  height: 100%;
+  background-image: url("../../assets/images/beaches.jpg");
+}
+.container .signIn-container{
+  padding: 20px 22px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  width:320px ;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.container .header{
+  display: flex;
+
+}
+
+.container .header .logo{
+  width:30px ;
+  height:30px ;
+  position: relative;
+  top: 3px;
+}
+.container .header .logo img{
+  width: 100%;
+  height: 100%;
+}
+
+.container .header .companyName{
+  padding-left: 10px;
+}
+.container .header .title1{
+  font-family: Roboto;
+  font-size: 12px;
+  color: #5a5a5a;
+}
+.container .header .title2{
+  font-family: Roboto;
+  font-size: 18px;
+  color: #5a5a5a;
+}
+.container .signIn-form .title{
+  padding:20px 0 10px 0;
+  font-family: Roboto;
+  font-size: 18px;
+  color: #0096d6;
+}
+.container .signIn-form input[type="email"],
+.container .signIn-form input[type="password"]
+{
+  border: none;
+  border-bottom: 1px solid #f2f2f2;
+  width: 100%;
+  height:26px;
+}
+.container .signIn-form input::placeholder{
+  color: #b9b9b9;
+  font-size: 12px;
+}
+.container .signIn-form a.forgetPass{
+  color: #0096d6;
+  font-family: Roboto;
+  font-size: 12px;
+  text-align: right;
+  width: 100%;
+  display: inline-block;
+  margin: 9px 0;
+}
+
+.container .signIn-form a.forgetPass:hover {
+  cursor: pointer;
+}
+
+.container .signIn-form input[type=checkbox]{
+  position: absolute;
+  /*left: -10px;*/
+  z-index: -100;
+}
+.container .signIn-form .checkBoxes{
+  display: flex;
+}
+.container .signIn-form .checkBoxes:hover{
+  cursor: pointer;
+}
+.container .signIn-form .choice{
+  color: #5a5a5a;
+  font-family: Roboto;
+  font-size: 12px;
+  position: relative;
+  top: 7px;
+}
+.container .signIn-form .checkBox{
+  width: 18px;
+  height: 18px;
+  border: 2px solid #5a5a5a;
+  border-radius: 2px;
+  margin: 5px;
+
+}
+.container .signIn-form .checkBox .icon{
+  color: white;
+  font-size: 12px;
+  font-weight: normal;
+  padding: 1px;
+}
+.container .signIn-form .checked{
+  background-color: #0096d6;
+}
+
+
+.container .signIn-form .signInBtn{
+  background-color: #0096d6;
+  border: none;
+  width: 100%;
+  color: white;
+  margin-top: 32px;
+  height: 26px;
+  font-size: 12px;
+  font-family: Roboto;
+
+}
+.container .signIn-form .signInBtn:hover{
+  cursor: pointer;
+}
+
+.container .signIn-form .errorMsg{
+  font-size: 12px;
+  color: red;
+  font-family: Roboto;
+  padding-top: 10px;
+}
+
+.container .signIn-container .copy-right{
+  margin-top: auto;
+  font-family: Roboto;
+  font-size: 10px;
+  color: #5a5a5a;
+  text-align: center;
+
+}

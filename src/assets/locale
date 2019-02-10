@@ -1,0 +1,6 @@
+
+let local = {
+  "Post": "Angular Json Files",
+  "CanEdit": true,
+  "Version": 7
+};
