@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../User';
 import {DataBaseService} from "../services/data-base.service";
 import {Router} from "@angular/router"
-import {ReadFromJSONFileService} from "../services/read-from-jsonfile.service";
-
+import {data} from "../locale";
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
@@ -20,7 +19,6 @@ export class LogInComponent implements OnInit {
     this.KeepMeSignedIn = !this.KeepMeSignedIn;
   }
 
-  token={};
   errorMsg:string;
   showErrorMsg=false;
 
@@ -29,7 +27,9 @@ export class LogInComponent implements OnInit {
       this.signIn(userEmail,userPass);
     }
   }
-
+  saveToken(token:object):void{
+    localStorage.setItem("auth_token",JSON.stringify(token));
+  }
   signIn(userEmail:string,userPass:string){
     userEmail=userEmail.trim();
     userPass=userPass.trim();
@@ -40,19 +40,19 @@ export class LogInComponent implements OnInit {
     this.userInfo.password=userPass;
     this.dataBaseService.getLogInToken(this.userInfo).subscribe(
       (token)=>{
-          this.token = token;
+          this.saveToken(token);
           this.showErrorMsg=false;
           this.router.navigate(['/main'])
 
       },
       (error)=>{
-        this.errorMsg ="wrong email or password ";
+        this.errorMsg =data.english.auth_error_msg;
         this.showErrorMsg=true;
       }
     );
 
   }
-  constructor(private dataBaseService:DataBaseService,private router: Router,private readFromJSONFileService:ReadFromJSONFileService) { }
+  constructor(private dataBaseService:DataBaseService,private router: Router) { }
 
   ngOnInit() {
     this.userInfo=new User();

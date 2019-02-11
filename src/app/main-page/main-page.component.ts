@@ -11,6 +11,7 @@ export class MainPageComponent implements OnInit {
   constructor(private sidebarService:SidebarService) { }
 
   ngOnInit() {
+    // console.log(JSON.parse(localStorage.getItem("auth_token")));
   }
 
 }
