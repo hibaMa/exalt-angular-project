@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DataBaseService} from "../services/data-base.service";
+import {SidebarService} from "../services/sidebar.service";
 
 @Component({
   selector: 'app-requests',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestsComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private dataBaseService:DataBaseService) { }
+  requests=[];
   ngOnInit() {
+    this.dataBaseService.getRequestByUserId().subscribe(
+      (requests)=>{
+        this.requests=requests;
+
+      }
+    )
   }
+
+  toggleSittingDiv(index:number):void{
+  }
+
+
+
 
 }

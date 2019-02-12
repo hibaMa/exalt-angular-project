@@ -12,13 +12,20 @@ const httpOptions = {
 })
 export class DataBaseService {
 
-  private URL="https://hptestinghub.com/testhub/auth";
+  private AuthURL="https://hptestinghub.com/testhub/auth";
+  private RequestURL="https://hptestinghub.com/testhub/api/v1/request";
   constructor(private http: HttpClient) { }
 
   getLogInToken(userInfo:User):Observable<any>{
-    return this.http.post<any>(this.URL, userInfo, httpOptions);
+    return this.http.post<any>(this.AuthURL, userInfo, httpOptions);
 
   }
+
+  getRequestByUserId():Observable<any>{
+    return this.http.get<any>(this.RequestURL, httpOptions);
+
+  }
+
 
 
 }

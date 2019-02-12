@@ -16,54 +16,28 @@
       <li></li>
     </ul>
 
-    <ul>
-      <li>Test Name_1</li>
-      <li>Project Name_1</li>
-      <li>Feb 15, 2018</li>
-      <li><img class="press_img inline-block" src="../../assets/images/factory.png"><div class="note inline-block">T400S</div><a href="#" class="info-link"><i class="info-icon fa fa-info-circle" aria-hidden="true"></i></a></li>
-      <li><i class="status-icon inline-block fa fa-check-circle-o"></i><div class="note inline-block">Pending Approval</div></li>
-      <li><i class="note-icon fa fa-list-alt" aria-hidden="true"></i><i class=" fa fa-ellipsis-v"></i></li>
+    <ul *ngFor="let request of requests;let i = index" [class.noted]="request.comment" >
+      <li>{{request.name}}</li>
+      <li>{{request.project.name}}</li>
+      <li>{{request.created | date:'dd-mm-yyyy' }}</li>
+      <li><img class="press_img inline-block" [src]="request.presses[0].imageUrl"><div class="note inline-block">{{request.presses[0].name}}</div><a href="#" class="info-link"><i class="info-icon fa fa-info-circle" aria-hidden="true"></i></a></li>
+      <li [class.remove]="!(request.status=='PENDING' || request.status=='PLANNED')" ><i class="pending icon fa fa-clock-o" aria-hidden="true"></i><div class="status inline-block">Pending Approval</div></li>
+      <!--<li [class.remove]="!(request.status=='PENDING' || request.status=='PLANNED')" ><i class="status-icon icon inline-block fa fa-check-circle-o"></i><div class=" status inline-block">Pending Approval</div></li>-->
+      <li>
+        <i class="note-icon fa fa-list-alt" aria-hidden="true">
+          <div class="note">{{request.comment}}</div>
+        </i>
+        <i class="sittings-icon fa fa-ellipsis-v" (click)="toggleSittingDiv(i)">
+          <!--<div class="sittings">-->
+            <!--<div class="duplicate">Duplicate</div>-->
+            <!--<div class="delete">Delete Request</div>-->
+          <!--</div>-->
+        </i>
+      </li>
+
     </ul>
 
-    <ul class="selected"  >
-      <li>Test Name_1</li>
-      <li>Project Name_1</li>
-      <li>Feb 15, 2018</li>
-      <li><img class="press_img inline-block" src="../../assets/images/factory.png"><div class="note inline-block">T400S</div>
-        <a href="#" class="info-link">
-          <i class="info-icon fa fa-info-circle" aria-hidden="true"></i>
-          <ul class="info-list">
-            <li>
-              <img class="tr-img inline-block" src="../../assets/images/factory.png">
-              <div class="inline-block">T400S</div>
-            </li>
-            <li>
-              <img class="tr-img inline-block" src="../../assets/images/factory.png">
-              <div class="inline-block">T400S</div>
-            </li>
-          </ul>
-        </a></li>
-      <li><i class="status-icon inline-block fa fa-check-circle-o"></i><div class="note inline-block">Pending Approval</div></li>
-      <li><i class="note-icon fa fa-list-alt" aria-hidden="true"></i><i class=" fa fa-ellipsis-v"></i></li>
-    </ul>
 
-    <ul class="noted">
-      <li>Test Name_1</li>
-      <li>Project Name_1</li>
-      <li>Feb 15, 2018</li>
-      <li><img class="press_img inline-block" src="../../assets/images/factory.png"><div class="note inline-block">T400S</div><a href="#" class="info-link"><i class="info-icon fa fa-info-circle" aria-hidden="true"></i></a></li>
-      <li><i class="status-icon inline-block fa fa-check-circle-o"></i><div class="note inline-block">Pending Approval</div></li>
-      <li><i class="note-icon fa fa-list-alt" aria-hidden="true"></i><i class=" fa fa-ellipsis-v"></i></li>
-    </ul>
-
-    <ul class="noted">
-      <li>Test Name_1</li>
-      <li>Project Name_1</li>
-      <li>Feb 15, 2018</li>
-      <li><img class="press_img inline-block" src="../../assets/images/factory.png"><div class="note inline-block">T400S</div><a href="#" class="info-link"><i class="info-icon fa fa-info-circle" aria-hidden="true"></i></a></li>
-      <li><i class="status-icon inline-block fa fa-check-circle-o"></i><div class="note inline-block">Pending Approval</div></li>
-      <li><i class="note-icon fa fa-list-alt" aria-hidden="true"></i><i class=" fa fa-ellipsis-v"></i></li>
-    </ul>
 
   </div>
 

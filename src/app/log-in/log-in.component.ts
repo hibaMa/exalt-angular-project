@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../User';
 import {DataBaseService} from "../services/data-base.service";
 import {Router} from "@angular/router"
-import {data} from "../locale";
+import {LocaleService} from "../services/locale.service"
+
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
@@ -12,6 +13,13 @@ export class LogInComponent implements OnInit {
   userInfo:User;
   isRememberMeChecked = false;
   KeepMeSignedIn = false;
+
+  constructor(private dataBaseService:DataBaseService,private router: Router,private localeService:LocaleService) { }
+
+  ngOnInit() {
+    this.userInfo=new User();
+  }
+
   toggleRememberMe(): void {
     this.isRememberMeChecked = !this.isRememberMeChecked;
   }
@@ -46,16 +54,12 @@ export class LogInComponent implements OnInit {
 
       },
       (error)=>{
-        this.errorMsg =data.english.auth_error_msg;
+        this.errorMsg = this.localeService.getMessage("english","auth_error_msg");
         this.showErrorMsg=true;
       }
     );
 
   }
-  constructor(private dataBaseService:DataBaseService,private router: Router) { }
 
-  ngOnInit() {
-    this.userInfo=new User();
-  }
 
 }
