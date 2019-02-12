@@ -40,11 +40,14 @@
   font-size: 21px;
   color: #0096d6;
   font-weight: bold;
-  padding: 9px 14px 0px 14px;
+  padding: 15px 20px 0 15px;
 }
 
-
+.navbar .user_icon:hover{
+  cursor: pointer;
+}
 .userDetails{
+  margin: 3px;
   height: 100px;
   width: 170px;
   display: grid;
@@ -85,10 +88,4 @@
 
 }
 
-.userDetails{
-  display: none;
-}
 
-.user_icon:hover .userDetails{
-  display: block;
-}

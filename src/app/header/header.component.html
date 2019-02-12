@@ -10,10 +10,10 @@
   </div>
 
 
-  <div class="user_icon">
+  <div class="user_icon" (click)="showUserInfo=!showUserInfo">
    <i class="fa fa-user-o " ></i>
-   <div class="userDetails">
-     <div class="details">
+   <div class="userDetails" *ngIf="showUserInfo">
+     <div class="details" >
        <div class="name">John Smith</div>
        <div class="position">Test Owner</div>
      </div>

@@ -33,6 +33,10 @@
   border: none;
 }
 
+.request .req-btn:hover{
+  cursor: pointer;
+}
+
 .requestTable{
   margin:10px;
   grid-column:1/-1;
@@ -110,31 +114,35 @@
   right: 10px;
   top: 25px;
   z-index: 100;
-  display: none;
 
-}
-.requestTable ul .note-icon:hover .note{
-  display: block;
 }
 .requestTable ul.noted .note-icon{
   visibility:visible;
 }
+.requestTable ul.noted .note-icon:hover{
+  cursor: pointer;
+}
 
-.requestTable ul .sittings-icon{
+.requestTable ul .sittings-icon {
   position: relative;
+  padding: 10px 30px;right: 0px;
+}
+.requestTable ul .sittings-icon:hover{
+  cursor: pointer;
 }
 
 .requestTable ul .sittings-icon .sittings{
   position: absolute;
   background-color: white;
-  padding: 5px;
+  padding: 0 5px;
   font-family: Roboto;
   font-size: 12px;
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
   width: 100px;
-  right: -15px;
-  top: 25px;
+  right: 0px;
+  top: 30px;
   z-index: 100;
+
 }
 .requestTable ul .sittings-icon .sittings div{
   height: 26px;
@@ -144,9 +152,6 @@
   color: #d7410b;
 
 }
-
-
-
 .requestTable ul li .press_img{
   padding:3px;
   width: 122.6px;

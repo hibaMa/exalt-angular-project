@@ -20,18 +20,20 @@
       <li>{{request.name}}</li>
       <li>{{request.project.name}}</li>
       <li>{{request.created | date:'dd-mm-yyyy' }}</li>
-      <li><img class="press_img inline-block" [src]="request.presses[0].imageUrl"><div class="note inline-block">{{request.presses[0].name}}</div><a href="#" class="info-link"><i class="info-icon fa fa-info-circle" aria-hidden="true"></i></a></li>
-      <li [class.remove]="!(request.status=='PENDING' || request.status=='PLANNED')" ><i class="pending icon fa fa-clock-o" aria-hidden="true"></i><div class="status inline-block">Pending Approval</div></li>
+      <li><img class="press_img inline-block" [src]="baseURL+request.presses[0].imageUrl"><div class="note inline-block">{{request.presses[0].name}}</div><a href="#" class="info-link"><i class="info-icon fa fa-info-circle" aria-hidden="true"></i></a></li>
+      <li *ngIf="request.status=='PENDING' || request.status=='PLANNED'" ><i class="pending icon fa fa-clock-o" aria-hidden="true"></i><div class="status inline-block">Pending Approval</div></li>
       <!--<li [class.remove]="!(request.status=='PENDING' || request.status=='PLANNED')" ><i class="status-icon icon inline-block fa fa-check-circle-o"></i><div class=" status inline-block">Pending Approval</div></li>-->
+
       <li>
-        <i class="note-icon fa fa-list-alt" aria-hidden="true">
-          <div class="note">{{request.comment}}</div>
+        <i class="note-icon fa fa-list-alt" aria-hidden="true" (click)="toggleNoteDiv(i)">
+          <div class="note" *ngIf="noteDivs[i]">{{request.comment}}</div>
         </i>
+
         <i class="sittings-icon fa fa-ellipsis-v" (click)="toggleSittingDiv(i)">
-          <!--<div class="sittings">-->
-            <!--<div class="duplicate">Duplicate</div>-->
-            <!--<div class="delete">Delete Request</div>-->
-          <!--</div>-->
+          <div class="sittings" *ngIf="sittingDivs[i]">
+            <div class="duplicate">Duplicate</div>
+            <div class="delete">Delete Request</div>
+          </div>
         </i>
       </li>
 

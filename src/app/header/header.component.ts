@@ -9,7 +9,7 @@ import { SidebarService } from '../services/sidebar.service';
 
 export class HeaderComponent implements OnInit {
 
-
+  showUserInfo:boolean=false;
   toggleSidebar():void{
     this.sidebarService.isSidebarHidden=! this.sidebarService.isSidebarHidden;
   }

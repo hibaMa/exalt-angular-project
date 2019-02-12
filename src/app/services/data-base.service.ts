@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from "rxjs";
 import {User} from "../User";
-
+import { data } from "../constant";
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -12,8 +12,8 @@ const httpOptions = {
 })
 export class DataBaseService {
 
-  private AuthURL="https://hptestinghub.com/testhub/auth";
-  private RequestURL="https://hptestinghub.com/testhub/api/v1/request";
+  private AuthURL=data.baseURL+"/auth";
+  private RequestURL=data.baseURL+"/api/v1/request";
   constructor(private http: HttpClient) { }
 
   getLogInToken(userInfo:User):Observable<any>{
