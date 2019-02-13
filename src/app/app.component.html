@@ -1,2 +1,68 @@
 
-<router-outlet></router-outlet>
+<!--<router-outlet></router-outlet>-->
+<div class="forms-container">
+  <div class="formTitle">New Press Request</div>
+  <form-wizard>
+    <wizard-step [title]="'Step1'"  (onNext)="onStep1Next($event)">
+
+      <div class="first-form">
+        <div class="urgent">
+          Urgent submission during this week?
+        </div>
+
+        <div class="radioContainer">
+         <div class="type">Type</div>
+
+         <div class="TestRadioCont" (click)="toggleTest()">
+           <input type="checkbox" [checked]="isTestChecked">
+            <div class="TestRadio" [class.checked]="isTestChecked" >
+            <div class="checkedTestRadio" *ngIf="isTestChecked"></div>
+           </div>
+           <div class="title">Test</div>
+         </div>
+
+         <div class="LabRadioCont" (click)="toggleLab()">
+           <input type="checkbox" [checked]="isLabChecked">
+           <div class="LabRadio" [class.checked]="isLabChecked" >
+             <div class="checkedLabRadio" *ngIf="isLabChecked"></div>
+           </div>
+           <div class="title">Lab</div>
+         </div>
+      </div>
+
+        <div class="inputsForm" >
+          <input type="text" placeholder="Lorem ipsum">
+          <div></div>
+          <select>
+            <option value="one">Lorem ipsum</option>
+          </select>
+          <select>
+            <option value="one">Lorem ipsum</option>
+          </select>
+          <input type="number" value="1">
+          <div class="halfShift">Half shift</div>
+        </div>
+        <div class="slider">  </div>
+      </div>
+      <button class="cancel">CANCEL</button>
+
+
+    </wizard-step>
+    <wizard-step [title]="'Step2'" (onNext)="onStep2Next($event)">
+      <h1>Step2</h1>
+    </wizard-step>
+    <wizard-step [title]="'Step3'" (onNext)="onStep3Next($event)">
+      <h1>Step3</h1>
+    </wizard-step>
+    <wizard-step [title]="'Step4'" (onComplete)="onComplete($event)">
+      <div [ngSwitch]="isCompleted">
+        <div *ngSwitchDefault>
+          <h1>Step4</h1>
+        </div>
+        <div *ngSwitchCase="true">
+          <h4>Thank you! You have completed all the steps.</h4>
+        </div>
+      </div>
+    </wizard-step>
+  </form-wizard>
+</div>
