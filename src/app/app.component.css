@@ -1,3 +1,5 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 .forms-container{
   width: 600px;
   position: absolute;
@@ -6,6 +8,7 @@
   background-color:white;
   padding: 10px;
 }
+
 
 .forms-container .formTitle{
   font-family: Roboto;
@@ -47,6 +50,10 @@ li.active[_ngcontent-c1] a{
   font-size: 14px;
   color: #5a5a5a;
   font-weight: bold
+}
+
+.urgent .urgent-text{
+  margin-right: 20px;
 }
 
 .radioContainer{
@@ -111,8 +118,22 @@ li.active[_ngcontent-c1] a{
 
  }
 
+.inputsForm .halfShiftText {
+  position: relative;
+  margin-right: 15px;
+  top: -1px;
+}
 .inputsForm .halfShift{
+
   padding-top: 55px;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
+background-color: rgba(0,150,214,.54);
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #0096d6;
 }
 
 .slider{
@@ -149,4 +170,10 @@ li.active[_ngcontent-c1] a{
   font-size: 14px;
   color: #5a5a5a;
   font-weight: bold;
+}
+
+.carouselItem{
+  height: 100%;
+  width: 50px;
+  background-color: red;
 }

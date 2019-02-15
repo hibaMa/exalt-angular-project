@@ -24,7 +24,7 @@ export class RequestsComponent implements OnInit {
           this.noteDivs.push(false);
         }
       }
-    )
+    );
   }
 
   toggleSittingDiv(index:number):void{

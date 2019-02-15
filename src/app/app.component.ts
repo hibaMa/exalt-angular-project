@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
+import {DataBaseService} from './services/data-base.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,16 @@ import {Component, ViewEncapsulation} from '@angular/core';
 })
 export class AppComponent {
   title = 'angular';
-  email = '1@2.com';
   isTestChecked = false;
   isLabChecked = true;
+
+  halfShiftChecked = false;
+  urgentChecked = false;
+
+  isUrgent = false;
+  isHalfShift = false;
+  requests = ['1','2','3','4','5','6'];
+
   toggleTest(): void {
     this.isTestChecked = !this.isTestChecked;
     this.isLabChecked = this.isTestChecked ? false : this.isLabChecked;
@@ -19,6 +27,7 @@ export class AppComponent {
     this.isLabChecked = !this.isLabChecked;
     this.isTestChecked = this.isLabChecked ? false : this.isTestChecked;
   }
-  constructor() { }
+  constructor(private dataBaseService:DataBaseService) { }
+
 
 }

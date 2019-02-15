@@ -19,6 +19,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptorService } from './services/jwt-interceptor.service';
 import { FormWizardModule } from 'angular2-wizard';
 import { FormsModule } from '@angular/forms';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FormsModule } from '@angular/forms';
 
   ],
   imports: [
+    MatSlideToggleModule,
     BrowserModule,
     AppRoutingModule,
     AngularFontAwesomeModule,
