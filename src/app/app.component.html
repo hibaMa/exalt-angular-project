@@ -2,7 +2,7 @@
 <div class="forms-container">
   <div class="formTitle">New Press Request</div>
   <form-wizard>
-    <wizard-step [title]="'Step1'"  (onNext)="onStep1Next($event)">
+    <wizard-step [title]="'Basic info'"  (onNext)="onStep1Next($event)">
 
       <div class="first-form">
         <div class="urgent">
@@ -53,13 +53,13 @@
 
 
     </wizard-step>
-    <wizard-step [title]="'Step2'" (onNext)="onStep2Next($event)">
+    <wizard-step [title]="'Request details'" (onNext)="onStep2Next($event)">
       <h1>Step2</h1>
     </wizard-step>
-    <wizard-step [title]="'Step3'" (onNext)="onStep3Next($event)">
+    <wizard-step [title]="'Test plan'" (onNext)="onStep3Next($event)">
       <h1>Step3</h1>
     </wizard-step>
-    <wizard-step [title]="'Step4'" (onComplete)="onComplete($event)">
+    <wizard-step [title]="'Submit'" (onComplete)="onComplete($event)">
       <div [ngSwitch]="isCompleted">
         <div *ngSwitchDefault>
           <h1>Step4</h1>

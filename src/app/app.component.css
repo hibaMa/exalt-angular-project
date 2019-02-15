@@ -37,7 +37,7 @@ li.active[_ngcontent-c1] a{
 }
 
 .nav-item[_ngcontent-c1] {
-  padding: 15px 40px !important;
+  padding: 15px 0 !important;
   border-bottom: 1px solid #f2f2f2 !important;
 }
 
@@ -133,6 +133,9 @@ background-color: rgba(0,150,214,.54);
 }
 
 .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #0096d6;
+}
+.mat-slide-toggle.mat-checked .mat-ripple-element{
   background-color: #0096d6;
 }
 
