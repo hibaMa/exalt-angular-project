@@ -1,0 +1,234 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.forms-container{
+  width: 600px;
+  position: absolute;
+  margin: auto;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color:white;
+  padding: 10px;
+}
+
+
+.forms-container .formTitle{
+  font-family: Roboto;
+  font-size: 16px;
+  color: #5a5a5a;
+  padding: 6px 10px;
+  border-bottom: 1px solid #5a5a5a;
+}
+
+/*----------------------*/
+.card[_ngcontent-c1]{
+  border: none;
+}
+a:not([href]):not([tabindex]){
+  font-family: Roboto;
+  font-size: 14px;
+  color: #b9b9b9;
+
+}
+li.active[_ngcontent-c1]{
+  border-bottom: 1px solid #0096d6;
+}
+li.active[_ngcontent-c1] a{
+  color: #0096d6 !important;
+
+}
+.card[_ngcontent-c2]{
+  border: none;
+}
+.nav-item[_ngcontent-c2] {
+  padding: 15px 0 !important;
+  border-bottom: 1px solid #f2f2f2 !important;
+}
+
+
+.urgent{
+  margin-top: 15px;
+  background-color: #bbedff;
+  padding: 9px 20px;
+  font-family: Roboto;
+  font-size: 14px;
+  color: #5a5a5a;
+  font-weight: bold
+}
+
+.urgent .urgent-text{
+  margin-right: 20px;
+}
+
+.radioContainer{
+  padding: 18px 10px;
+  display: flex;
+}
+
+.radioContainer .type{
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+  color: #5a5a5a;
+  line-height: 1.2;
+  margin-right: 15px;
+}
+.radioContainer .TestRadioCont .TestRadio,.radioContainer .LabRadioCont .LabRadio{
+  display: inline-block;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #5a5a5a;
+  padding: 2px;
+}
+.radioContainer .TestRadioCont .TestRadio.checked,.radioContainer .LabRadioCont .LabRadio.checked {
+  border: 2px solid #0096d6;
+}
+.radioContainer .TestRadioCont:hover,.radioContainer .LabRadioCont:hover{
+  cursor: pointer;
+}
+.radioContainer .TestRadioCont .TestRadio .checkedTestRadio,.radioContainer .LabRadioCont .LabRadio .checkedLabRadio{
+  height: 100%;
+  width: 100%;
+  background-color:#0096d6;
+  border-radius:50% ;
+}
+.radioContainer .TestRadioCont .title,.radioContainer .LabRadioCont .title{
+  margin-right: 14px;
+  font-family: Roboto;
+  font-size: 12px;
+  display: inline-block;
+  color: #5a5a5a;
+  position: relative;
+  top: -5px;
+  margin-left: 4px;
+}
+
+.radioContainer input[type="checkbox"]{
+  position: absolute;
+  z-index: -1;
+}
+
+.inputsForm{
+  display: grid;
+  grid-template-columns:1fr 1fr ;
+  grid-template-rows: repeat(3,80px);
+
+}
+.inputsForm input,.inputsForm select{
+  border: none;
+  border-bottom: 1px solid #b9b9b9;
+  margin: 40px 20px 0 0;
+
+}
+
+.inputsForm .halfShiftText {
+  position: relative;
+  margin-right: 15px;
+  top: -1px;
+}
+.inputsForm .halfShift{
+
+  padding-top: 55px;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
+  background-color: rgba(0,150,214,.54);
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #0096d6;
+}
+.mat-slide-toggle.mat-checked .mat-ripple-element{
+  background-color: #0096d6;
+}
+
+.slider{
+  position: relative;
+  height: 146px;
+  background-color: #f2f2f2;
+  margin: 20px 0;
+  overflow: hidden;
+  padding-left: 4px;
+
+}
+
+.slider ul{
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style-type:none ;
+}
+.slider li.slideItem{
+  float: left;
+  width: 170px;
+  height: 90px;
+  background-color: wheat;
+  margin: 10px;
+}
+.slider .sliderTitle{
+  font-family: Roboto;
+  font-size: 14px;
+  color: #5a5a5a;
+  font-weight: bold;
+  margin: 10px;
+  margin-bottom: 0;
+}
+.slider .slideLeft{
+  left: -5px;
+}
+.slider .slideRight{
+  right: -5px;
+}
+.slider .slideRight,.slider .slideLeft{
+  position: absolute;
+  z-index: 100;
+  font-size: 20px;
+  padding-top: 46px;
+  font-weight: bold;
+}
+.slider .slideLeft .fa-angle-left,.slider .slideRight .fa-angle-right{
+  padding: 3px;
+  height: 27px;
+  width: 27px;
+  border-radius: 50%;
+  text-align: center;
+}
+.slider .slideLeft:hover .fa-angle-left,.slider .slideRight:hover .fa-angle-right{
+  background-color: rgba(50,50,50,0.1);
+
+  cursor: pointer;
+}
+.cancel{
+  position: absolute;
+  bottom: 16px;
+  left: -3px;
+  border: none;
+  background: rgba(0,0,0,0);
+  font-family: Roboto;
+  font-size: 12px;
+  color: #5a5a5a;
+}
+.btn-secondary{
+  width: 60px;
+  height: 26px;
+  background-color: #0096d6;
+  font-family: Roboto;
+  font-size: 12px;
+  padding: 0;
+  color: #ffffff;
+  border-radius: 0;
+}
+.btn-secondary:hover{
+  background-color: #0096d6;
+}
+.halfShift{
+  font-family: Roboto;
+  font-size: 14px;
+  color: #5a5a5a;
+  font-weight: bold;
+}
+
+.carouselItem{
+  height: 100%;
+  width: 50px;
+  background-color: red;
+}

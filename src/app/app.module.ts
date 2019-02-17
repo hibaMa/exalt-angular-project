@@ -20,6 +20,7 @@ import { JwtInterceptorService } from './services/jwt-interceptor.service';
 import { FormWizardModule } from 'angular2-wizard';
 import { FormsModule } from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { AddRequestComponent } from './add-request/add-request.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     WorkPlanComponent,
     LogInComponent,
     RegisterComponent,
-    MainPageComponent
+    MainPageComponent,
+    AddRequestComponent
 
   ],
   imports: [
