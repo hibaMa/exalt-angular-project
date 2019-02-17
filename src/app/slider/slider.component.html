@@ -1,0 +1,12 @@
+<div class="slider">
+  <div class="sliderTitle">Available Presses</div>
+  <div class="slideLeft" (click)="sliderLeftArrow()"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+  <div class="slideRight" (click)="sliderRightArrow()"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+  <ul>
+    <li class="slideItem" *ngFor="let item of items">
+      <div class="img">  <img src="../../assets/images/hp.png" alt=""></div>
+      <div class="title">title{{item}}</div>
+      <div class="subTitle">subTitle</div>
+    </li>
+  </ul>
+</div>

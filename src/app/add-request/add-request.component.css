@@ -141,62 +141,7 @@ li.active[_ngcontent-c1] a{
   background-color: #0096d6;
 }
 
-.slider{
-  position: relative;
-  height: 146px;
-  background-color: #f2f2f2;
-  margin: 20px 0;
-  overflow: hidden;
-  padding-left: 4px;
 
-}
-
-.slider ul{
-  position: relative;
-  margin: 0;
-  padding: 0;
-  list-style-type:none ;
-}
-.slider li.slideItem{
-  float: left;
-  width: 170px;
-  height: 90px;
-  background-color: wheat;
-  margin: 10px;
-}
-.slider .sliderTitle{
-  font-family: Roboto;
-  font-size: 14px;
-  color: #5a5a5a;
-  font-weight: bold;
-  margin: 10px;
-  margin-bottom: 0;
-}
-.slider .slideLeft{
-  left: -5px;
-}
-.slider .slideRight{
-  right: -5px;
-}
-.slider .slideRight,.slider .slideLeft{
-  position: absolute;
-  z-index: 100;
-  font-size: 20px;
-  padding-top: 46px;
-  font-weight: bold;
-}
-.slider .slideLeft .fa-angle-left,.slider .slideRight .fa-angle-right{
-  padding: 3px;
-  height: 27px;
-  width: 27px;
-  border-radius: 50%;
-  text-align: center;
-}
-.slider .slideLeft:hover .fa-angle-left,.slider .slideRight:hover .fa-angle-right{
-  background-color: rgba(50,50,50,0.1);
-
-  cursor: pointer;
-}
 .cancel{
   position: absolute;
   bottom: 16px;

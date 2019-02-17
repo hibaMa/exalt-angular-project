@@ -21,6 +21,7 @@ import { FormWizardModule } from 'angular2-wizard';
 import { FormsModule } from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AddRequestComponent } from './add-request/add-request.component';
+import { SliderComponent } from './slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AddRequestComponent } from './add-request/add-request.component';
     LogInComponent,
     RegisterComponent,
     MainPageComponent,
-    AddRequestComponent
+    AddRequestComponent,
+    SliderComponent
 
   ],
   imports: [
