@@ -5,10 +5,18 @@ import { WorkPlanComponent } from './work-plan/work-plan.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { RegisterComponent } from './register/register.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import {EnterComponent} from './enter/enter.component';
 
 const routes: Routes = [
-  {path:'logIn',component:LogInComponent},
-  {path:'register',component:RegisterComponent},
+  {
+    path:'enter',
+    component:EnterComponent,
+    children:[
+      {path:'logIn',component:LogInComponent},
+      {path:'register',component:RegisterComponent},
+      { path: '', redirectTo: 'logIn', pathMatch: 'full' },
+    ]
+  },
   {
     path:'main',
     component:MainPageComponent,
@@ -18,7 +26,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'myRequest', pathMatch: 'full' },
     ]
   },
-  { path: '', redirectTo: '/logIn', pathMatch: 'full' },
+  { path: '', redirectTo: '/enter/logIn', pathMatch: 'full' },
 
 ];
 

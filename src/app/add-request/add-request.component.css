@@ -2,24 +2,33 @@
 
 .forms-container{
   width: 600px;
-  position: absolute;
+  height: 635px;
+  position: relative;
   margin: auto;
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
   background-color:white;
   padding: 10px;
 }
+.forms-container .formHeader {
+  border-bottom: 1px solid #5a5a5a;
 
+}
 
 .forms-container .formTitle{
+  display: inline-block;
   font-family: Roboto;
   font-size: 16px;
   color: #5a5a5a;
   padding: 6px 10px;
-  border-bottom: 1px solid #5a5a5a;
+}
+
+.card{
+  height: auto !important;
+  border:none;
 }
 
 /*----------------------*/
-.card[_ngcontent-c1]{
+.card-header{
   border: none;
 }
 a:not([href]):not([tabindex]){
@@ -35,11 +44,9 @@ li.active[_ngcontent-c1] a{
   color: #0096d6 !important;
 
 }
-.card[_ngcontent-c2]{
-  border: none;
-}
-.nav-item[_ngcontent-c2] {
-  padding: 15px 0 !important;
+
+.nav-justified .nav-item {
+  padding: 10px 0 !important;
   border-bottom: 1px solid #f2f2f2 !important;
 }
 
@@ -110,13 +117,13 @@ li.active[_ngcontent-c1] a{
 .inputsForm{
   display: grid;
   grid-template-columns:1fr 1fr ;
-  grid-template-rows: repeat(3,80px);
+  grid-template-rows: repeat(3,55px);
 
 }
 .inputsForm input,.inputsForm select{
   border: none;
   border-bottom: 1px solid #b9b9b9;
-  margin: 40px 20px 0 0;
+  margin: 20px 20px 0 0;
 
 }
 
@@ -127,7 +134,7 @@ li.active[_ngcontent-c1] a{
 }
 .inputsForm .halfShift{
 
-  padding-top: 55px;
+  padding-top: 30px;
 }
 
 .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
@@ -176,4 +183,34 @@ li.active[_ngcontent-c1] a{
   height: 100%;
   width: 50px;
   background-color: red;
+}
+/*2*/
+.RequestDetails{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.RequestDetails input{
+  border: none;
+  border-bottom: 1px solid #b9b9b9;
+  margin: 35px 20px 7px 0;
+}
+
+/*3*/
+.optionalText{
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+  color: #5a5a5a;
+  margin: 20px 0;
+}
+.testPlan{
+  display: flex;
+  flex-direction: column;
+}
+.testPlan input{
+  border: none;
+  border-bottom: 1px solid #b9b9b9;
+  margin: 35px 20px 155px 0;
 }

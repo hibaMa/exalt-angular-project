@@ -1,16 +1,16 @@
-.navbar{
+.mainNavbar{
   display:flex;
   border-bottom:2px solid #0096d6;
   background-color: white;
   height: 50px;
 }
 
-.navbar .nav_icon{
+.mainNavbar .nav_icon{
   padding: 13px;
   color: #5a5a5a;
   cursor: pointer;
 }
-.navbar .nav_icon:hover{
+.mainNavbar .nav_icon:hover{
   transform: scale(1.1);
   transition: transform 0.2s;
 }
@@ -21,21 +21,21 @@
   margin-top: 5px;
 }
 
-.navbar .title{
+.mainNavbar .title{
   padding: 5px 0px 0px 12px;
 }
-.navbar .title .subtitle1{
+.mainNavbar .title .subtitle1{
   color: #5a5a5a;
   font-family: Roboto;
   font-size: 12px;
 }
-.navbar .title .subtitle2{
+.mainNavbar .title .subtitle2{
   font-family: Roboto;
   color: #5a5a5a;
   font-size: 18px;
 }
 
-.navbar .user_icon{
+.mainNavbar .user_icon{
   margin-left:auto;
   font-size: 21px;
   color: #0096d6;
@@ -43,7 +43,7 @@
   padding: 15px 20px 0 15px;
 }
 
-.navbar .user_icon:hover{
+.mainNavbar .user_icon:hover{
   cursor: pointer;
 }
 .userDetails{
@@ -88,5 +88,4 @@
   font-size: 13px
 
 }
-
 

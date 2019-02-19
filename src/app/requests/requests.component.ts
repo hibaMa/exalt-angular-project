@@ -45,6 +45,10 @@ export class RequestsComponent implements OnInit {
     this.noteDivs[index]=!this.noteDivs[index];
   }
 
+  addRequest():void{
+    $(".addRequest").toggle();
+  }
+
 
 
 }

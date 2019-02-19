@@ -1,12 +1,15 @@
 <div class="forms-container">
-  <div class="formTitle">New Press Request</div>
+  <div class="formHeader">
+    <div class="formTitle">New Press Request</div>
+    <div class="close">x</div>
+  </div>
   <form-wizard>
-    <wizard-step [title]="'Basic info'"  (onNext)="onStep1Next($event)">
+    <wizard-step [title]="'Basic info'"  >
 
       <div class="first-form">
         <div class="urgent">
           <span class="urgent-text">Urgent submission during this week?</span>
-          <mat-slide-toggle [color]="urgentColor" [checked]="urgentChecked" [(ngModel)]="isUrgent"></mat-slide-toggle>
+          <mat-slide-toggle  [checked]="urgentChecked" [(ngModel)]="isUrgent"></mat-slide-toggle>
         </div>
 
         <div class="radioContainer">
@@ -45,22 +48,36 @@
           </div>
         </div>
 
-        <app-slider></app-slider>
+        <app-slider [items]="requestArray"></app-slider>
 
       </div>
 
-
       <button class="cancel">CANCEL</button>
 
+    </wizard-step>
+
+    <wizard-step [title]="'Request details'" >
+      <div class="RequestDetails">
+        <input type="text" placeholder="Lorem ipsum">
+        <input type="file">
+        <input type="file">
+        <input type="text" placeholder="Lorem ipsum">
+      </div>
+      <app-slider [items]="requestArray"></app-slider>
+
 
     </wizard-step>
-    <wizard-step [title]="'Request details'" (onNext)="onStep2Next($event)">
-      <h1>Step2</h1>
+
+    <wizard-step [title]="'Test plan'" >
+      <div class="testPlan">
+        <div class="optionalText">Locate and upload your test plan document (optional)</div>
+        <input type="file">
+      </div>
+
+      <app-slider [items]="requestArray"></app-slider>
     </wizard-step>
-    <wizard-step [title]="'Test plan'" (onNext)="onStep3Next($event)">
-      <h1>Step3</h1>
-    </wizard-step>
-    <wizard-step [title]="'Submit'" (onComplete)="onComplete($event)">
+
+    <wizard-step [title]="'Submit'" >
       <div [ngSwitch]="isCompleted">
         <div *ngSwitchDefault>
           <h1>Step4</h1>
@@ -72,3 +89,4 @@
     </wizard-step>
   </form-wizard>
 </div>
+

@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AddRequestComponent } from './add-request/add-request.component';
 import { SliderComponent } from './slider/slider.component';
+import { EnterComponent } from './enter/enter.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SliderComponent } from './slider/slider.component';
     RegisterComponent,
     MainPageComponent,
     AddRequestComponent,
-    SliderComponent
+    SliderComponent,
+    EnterComponent
 
   ],
   imports: [

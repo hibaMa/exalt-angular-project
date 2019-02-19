@@ -3,7 +3,7 @@
 
   <div class="request">
     <div class="req-title">My Requests</div>
-    <button class="req-btn">+ New Request</button>
+    <button class="req-btn" (click)="addRequest()">+ New Request</button>
   </div>
 
   <div class="requestTable">
@@ -44,4 +44,8 @@
   </div>
 
 
+</div>
+
+<div class="addRequest">
+  <app-add-request></app-add-request>
 </div>
