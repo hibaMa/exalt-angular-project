@@ -69,24 +69,32 @@
           <span class="title">Request media</span>
           <div class="add">
             <span (click)="requestMediaPopupShow()">+ &nbsp;&nbsp; Add</span>
-            <div class="addedContent"></div>
+            <div class="addedContent">
+              <div class="addedMedia" *ngFor="let media of requestMedia;let i = index">
+                <div class="info">{{media.media_name}} &nbsp; (Qty : {{media.media_Quantity}} {{media.media_type}})</div>
+                <div class="sittings">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                  <i class="fa fa-times" aria-hidden="true" (click)="deleteMediaByIndex(i)"></i>
+                </div>
+              </div>
+            </div>
             <div class="popup">
               <mat-form-field>
-                <select matNativeControl (ngModel)="media_name" placeholder="media name">
+                <select matNativeControl [(ngModel)]="media_name" placeholder="media name" required>
                   <option value="one">media name1</option>
                 </select>
               </mat-form-field>
               <div class="media_info">
-                <mat-form-field><input matInput  type="number" placeholder="Quantity" required (ngModel)="media_Quantity"></mat-form-field>
+                <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="media_Quantity" required></mat-form-field>
                 <mat-form-field>
-                  <select matNativeControl (ngModel)="media_type" placeholder="media type">
+                  <select matNativeControl [(ngModel)]="media_type" placeholder="media type" required>
                     <option value="one">media type 1</option>
                   </select>
                 </mat-form-field>
               </div>
               <div class="buttons">
                 <button class="cancelBtn" (click)="requestMediaPopupHide()">CANCEL</button>
-                <button class="done">Done</button>
+                <button class="done" (click)="addRequestMedia()" >Done</button>
 
               </div>
 
@@ -98,8 +106,25 @@
         <div class="ReplaceComponent">
           <span class="title">Replace Component</span>
           <div class="add">
-            <span>+ &nbsp;&nbsp; Add</span>
-            <div class="addedContent"></div>
+            <span (click)="ReplaceComponentPopupShow()">+ &nbsp;&nbsp; Add</span>
+            <div class="addedContent">
+
+            </div>
+            <div class="popup">
+              <mat-form-field>
+                <select matNativeControl [(ngModel)]="Component_name" placeholder="Component name" required>
+                  <option value="one">Component name1</option>
+                </select>
+              </mat-form-field>
+              <div class="media_info">
+                <mat-form-field><input matInput  type="number" placeholder="Num"  [(ngModel)]="Component_Num" required></mat-form-field>
+              </div>
+              <div class="buttons">
+                <button class="cancelBtn" (click)="ReplaceComponentPopupHide()">CANCEL</button>
+                <button class="done" (click)="addReplaceComponentMedia()" >Done</button>
+              </div>
+
+            </div>
           </div>
         </div>
         <mat-form-field><input matInput type="text" placeholder="Additional Comment"  [(ngModel)]="Additional_Comment"></mat-form-field>

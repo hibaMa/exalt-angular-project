@@ -26,6 +26,8 @@ export class AddRequestComponent implements OnInit {
   media_name:string;
   media_type:string;
   media_Quantity:number=0;
+  requestMedia=[];
+
 
   //checkbox - function
   isTestChecked = false;
@@ -60,6 +62,38 @@ export class AddRequestComponent implements OnInit {
 
   requestMediaPopupHide():void{
     $(".requestMedia .add .popup").hide(300);
+  }
+
+  ReplaceComponentPopupShow():void{
+    $(".ReplaceComponent .add .popup").show(300);
+  }
+
+  ReplaceComponentPopupHide():void{
+    $(".ReplaceComponent .add .popup").hide(300);
+  }
+
+
+  addRequestMedia():void{
+    var currenRequest={};
+    if(this.media_name.trim()!="" && this.media_type!="" && this.media_Quantity!='undefined'){
+      currenRequest.media_name=this.media_name;
+      currenRequest.media_type=this.media_type;
+      currenRequest.media_Quantity=this.media_Quantity;
+      this.requestMedia.push(currenRequest);
+      this.requestMediaPopupHide();
+      this.media_name="";
+      this.media_type="";
+      this.media_Quantity=0;
+    }
+
+  }
+
+  addReplaceComponentMedia():void{
+  }
+
+  deleteMediaByIndex(index:number):void{
+    this.requestMedia.splice(index, 1);
+
   }
 
 

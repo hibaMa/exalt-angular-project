@@ -230,6 +230,34 @@ li.active[_ngcontent-c1] a{
 .RequestDetails  .ReplaceComponent .add .addedContent{
   border-left: 1px solid #0096d6;
   margin-bottom: 3px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.RequestDetails  .requestMedia .add .addedContent .addedMedia,
+.RequestDetails  .ReplaceComponent .add .addedContent .addedMedia{
+  font-family: Roboto;
+  font-size: 12px;
+  color: #5a5a5a;
+  background-color: #e0e1e4;
+  margin: 2px 2px;
+  padding: 2px 6px;
+  display: flex;
+}
+.RequestDetails  .requestMedia .add .addedContent .addedMedia .sittings,
+.RequestDetails  .ReplaceComponent .add .addedContent .addedMedia .sittings{
+  color: #5a5a5a;
+  font-size: 14px;
+  margin-left: 12px;
+}
+
+.RequestDetails  .requestMedia .add .addedContent .addedMedia .sittings i ,
+.RequestDetails  .ReplaceComponent .add .addedContent .addedMedia .sittings i{
+  margin: 2px 3px;
+}
+.RequestDetails  .requestMedia .add .addedContent .addedMedia .sittings:hover ,
+.RequestDetails  .ReplaceComponent .add .addedContent .addedMedia .sittings:hover{
+  cursor: pointer;
 }
 .RequestDetails  .requestMedia .add span ,
 .RequestDetails  .ReplaceComponent .add span{
@@ -241,6 +269,8 @@ li.active[_ngcontent-c1] a{
   font-size: 14px;
   padding-left: 10px;
 }
+
+
 
 .RequestDetails  .requestMedia .add .popup .mat-form-field-infix,
 .RequestDetails  .ReplaceComponent .add .popup .mat-form-field-infix{
