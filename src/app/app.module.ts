@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
+import { MatFormFieldModule, MatInputModule , MatSelectModule,MatButtonModule ,  MatNativeDateModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -40,6 +43,12 @@ import { EnterComponent } from './enter/enter.component';
 
   ],
   imports: [
+    MatButtonModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatSlideToggleModule,
     BrowserModule,
     AppRoutingModule,

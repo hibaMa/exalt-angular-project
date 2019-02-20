@@ -117,13 +117,24 @@ li.active[_ngcontent-c1] a{
 .inputsForm{
   display: grid;
   grid-template-columns:1fr 1fr ;
-  grid-template-rows: repeat(3,55px);
+  grid-template-rows: repeat(3,60px);
 
 }
 .inputsForm input,.inputsForm select{
   border: none;
-  border-bottom: 1px solid #b9b9b9;
-  margin: 20px 20px 0 0;
+  font-family: Roboto;
+  font-size: 14px;
+  color: #5a5a5a;
+  /*border-bottom: 1px solid #b9b9b9;*/
+
+}
+.inputsForm input::placeholder{
+  font-family: Roboto;
+  font-size: 14px;
+}
+.inputsForm .mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  margin-right: 20px;
+  margin-bottom: 20px;
 
 }
 
@@ -193,8 +204,98 @@ li.active[_ngcontent-c1] a{
 
 .RequestDetails input{
   border: none;
-  border-bottom: 1px solid #b9b9b9;
-  margin: 35px 20px 7px 0;
+
+}
+.RequestDetails  .mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  margin-top:15px;
+}
+.RequestDetails  .requestMedia {
+  margin-bottom: 25px;
+}
+
+.RequestDetails  .requestMedia span.title , .RequestDetails  .ReplaceComponent span.title {
+  font-family: Roboto;
+  font-size: 12px;
+  color: #b9b9b9;
+  margin-bottom: 11px;
+  display: block;
+}
+.RequestDetails  .requestMedia .add , .RequestDetails  .ReplaceComponent .add{
+  display: grid;
+  grid-template-columns: 75px auto;
+  border-bottom:1px solid #b9b9b9;
+  position: relative;
+}
+.RequestDetails  .requestMedia .add .addedContent,
+.RequestDetails  .ReplaceComponent .add .addedContent{
+  border-left: 1px solid #0096d6;
+  margin-bottom: 3px;
+}
+.RequestDetails  .requestMedia .add span ,
+.RequestDetails  .ReplaceComponent .add span{
+  cursor: pointer;
+  color: #0096d6;
+  font-size: 18px;
+  margin-bottom: 3px;
+  font-family: Roboto;
+  font-size: 14px;
+  padding-left: 10px;
+}
+
+.RequestDetails  .requestMedia .add .popup .mat-form-field-infix,
+.RequestDetails  .ReplaceComponent .add .popup .mat-form-field-infix{
+  width: auto;
+}
+.RequestDetails  .requestMedia .add .popup .mat-form-field-appearance-legacy .mat-form-field-wrapper,
+.RequestDetails  .ReplaceComponent .add .popup .mat-form-field-appearance-legacy .mat-form-field-wrapper{
+  margin-right:15px;
+}
+.RequestDetails  .requestMedia .add .popup ,
+.RequestDetails  .ReplaceComponent .add .popup{
+  display: none;
+  flex-direction: column;
+  padding: 0px 15px;
+  position: absolute;
+  width: 317px;
+  height: 214px;
+  background-color: #ffffff;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  left: 90px;
+  top: -83px;
+}
+.RequestDetails  .requestMedia .add .popup .media_info, .RequestDetails  .ReplaceComponent .add .popup .media_info{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.RequestDetails  .requestMedia .add .popup .buttons ,
+.RequestDetails  .ReplaceComponent .add .popup .buttons {
+  border-top: 1px solid #e0e1e4;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  padding: 12px 0;
+
+}
+.RequestDetails  .requestMedia .add .popup .buttons button,
+.RequestDetails  .ReplaceComponent .add .popup .buttons button{
+  border: none;
+  padding: 5px 15px;
+}
+.RequestDetails  .requestMedia .add .popup .buttons .cancelBtn,
+.RequestDetails  .ReplaceComponent .add .popup .buttons .cancelBtn{
+
+  background-color: white;
+  color: #5a5a5a;
+  margin-left: auto;
+
+}
+.RequestDetails  .requestMedia .add .popup .buttons .done,
+.RequestDetails  .ReplaceComponent .add .popup .buttons .done{
+  background-color: #0096d6;
+  color: white;
+
 }
 
 /*3*/

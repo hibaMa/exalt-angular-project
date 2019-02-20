@@ -4,12 +4,13 @@
     <div class="close">x</div>
   </div>
   <form-wizard>
+    <!--step1-->
     <wizard-step [title]="'Basic info'"  >
 
       <div class="first-form">
         <div class="urgent">
           <span class="urgent-text">Urgent submission during this week?</span>
-          <mat-slide-toggle  [checked]="urgentChecked" [(ngModel)]="isUrgent"></mat-slide-toggle>
+          <mat-slide-toggle  [(ngModel)]="isUrgent"></mat-slide-toggle>
         </div>
 
         <div class="radioContainer">
@@ -33,18 +34,22 @@
         </div>
 
         <div class="inputsForm" >
-          <input type="text" placeholder="Lorem ipsum">
+          <mat-form-field><input matInput  type="text" placeholder="Test Name" required (ngModel)="Test_Name"></mat-form-field>
           <div></div>
-          <select>
-            <option value="one">Lorem ipsum</option>
+          <mat-form-field>
+            <select matNativeControl (ngModel)="Product_Name" placeholder="Product Name">
+            <option value="one">Product_Name</option>
           </select>
-          <select>
-            <option value="one">Lorem ipsum</option>
+          </mat-form-field>
+          <mat-form-field>
+            <select matNativeControl (ngModel)="Project_Name" placeholder="Project Name">
+            <option value="one">Project_Name</option>
           </select>
-          <input type="number" value="1">
-          <div class="halfShift">
-            <span class="halfShiftText">Half shift</span>
-            <mat-slide-toggle [checked]="halfShiftChecked" [(ngModel)]="isHalfShift"></mat-slide-toggle>
+          </mat-form-field>
+          <mat-form-field><input  matInput type="number" value="1" id="shift" [(ngModel)]="shift"></mat-form-field>
+          <div class="halfShift" >
+            <span class="halfShiftText" >Half shift</span>
+            <mat-slide-toggle [(ngModel)]="isHalfShift" (change)="HalfShiftChange()" ></mat-slide-toggle>
           </div>
         </div>
 
@@ -55,19 +60,55 @@
       <button class="cancel">CANCEL</button>
 
     </wizard-step>
-
+    <!--step2-->
     <wizard-step [title]="'Request details'" >
       <div class="RequestDetails">
-        <input type="text" placeholder="Lorem ipsum">
-        <input type="file">
-        <input type="file">
-        <input type="text" placeholder="Lorem ipsum">
+        <mat-form-field><input matInput type="text" placeholder="Test Objectives" [(ngModel)]="Test_Objectives"></mat-form-field>
+
+        <div class="requestMedia">
+          <span class="title">Request media</span>
+          <div class="add">
+            <span (click)="requestMediaPopupShow()">+ &nbsp;&nbsp; Add</span>
+            <div class="addedContent"></div>
+            <div class="popup">
+              <mat-form-field>
+                <select matNativeControl (ngModel)="media_name" placeholder="media name">
+                  <option value="one">media name1</option>
+                </select>
+              </mat-form-field>
+              <div class="media_info">
+                <mat-form-field><input matInput  type="number" placeholder="Quantity" required (ngModel)="media_Quantity"></mat-form-field>
+                <mat-form-field>
+                  <select matNativeControl (ngModel)="media_type" placeholder="media type">
+                    <option value="one">media type 1</option>
+                  </select>
+                </mat-form-field>
+              </div>
+              <div class="buttons">
+                <button class="cancelBtn" (click)="requestMediaPopupHide()">CANCEL</button>
+                <button class="done">Done</button>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="ReplaceComponent">
+          <span class="title">Replace Component</span>
+          <div class="add">
+            <span>+ &nbsp;&nbsp; Add</span>
+            <div class="addedContent"></div>
+          </div>
+        </div>
+        <mat-form-field><input matInput type="text" placeholder="Additional Comment"  [(ngModel)]="Additional_Comment"></mat-form-field>
       </div>
       <app-slider [items]="requestArray"></app-slider>
 
 
     </wizard-step>
-
+    <!--step3-->
     <wizard-step [title]="'Test plan'" >
       <div class="testPlan">
         <div class="optionalText">Locate and upload your test plan document (optional)</div>
@@ -76,7 +117,7 @@
 
       <app-slider [items]="requestArray"></app-slider>
     </wizard-step>
-
+    <!--step4-->
     <wizard-step [title]="'Submit'" >
       <div [ngSwitch]="isCompleted">
         <div *ngSwitchDefault>
