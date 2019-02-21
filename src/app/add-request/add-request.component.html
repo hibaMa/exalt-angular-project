@@ -46,14 +46,16 @@
             <option value="one">Project_Name</option>
           </select>
           </mat-form-field>
-          <mat-form-field><input  matInput type="number" value="1" id="shift" [(ngModel)]="shift"></mat-form-field>
+          <mat-form-field>
+            <input  matInput type="number" [disabled]="isHalfShift" [(ngModel)]="shift"  min="0">
+          </mat-form-field>
           <div class="halfShift" >
             <span class="halfShiftText" >Half shift</span>
-            <mat-slide-toggle [(ngModel)]="isHalfShift" (change)="HalfShiftChange()" ></mat-slide-toggle>
+            <mat-slide-toggle [(ngModel)]="isHalfShift" (change)="HalfShiftChange()"></mat-slide-toggle>
           </div>
         </div>
 
-        <app-slider [items]="requestArray"></app-slider>
+        <app-slider [items]="pressesArray"></app-slider>
 
       </div>
 
@@ -73,7 +75,28 @@
               <div class="addedMedia" *ngFor="let media of requestMedia;let i = index">
                 <div class="info">{{media.media_name}} &nbsp; (Qty : {{media.media_Quantity}} {{media.media_type}})</div>
                 <div class="sittings">
-                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                  <i class="fa fa-pencil" aria-hidden="true" (click)="displayEditPopup(i)">
+                    <div class="editPopup" *ngIf="requestMediaEditPopup[i]" >
+                      <mat-form-field>
+                        <select matNativeControl [(ngModel)]="media_name" placeholder="media name" required>
+                          <option value="one"> {{media.media_name}}</option>
+                        </select>
+                      </mat-form-field>
+                      <div class="media_info">
+                        <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="media_Quantity" required></mat-form-field>
+                        <mat-form-field>
+                          <select matNativeControl [(ngModel)]="media_type" placeholder="media type" required>
+                            <option value="one">{{media.media_type}}</option>
+                          </select>
+                        </mat-form-field>
+                      </div>
+                      <div class="buttons">
+                        <button class="cancelBtn" (click)="requestMediaEditPopupHide(i)">CANCEL</button>
+                        <button class="done" (click)="editRequestMedia(i)" >Edit</button>
+                      </div>
+
+                    </div>
+                  </i>
                   <i class="fa fa-times" aria-hidden="true" (click)="deleteMediaByIndex(i)"></i>
                 </div>
               </div>

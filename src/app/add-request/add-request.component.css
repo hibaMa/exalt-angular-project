@@ -280,6 +280,19 @@ li.active[_ngcontent-c1] a{
 .RequestDetails  .ReplaceComponent .add .popup .mat-form-field-appearance-legacy .mat-form-field-wrapper{
   margin-right:15px;
 }
+.RequestDetails  .requestMedia .add .editPopup ,
+.RequestDetails  .ReplaceComponent .add .editPopup {
+  flex-direction: column;
+  padding: 0px 15px;
+  position: absolute;
+  width: 317px;
+  height: 214px;
+  background-color: #ffffff;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  left: 90px;
+  top: -83px;
+}
 .RequestDetails  .requestMedia .add .popup ,
 .RequestDetails  .ReplaceComponent .add .popup{
   display: none;

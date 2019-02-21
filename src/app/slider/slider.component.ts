@@ -12,7 +12,7 @@ export class SliderComponent implements OnInit {
     this.slide.marginLeft = 10;
     this.slide.marginRight = 10;
     this.slide.width = 170;
-    this.slide.count = this.items.length;
+    this.slide.count =  this.items ?this.items.length:0;
     this.slide.left = parseInt($('.slider ul').css('left'), 10);
     this.slide.widthIncMargin=this.slide.width+this.slide.marginLeft+this.slide.marginRight;
 

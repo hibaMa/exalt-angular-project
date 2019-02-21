@@ -14,6 +14,7 @@ export class DataBaseService {
 
   private AuthURL=data.baseURL+"/auth";
   private RequestURL=data.baseURL+"/api/v1/request";
+  private PressesURL=data.baseURL+"/api/v1/presses";
   constructor(private http: HttpClient) { }
 
   getLogInToken(userInfo:User):Observable<any>{
@@ -26,7 +27,9 @@ export class DataBaseService {
 
   }
 
-
+  getAvailablePresses():Observable<any>{
+    return this.http.get<any>(this.PressesURL, httpOptions);
+  }
 
 
 

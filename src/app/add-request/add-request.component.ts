@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import * as jQuery from 'jquery';
+import {DataBaseService} from '../services/data-base.service';
 
 @Component({
   selector: 'app-add-request',
@@ -9,7 +10,7 @@ import * as jQuery from 'jquery';
 })
 export class AddRequestComponent implements OnInit {
 
-  requestArray=[1,2,3,4,5,6,7,8,9,10,11,12,13];
+  pressesArray=[1,2,3,4,5,6,7,8,9,10,11];
 
   //form1 data
   isUrgent = false;
@@ -17,7 +18,7 @@ export class AddRequestComponent implements OnInit {
   Project_Name:string;
   Test_Name:string;
   Test_type:string;
-  shift:number=0;
+  shift=0;
   isHalfShift = false;
 
   //form2 data
@@ -25,8 +26,9 @@ export class AddRequestComponent implements OnInit {
   Additional_Comment:string;
   media_name:string;
   media_type:string;
-  media_Quantity:number=0;
+  media_Quantity=0;
   requestMedia=[];
+  requestMediaEditPopup=[];
 
 
   //checkbox - function
@@ -49,10 +51,7 @@ export class AddRequestComponent implements OnInit {
 
   HalfShiftChange():void{
     if(this.isHalfShift){
-      document.getElementById("shift").value="0.5";
-      document.getElementById("shift").disabled=true;
-    }else{
-      document.getElementById("shift").disabled=false;
+      this.shift=0.5;
     }
   }
 
@@ -62,6 +61,10 @@ export class AddRequestComponent implements OnInit {
 
   requestMediaPopupHide():void{
     $(".requestMedia .add .popup").hide(300);
+  }
+
+  requestMediaEditPopupHide(index:number):void{
+    this.requestMediaEditPopup[index]=false;
   }
 
   ReplaceComponentPopupShow():void{
@@ -74,12 +77,13 @@ export class AddRequestComponent implements OnInit {
 
 
   addRequestMedia():void{
-    var currenRequest={};
-    if(this.media_name.trim()!="" && this.media_type!="" && this.media_Quantity!='undefined'){
+    var currenRequest={media_name:"",media_type:"",media_Quantity:0};
+    if(this.media_name.trim()!="" && this.media_type!="" ){
       currenRequest.media_name=this.media_name;
       currenRequest.media_type=this.media_type;
       currenRequest.media_Quantity=this.media_Quantity;
       this.requestMedia.push(currenRequest);
+      this.requestMediaEditPopup.push(false);
       this.requestMediaPopupHide();
       this.media_name="";
       this.media_type="";
@@ -87,12 +91,32 @@ export class AddRequestComponent implements OnInit {
     }
 
   }
+  editRequestMedia(index:number):void{
+    this.requestMedia[index].media_name=this.media_name;
+    this.requestMedia[index].media_type=this.media_type;
+    this.requestMedia[index].media_Quantity=this.media_Quantity;
+    this.requestMediaEditPopupHide(index);
+    this.media_name="";
+    this.media_type="";
+    this.media_Quantity=0;
+  }
+
+  displayEditPopup(index:number):void{
+    for(var i=0;i<this.requestMediaEditPopup.length;i++){
+      this.requestMediaEditPopup[i]=false;
+    }
+    this.requestMediaEditPopup[index]=true;
+  }
+
+
 
   addReplaceComponentMedia():void{
+
   }
 
   deleteMediaByIndex(index:number):void{
     this.requestMedia.splice(index, 1);
+    this.requestMediaEditPopup.splice(index, 1);
 
   }
 
@@ -101,11 +125,15 @@ export class AddRequestComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(private dataBaseService:DataBaseService) { }
 
 
   ngOnInit() {
-
+    // this.dataBaseService.getAvailablePresses().subscribe(
+    //   (presses)=>{
+    //     this.pressesArray=presses;
+    //   }
+    // );
   }
 
 
