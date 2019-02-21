@@ -27,6 +27,9 @@ export class AddRequestComponent implements OnInit {
   media_name:string;
   media_type:string;
   media_Quantity=0;
+  editMedia_name:string;
+  editMedia_type:string;
+  editMedia_Quantity=0;
   requestMedia=[];
   requestMediaEditPopup=[];
 
@@ -93,13 +96,13 @@ export class AddRequestComponent implements OnInit {
 
   }
   editRequestMedia(index:number):void{
-    this.requestMedia[index].media_name=this.media_name;
-    this.requestMedia[index].media_type=this.media_type;
-    this.requestMedia[index].media_Quantity=this.media_Quantity;
+    this.requestMedia[index].media_name=this.editMedia_name;
+    this.requestMedia[index].media_type=this.editMedia_type;
+    this.requestMedia[index].media_Quantity=this.editMedia_Quantity;
     this.requestMediaEditPopupHide(index);
-    this.media_name="";
-    this.media_type="";
-    this.media_Quantity=0;
+    this.editMedia_name="";
+    this.editMedia_type="";
+    this.editMedia_Quantity=0;
   }
 
   displayEditPopup(index:number):void{
@@ -108,8 +111,6 @@ export class AddRequestComponent implements OnInit {
     }
     this.requestMediaEditPopup[index]=true;
   }
-
-
 
   addReplaceComponentMedia():void{
 

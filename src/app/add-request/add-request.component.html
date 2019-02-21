@@ -78,14 +78,14 @@
                   <i class="fa fa-pencil" aria-hidden="true" (click)="displayEditPopup(i)"></i>
                   <div class="popup editPopup" *ngIf="requestMediaEditPopup[i]==true">
                     <mat-form-field>
-                      <select matNativeControl [(ngModel)]="media_name" placeholder="media name" required>
-                        <option value="one">media name1</option>
+                      <select matNativeControl [(ngModel)]="editMedia_name" placeholder="media name" required>
+                        <option value="one" >media name1</option>
                       </select>
                     </mat-form-field>
                     <div class="media_info">
-                      <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="media_Quantity" required></mat-form-field>
+                      <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="editMedia_Quantity" required></mat-form-field>
                       <mat-form-field>
-                        <select matNativeControl [(ngModel)]="media_type" placeholder="media type" required>
+                        <select matNativeControl [(ngModel)]="editMedia_type" placeholder="media type" required>
                           <option value="one">media type 1</option>
                         </select>
                       </mat-form-field>
