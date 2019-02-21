@@ -65,6 +65,7 @@ export class AddRequestComponent implements OnInit {
 
   requestMediaEditPopupHide(index:number):void{
     this.requestMediaEditPopup[index]=false;
+
   }
 
   ReplaceComponentPopupShow():void{
