@@ -79,14 +79,16 @@
                   <div class="popup editPopup" *ngIf="requestMediaEditPopup[i]==true">
                     <mat-form-field>
                       <select matNativeControl [(ngModel)]="editMedia_name" placeholder="media name" required>
-                        <option value="one" >media name1</option>
+                        <option value="one">media name1</option>
+                        <option value="two">media name2</option>
                       </select>
                     </mat-form-field>
                     <div class="media_info">
                       <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="editMedia_Quantity" required></mat-form-field>
                       <mat-form-field>
                         <select matNativeControl [(ngModel)]="editMedia_type" placeholder="media type" required>
-                          <option value="one">media type 1</option>
+                          <option value="one1">media type 1</option>
+                          <option value="two2">media type 2</option>
                         </select>
                       </mat-form-field>
                     </div>
@@ -129,9 +131,33 @@
         <div class="ReplaceComponent">
           <span class="title">Replace Component</span>
           <div class="add">
-            <span (click)="ReplaceComponentPopupShow()">+ &nbsp;&nbsp; Add</span>
-            <div class="addedContent">
+            <span (click)="replaceComponentPopupShow()">+ &nbsp;&nbsp; Add</span>
+            <div class="addedContent" >
+              <div class="addedComp" *ngFor="let comp of replaceComponent;let i = index">
 
+              <div class="info">{{comp.compo_name}} &nbsp; (Num : {{comp.compo_num}})</div>
+                <div class="sittings">
+                  <i class="fa fa-pencil" aria-hidden="true" (click)="displayCompEditPopup(i)"></i>
+                  <div class="popup editPopup" *ngIf="compEditPopup[i]==true">
+                    <mat-form-field>
+                      <select matNativeControl [(ngModel)]="editComponent_name" placeholder="Component name" required>
+                        <option value="one">Component name1</option>
+                      </select>
+                    </mat-form-field>
+                    <div class="media_info">
+                      <mat-form-field>
+                        <input matInput  type="number" placeholder="Num"  [(ngModel)]="editComponent_Num" required>
+                      </mat-form-field>
+                    </div>
+                    <div class="buttons">
+                      <button class="cancelBtn" (click)="replaceComponentEditPopupHide(i)">CANCEL</button>
+                      <button class="done" (click)="editComponent(i)" >Edit</button>
+                    </div>
+
+                  </div>
+                  <i class="fa fa-times" aria-hidden="true" (click)="deletecompByIndex(i)"></i>
+                </div>
+              </div>
             </div>
             <div class="popup">
               <mat-form-field>
@@ -140,16 +166,20 @@
                 </select>
               </mat-form-field>
               <div class="media_info">
-                <mat-form-field><input matInput  type="number" placeholder="Num"  [(ngModel)]="Component_Num" required></mat-form-field>
+                <mat-form-field>
+                  <input matInput  type="number" placeholder="Num"  [(ngModel)]="Component_Num" required>
+                </mat-form-field>
               </div>
               <div class="buttons">
-                <button class="cancelBtn" (click)="ReplaceComponentPopupHide()">CANCEL</button>
+                <button class="cancelBtn" (click)="replaceComponentPopupHide()">CANCEL</button>
                 <button class="done" (click)="addReplaceComponentMedia()" >Done</button>
               </div>
 
             </div>
           </div>
         </div>
+
+
         <mat-form-field><input matInput type="text" placeholder="Additional Comment"  [(ngModel)]="Additional_Comment"></mat-form-field>
       </div>
       <app-slider [items]="requestArray"></app-slider>

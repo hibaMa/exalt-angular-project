@@ -24,14 +24,23 @@ export class AddRequestComponent implements OnInit {
   //form2 data
   Test_Objectives:string;
   Additional_Comment:string;
+
   media_name:string;
   media_type:string;
   media_Quantity=0;
   editMedia_name:string;
   editMedia_type:string;
   editMedia_Quantity=0;
+
   requestMedia=[];
   requestMediaEditPopup=[];
+
+  Component_name:string;
+  Component_Num:number;
+  editComponent_name:string;
+  editComponent_Num:number;
+  replaceComponent=[];
+  compEditPopup=[];
 
 
   //checkbox - function
@@ -71,11 +80,11 @@ export class AddRequestComponent implements OnInit {
 
   }
 
-  ReplaceComponentPopupShow():void{
+  replaceComponentPopupShow():void{
     $(".ReplaceComponent .add .popup").show(300);
   }
 
-  ReplaceComponentPopupHide():void{
+  replaceComponentPopupHide():void{
     $(".ReplaceComponent .add .popup").hide(300);
   }
 
@@ -105,6 +114,10 @@ export class AddRequestComponent implements OnInit {
     this.editMedia_Quantity=0;
   }
 
+  editComponent(index):void{
+
+  }
+
   displayEditPopup(index:number):void{
     for(var i=0;i<this.requestMediaEditPopup.length;i++){
       this.requestMediaEditPopup[i]=false;
@@ -112,7 +125,28 @@ export class AddRequestComponent implements OnInit {
     this.requestMediaEditPopup[index]=true;
   }
 
+  displayCompEditPopup(index:number):void{
+    for(var i=0;i<this.compEditPopup.length;i++){
+      this.compEditPopup[i]=false;
+    }
+    this.compEditPopup[index]=true;
+  }
+
+  replaceComponentEditPopupHide(index:number):void{
+    this.compEditPopup[index]=false;
+  }
+
   addReplaceComponentMedia():void{
+    var currenComp={compo_name:"",compo_num:0};
+    if(this.Component_name.trim()!="" ){
+      currenComp.compo_name=this.Component_name;
+      currenComp.compo_num=this.Component_Num;
+      this.replaceComponent.push(currenComp);
+      this.compEditPopup.push(false);
+      this.replaceComponentPopupHide()
+      this.Component_name="";
+      this.Component_Num=0;
+    }
 
   }
 
@@ -121,6 +155,14 @@ export class AddRequestComponent implements OnInit {
     this.requestMediaEditPopup.splice(index, 1);
 
   }
+  deletecompByIndex(index:number):void{
+    this.replaceComponent.splice(index, 1);
+    this.compEditPopup.splice(index, 1);
+
+  }
+
+
+
 
 
 

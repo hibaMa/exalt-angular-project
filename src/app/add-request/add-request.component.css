@@ -235,7 +235,7 @@ li.active[_ngcontent-c1] a{
 }
 
 .RequestDetails  .requestMedia .add .addedContent .addedMedia,
-.RequestDetails  .ReplaceComponent .add .addedContent .addedMedia{
+.RequestDetails  .ReplaceComponent .add .addedContent .addedComp{
   font-family: Roboto;
   font-size: 12px;
   color: #5a5a5a;
@@ -245,7 +245,7 @@ li.active[_ngcontent-c1] a{
   display: flex;
 }
 .RequestDetails  .requestMedia .add .addedContent .addedMedia .sittings,
-.RequestDetails  .ReplaceComponent .add .addedContent .addedMedia .sittings{
+.RequestDetails  .ReplaceComponent .add .addedContent .addedComp .sittings{
   color: #5a5a5a;
   font-size: 14px;
   margin-left: 12px;
@@ -253,11 +253,11 @@ li.active[_ngcontent-c1] a{
 }
 
 .RequestDetails  .requestMedia .add .addedContent .addedMedia .sittings i ,
-.RequestDetails  .ReplaceComponent .add .addedContent .addedMedia .sittings i{
+.RequestDetails  .ReplaceComponent .add .addedContent .addedComp .sittings i{
   margin: 2px 3px;
 }
 .RequestDetails  .requestMedia .add .addedContent .addedMedia .sittings:hover ,
-.RequestDetails  .ReplaceComponent .add .addedContent .addedMedia .sittings:hover{
+.RequestDetails  .ReplaceComponent .add .addedContent .addedComp .sittings:hover{
   cursor: pointer;
 }
 .RequestDetails  .requestMedia .add span ,
