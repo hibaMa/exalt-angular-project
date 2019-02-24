@@ -19,8 +19,8 @@ export class AddRequestComponent implements OnInit {
 
   //form1 data
   isUrgent = false;
-  Product_Name:string;
-  Project_Name:string;
+  Product_NameID:string;
+  Project_NameID:string;
   Test_Name:string;
   Test_type:string;
   shift=0;
@@ -30,8 +30,8 @@ export class AddRequestComponent implements OnInit {
   Test_Objectives:string;
   Additional_Comment:string;
 
-  media_name:string;
-  media_type:string;
+  media_nameID:string;
+  media_typeID:string;
   media_Quantity=0;
   editMedia_name:string;
   editMedia_type:string;
@@ -46,6 +46,9 @@ export class AddRequestComponent implements OnInit {
   editComponent_Num:number;
   replaceComponent=[];
   compEditPopupViability=[];
+
+  //calss data
+  selectedMediaID:string;
 
 
   //checkbox - function
@@ -78,8 +81,8 @@ export class AddRequestComponent implements OnInit {
 
   requestMediaPopupHide():void{
     $(".requestMedia .add .popup").hide(300);
-    this.media_name="";
-    this.media_type="";
+    this.media_nameID="";
+    this.media_typeID="";
     this.media_Quantity=0;
   }
 
@@ -123,15 +126,15 @@ export class AddRequestComponent implements OnInit {
 
   addRequestMedia():void{
     var currenRequest={media_name:"",media_type:"",media_Quantity:0};
-    if(this.media_name.trim()!="" && this.media_type!="" ){
-      currenRequest.media_name=this.media_name;
-      currenRequest.media_type=this.media_type;
+    if(this.media_nameID.trim()!="" && this.media_typeID!="" ){
+      currenRequest.media_name=this.getSelectedMediaByID(this.media_nameID).name;
+      currenRequest.media_type=this.getSelectedMediaTypeByID(this.media_typeID).name;
       currenRequest.media_Quantity=this.media_Quantity;
       this.requestMedia.push(currenRequest);
       this.requestMediaEditPopup.push(false);
       this.requestMediaPopupHide();
-      this.media_name="";
-      this.media_type="";
+      this.media_nameID="";
+      this.media_typeID="";
       this.media_Quantity=0;
     }
 
@@ -180,9 +183,47 @@ export class AddRequestComponent implements OnInit {
 
   }
 
-  modifySelectedMediaTypes(index:number):void{
-    this.selectedMediaTypes = this.mediaArray[index].types;
+  modifySelectedMediaTypes(selectedElem):void{
+    this.selectedMediaID=selectedElem.value;
+    var media=this.getSelectedMediaByID(this.selectedMediaID);
+    this.selectedMediaTypes = media.types;
+  }
 
+  getSelectedMediaByID(mediaID:number):any{
+    for(let media of this.mediaArray){
+      if(media.id==mediaID){
+        return media;
+      }
+    }
+    return null;
+  }
+
+  getSelectedMediaTypeByID(mediaTypeID:number):any{
+    for(let mediaType of this.selectedMediaTypes){
+      if(mediaType.id==mediaTypeID){
+        return mediaType;
+      }
+    }
+    return null;
+  }
+  getProjectByID(projectID:number):any{
+    console.log("projectID"+projectID);
+    for(let project of this.projectsArray){
+      if(project.id==projectID){
+        return project;
+      }
+    }
+    return null;
+  }
+
+  getProductByID(productID:number):any{
+    console.log("productID"+productID);
+    for(let product of this.productsArray){
+      if(product.id==productID){
+        return product;
+      }
+    }
+    return null;
   }
 
   constructor(private dataBaseService:DataBaseService) { }
@@ -195,7 +236,7 @@ export class AddRequestComponent implements OnInit {
       }
     );
 
-    this.dataBaseService.getProducts().subscribe(
+    this.dataBaseService.getProjects().subscribe(
       (projects)=>{
         this.projectsArray=projects;
       }

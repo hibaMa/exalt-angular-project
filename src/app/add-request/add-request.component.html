@@ -37,12 +37,12 @@
           <mat-form-field><input matInput  type="text" placeholder="Test Name" required [(ngModel)]="Test_Name"></mat-form-field>
           <div></div>
           <mat-form-field>
-            <select matNativeControl [(ngModel)]="Product_Name" placeholder="Product Name">
+            <select matNativeControl [(ngModel)]="Product_NameID" placeholder="Product Name">
             <option  *ngFor="let product of productsArray" [value]="product.id">{{product.name}}</option>
           </select>
           </mat-form-field>
           <mat-form-field>
-            <select matNativeControl [(ngModel)]="Project_Name" placeholder="Project Name">
+            <select matNativeControl [(ngModel)]="Project_NameID" placeholder="Project Name">
             <option *ngFor="let project of projectsArray" [value]="project.id">{{project.name}}</option>
           </select>
           </mat-form-field>
@@ -85,9 +85,9 @@
                     <div class="media_info">
                       <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="editMedia_Quantity" required></mat-form-field>
                       <mat-form-field>
-                        <!--<select matNativeControl [(ngModel)]="editMedia_type" placeholder="media type" required (change)="modifySelectedMediaTypes(i)">-->
-                          <!--<option [value]="mediaType.name" *ngFor="let mediaType of selectedMediaTypes">{{mediaType.name}}</option>-->
-                        <!--</select>-->
+                        <select matNativeControl [(ngModel)]="editMedia_type" placeholder="media type" required (change)="modifySelectedMediaTypes(i)">
+                          <option [value]="mediaType.id" *ngFor="let mediaType of selectedMediaTypes">{{mediaType.name}}</option>
+                        </select>
                       </mat-form-field>
                     </div>
                     <div class="buttons">
@@ -103,14 +103,14 @@
             </div>
             <div class="popup">
               <mat-form-field>
-                <select matNativeControl [(ngModel)]="media_name" placeholder="media name" required >
+                <select matNativeControl [(ngModel)]="media_nameID" placeholder="media name" required (change)="modifySelectedMediaTypes($event.target)">
                   <option [value]="media.id" *ngFor="let media of mediaArray">{{media.name}}</option>
                 </select>
               </mat-form-field>
               <div class="media_info">
                 <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="media_Quantity" required></mat-form-field>
                 <mat-form-field>
-                  <select matNativeControl [(ngModel)]="media_type" placeholder="media type" required >
+                  <select matNativeControl [(ngModel)]="media_typeID" placeholder="media type" required >
                     <option [value]="mediaType.id" *ngFor="let mediaType of selectedMediaTypes">{{mediaType.name}}</option>
                   </select>
 
@@ -204,8 +204,8 @@
         <div *ngSwitchDefault>
           <div class="submittedData">
           <div><span>isUrgent </span><span>{{isUrgent}}</span></div>
-          <div><span>Product_Name </span><span>{{Product_Name}}</span></div>
-          <div><span>Project_Name</span><span> {{Project_Name}}</span></div>
+          <div><span>Product_Name </span><span *ngIf="Product_NameID">{{getProductByID(Product_NameID).name}}</span></div>
+          <div><span>Project_Name</span><span *ngIf="Project_NameID"> {{getProjectByID(Project_NameID).name}}</span></div>
           <div><span>Test_Name </span><span>{{Test_Name}}</span></div>
           <div><span>Test_type </span><span>{{isLabChecked?"Lab":"Test"}}</span></div>
           <div><span>shift</span> <span>{{shift}}</span></div>
