@@ -1,4 +1,6 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {data} from '../constant';
+import {DataBaseService} from '../services/data-base.service';
 
 @Component({
   selector: 'app-slider',
@@ -6,13 +8,15 @@ import { Component, OnInit,Input } from '@angular/core';
   styleUrls: ['./slider.component.css']
 })
 export class SliderComponent implements OnInit {
-  @Input() items: [];
+  pressesArray: [];
+  baseURL:string=data.baseURL;
+
   slide={count:0,marginLeft:0,marginRight:0,width:0,slideToSHow:3,left:0,widthIncMargin:0,index:0};
   initSlider():void {
     this.slide.marginLeft = 10;
     this.slide.marginRight = 10;
     this.slide.width = 170;
-    this.slide.count =  this.items ?this.items.length:0;
+    this.slide.count =  this.pressesArray ?this.pressesArray.length:0;
     this.slide.left = parseInt($('.slider ul').css('left'), 10);
     this.slide.widthIncMargin=this.slide.width+this.slide.marginLeft+this.slide.marginRight;
 
@@ -39,10 +43,16 @@ export class SliderComponent implements OnInit {
       this.slide.index++;
     }
   }
-  constructor() { }
+  constructor(private dataBaseService:DataBaseService) { }
 
   ngOnInit() {
-    this.initSlider();
+    this.dataBaseService.getAvailablePresses().subscribe(
+      (presses)=>{
+        this.pressesArray=presses;
+        this.initSlider();
+      }
+    );
+
   }
 
 }

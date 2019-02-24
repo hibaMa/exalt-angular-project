@@ -34,16 +34,16 @@
         </div>
 
         <div class="inputsForm" >
-          <mat-form-field><input matInput  type="text" placeholder="Test Name" required (ngModel)="Test_Name"></mat-form-field>
+          <mat-form-field><input matInput  type="text" placeholder="Test Name" required [(ngModel)]="Test_Name"></mat-form-field>
           <div></div>
           <mat-form-field>
-            <select matNativeControl (ngModel)="Product_Name" placeholder="Product Name">
-            <option value="one">Product_Name</option>
+            <select matNativeControl [(ngModel)]="Product_Name" placeholder="Product Name">
+            <option  *ngFor="let product of productsArray" [value]="product.id">{{product.name}}</option>
           </select>
           </mat-form-field>
           <mat-form-field>
-            <select matNativeControl (ngModel)="Project_Name" placeholder="Project Name">
-            <option value="one">Project_Name</option>
+            <select matNativeControl [(ngModel)]="Project_Name" placeholder="Project Name">
+            <option *ngFor="let project of projectsArray" [value]="project.id">{{project.name}}</option>
           </select>
           </mat-form-field>
           <mat-form-field>
@@ -55,7 +55,7 @@
           </div>
         </div>
 
-        <app-slider [items]="pressesArray"></app-slider>
+        <app-slider></app-slider>
 
       </div>
 
@@ -75,21 +75,19 @@
               <div class="addedMedia" *ngFor="let media of requestMedia;let i = index">
                 <div class="info">{{media.media_name}} &nbsp; (Qty : {{media.media_Quantity}} {{media.media_type}})</div>
                 <div class="sittings">
-                  <i class="fa fa-pencil" aria-hidden="true" (click)="displayEditPopup(i)"></i>
+                  <i class="fa fa-pencil" aria-hidden="true" (click)="displayRequestEditPopup(i)"></i>
                   <div class="popup editPopup" *ngIf="requestMediaEditPopup[i]==true">
                     <mat-form-field>
                       <select matNativeControl [(ngModel)]="editMedia_name" placeholder="media name" required>
-                        <option value="one">media name1</option>
-                        <option value="two">media name2</option>
+                        <option [value]="media.id" *ngFor="let media of mediaArray,let i =index">{{media.name}}</option>
                       </select>
                     </mat-form-field>
                     <div class="media_info">
                       <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="editMedia_Quantity" required></mat-form-field>
                       <mat-form-field>
-                        <select matNativeControl [(ngModel)]="editMedia_type" placeholder="media type" required>
-                          <option value="one1">media type 1</option>
-                          <option value="two2">media type 2</option>
-                        </select>
+                        <!--<select matNativeControl [(ngModel)]="editMedia_type" placeholder="media type" required (change)="modifySelectedMediaTypes(i)">-->
+                          <!--<option [value]="mediaType.name" *ngFor="let mediaType of selectedMediaTypes">{{mediaType.name}}</option>-->
+                        <!--</select>-->
                       </mat-form-field>
                     </div>
                     <div class="buttons">
@@ -105,16 +103,17 @@
             </div>
             <div class="popup">
               <mat-form-field>
-                <select matNativeControl [(ngModel)]="media_name" placeholder="media name" required>
-                  <option value="one">media name1</option>
+                <select matNativeControl [(ngModel)]="media_name" placeholder="media name" required >
+                  <option [value]="media.id" *ngFor="let media of mediaArray">{{media.name}}</option>
                 </select>
               </mat-form-field>
               <div class="media_info">
                 <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="media_Quantity" required></mat-form-field>
                 <mat-form-field>
-                  <select matNativeControl [(ngModel)]="media_type" placeholder="media type" required>
-                    <option value="one">media type 1</option>
+                  <select matNativeControl [(ngModel)]="media_type" placeholder="media type" required >
+                    <option [value]="mediaType.id" *ngFor="let mediaType of selectedMediaTypes">{{mediaType.name}}</option>
                   </select>
+
                 </mat-form-field>
               </div>
               <div class="buttons">
@@ -138,7 +137,7 @@
               <div class="info">{{comp.compo_name}} &nbsp; (Num : {{comp.compo_num}})</div>
                 <div class="sittings">
                   <i class="fa fa-pencil" aria-hidden="true" (click)="displayCompEditPopup(i)"></i>
-                  <div class="popup editPopup" *ngIf="compEditPopup[i]==true">
+                  <div class="popup editPopup" *ngIf="compEditPopupViability[i]==true">
                     <mat-form-field>
                       <select matNativeControl [(ngModel)]="editComponent_name" placeholder="Component name" required>
                         <option value="one">Component name1</option>
@@ -182,7 +181,7 @@
 
         <mat-form-field><input matInput type="text" placeholder="Additional Comment"  [(ngModel)]="Additional_Comment"></mat-form-field>
       </div>
-      <app-slider [items]="requestArray"></app-slider>
+      <app-slider ></app-slider>
 
 
     </wizard-step>
@@ -190,19 +189,31 @@
     <wizard-step [title]="'Test plan'" >
       <div class="testPlan">
         <div class="optionalText">Locate and upload your test plan document (optional)</div>
-        <input type="file">
+        <div class="UploadFileTitle">Upload file</div>
+        <label class="fileUpload">
+          <input  type="file"/>
+          <span>Choose</span>
+        </label>
       </div>
 
-      <app-slider [items]="requestArray"></app-slider>
+      <app-slider></app-slider>
     </wizard-step>
     <!--step4-->
     <wizard-step [title]="'Submit'" >
       <div [ngSwitch]="isCompleted">
         <div *ngSwitchDefault>
-          <h1>Step4</h1>
-        </div>
-        <div *ngSwitchCase="true">
-          <h4>Thank you! You have completed all the steps.</h4>
+          <div class="submittedData">
+          <div><span>isUrgent </span><span>{{isUrgent}}</span></div>
+          <div><span>Product_Name </span><span>{{Product_Name}}</span></div>
+          <div><span>Project_Name</span><span> {{Project_Name}}</span></div>
+          <div><span>Test_Name </span><span>{{Test_Name}}</span></div>
+          <div><span>Test_type </span><span>{{isLabChecked?"Lab":"Test"}}</span></div>
+          <div><span>shift</span> <span>{{shift}}</span></div>
+          <div><span>Test_Objectives </span><span>{{Test_Objectives}}</span></div>
+          <div *ngIf="Additional_Comment !=''"><span>Additional_Comment</span><span> {{Additional_Comment}}</span></div>
+          <div><span>request Media Num </span><span>{{requestMedia.length}}</span></div>
+          <div><span>replace Component Num </span><span>{{replaceComponent.length}}</span></div>
+          </div>
         </div>
       </div>
     </wizard-step>

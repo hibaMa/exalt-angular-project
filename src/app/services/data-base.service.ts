@@ -14,7 +14,11 @@ export class DataBaseService {
 
   private AuthURL=data.baseURL+"/auth";
   private RequestURL=data.baseURL+"/api/v1/request";
-  private PressesURL=data.baseURL+"/api/v1/presses";
+  private PressesURL=data.baseURL+"/api/v1/presses"+"?hubId=1";
+  private ProductURL=data.baseURL+"/api/v1/products"+"?hubId=1";
+  private ProjectURL=data.baseURL+"/api/v1/projects"+"?hubId=1";
+  private MediaURL=data.baseURL+"/api/v1/media"+"?hubId=1";
+
   constructor(private http: HttpClient) { }
 
   getLogInToken(userInfo:User):Observable<any>{
@@ -29,6 +33,18 @@ export class DataBaseService {
 
   getAvailablePresses():Observable<any>{
     return this.http.get<any>(this.PressesURL, httpOptions);
+  }
+
+  getProducts():Observable<any>{
+    return this.http.get<any>(this.ProductURL, httpOptions);
+  }
+
+  getProjects():Observable<any>{
+    return this.http.get<any>(this.ProjectURL, httpOptions);
+  }
+
+  getMedia():Observable<any>{
+    return this.http.get<any>(this.MediaURL, httpOptions);
   }
 
 
