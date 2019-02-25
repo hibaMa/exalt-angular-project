@@ -127,8 +127,8 @@ export class AddRequestComponent implements OnInit {
   addRequestMedia():void{
     var currenRequest={media_name:"",media_type:"",media_Quantity:0};
     if(this.media_nameID.trim()!="" && this.media_typeID!="" ){
-      currenRequest.media_name=this.getSelectedMediaByID(this.media_nameID).name;
-      currenRequest.media_type=this.getSelectedMediaTypeByID(this.media_typeID).name;
+      currenRequest.media_name=this.getSelectedMediaByID(Number(this.media_nameID)).name;
+      currenRequest.media_type=this.getSelectedMediaTypeByID(Number(this.media_typeID)).name;
       currenRequest.media_Quantity=this.media_Quantity;
       this.requestMedia.push(currenRequest);
       this.requestMediaEditPopup.push(false);
@@ -185,7 +185,7 @@ export class AddRequestComponent implements OnInit {
 
   modifySelectedMediaTypes(selectedElem):void{
     this.selectedMediaID=selectedElem.value;
-    var media=this.getSelectedMediaByID(this.selectedMediaID);
+    var media=this.getSelectedMediaByID(Number(this.selectedMediaID));
     this.selectedMediaTypes = media.types;
   }
 
