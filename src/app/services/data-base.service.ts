@@ -18,6 +18,7 @@ export class DataBaseService {
   private ProductURL=data.baseURL+"/api/v1/products"+"?hubId=1";
   private ProjectURL=data.baseURL+"/api/v1/projects"+"?hubId=1";
   private MediaURL=data.baseURL+"/api/v1/media"+"?hubId=1";
+  private ComponentURL=data.baseURL+"/api/v1/components"+"?hubId=1";
 
   constructor(private http: HttpClient) { }
 
@@ -45,6 +46,10 @@ export class DataBaseService {
 
   getMedia():Observable<any>{
     return this.http.get<any>(this.MediaURL, httpOptions);
+  }
+
+  getComponents():Observable<any>{
+    return this.http.get<any>(this.ComponentURL, httpOptions);
   }
 
 

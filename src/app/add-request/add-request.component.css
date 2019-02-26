@@ -2,13 +2,13 @@
 
 .forms-container{
   width: 600px;
-  height: 635px;
   position: relative;
   margin: auto;
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
   background-color:white;
   padding: 10px;
 }
+.forms-container .formHeader ,
 .forms-container .formHeader {
   border-bottom: 1px solid #5a5a5a;
 
@@ -243,13 +243,13 @@ li.active[_ngcontent-c6] a{
   margin: 2px 2px;
   padding: 2px 6px;
   display: flex;
+  position: relative;
 }
 .RequestDetails  .requestMedia .add .addedContent .addedMedia .sittings,
 .RequestDetails  .ReplaceComponent .add .addedContent .addedComp .sittings{
   color: #5a5a5a;
   font-size: 14px;
   margin-left: 12px;
-  position: relative;
 }
 
 .RequestDetails  .requestMedia .add .addedContent .addedMedia .sittings i ,
@@ -296,10 +296,17 @@ li.active[_ngcontent-c6] a{
   left: 90px;
   top: -83px;
 }
+
+.RequestDetails  .requestMedia .add .popup mat-form-field,
+.RequestDetails  .ReplaceComponent .add .popup mat-form-field{
+  display: block;
+}
+
+
 .RequestDetails  .requestMedia .add .editPopup ,
 .RequestDetails  .ReplaceComponent .add .editPopup {
   display: block;
-  left: 10px;
+  left: 180px;
   top: -91px;
 }
 .RequestDetails  .requestMedia .add .popup .media_info, .RequestDetails  .ReplaceComponent .add .popup .media_info{

@@ -16,6 +16,7 @@ export class AddRequestComponent implements OnInit {
   projectsArray=[];
   mediaArray=[];
   selectedMediaTypes=[];
+  componentArray=[];
 
   //form1 data
   isUrgent = false;
@@ -77,6 +78,7 @@ export class AddRequestComponent implements OnInit {
 
   requestMediaPopupShow():void{
     $(".requestMedia .add .popup").show(300);
+    this.replaceComponentPopupHide();
   }
 
   requestMediaPopupHide():void{
@@ -96,6 +98,7 @@ export class AddRequestComponent implements OnInit {
 
   replaceComponentPopupShow():void{
     $(".ReplaceComponent .add .popup").show(300);
+    this.requestMediaPopupHide();
   }
 
   replaceComponentPopupHide():void{
@@ -115,6 +118,8 @@ export class AddRequestComponent implements OnInit {
       this.requestMediaEditPopup[i]=false;
     }
     this.requestMediaEditPopup[index]=true;
+    this.editMedia_Quantity=this.requestMedia[index].media_Quantity;
+    this.editMedia_name=this.requestMedia[index].media_name;
   }
 
   displayCompEditPopup(index:number):void{
@@ -122,11 +127,14 @@ export class AddRequestComponent implements OnInit {
       this.compEditPopupViability[i]=false;
     }
     this.compEditPopupViability[index]=true;
+    this.editComponent_Num=this.replaceComponent[index].compo_num;
   }
 
   addRequestMedia():void{
-    var currenRequest={media_name:"",media_type:"",media_Quantity:0};
+    var currenRequest={media_name:"",media_type:"",media_Quantity:0,id:0,mediaID:0};
     if(this.media_nameID.trim()!="" && this.media_typeID!="" ){
+      currenRequest.id=Number(this.media_nameID);
+      currenRequest.mediaID=Number(this.media_typeID);
       currenRequest.media_name=this.getSelectedMediaByID(Number(this.media_nameID)).name;
       currenRequest.media_type=this.getSelectedMediaTypeByID(Number(this.media_typeID)).name;
       currenRequest.media_Quantity=this.media_Quantity;
@@ -140,23 +148,34 @@ export class AddRequestComponent implements OnInit {
 
   }
   editRequestMedia(index:number):void{
-    this.requestMedia[index].media_name=this.editMedia_name;
-    this.requestMedia[index].media_type=this.editMedia_type;
-    this.requestMedia[index].media_Quantity=this.editMedia_Quantity;
+    if(Number(this.editMedia_name)){
+      this.requestMedia[index].id=Number(this.editMedia_name);
+      this.requestMedia[index].media_name = this.getSelectedMediaByID(Number(this.editMedia_name)).name;
+    }
+    if(this.editMedia_type.trim() !=""){
+      this.requestMedia[index].mediaID=Number(this.editMedia_type);
+      this.requestMedia[index].media_type = this.getSelectedMediaTypeByID(Number(this.editMedia_type)).name;
+    }
+
+    if(this.editMedia_Quantity != 0){
+      this.requestMedia[index].media_Quantity = this.editMedia_Quantity;
+    }
+
     this.requestMediaEditPopupHide(index);
-    this.editMedia_name="";
-    this.editMedia_type="";
-    this.editMedia_Quantity=0;
+    this.editMedia_name = "";
+    this.editMedia_type = "";
+    this.editMedia_Quantity = 0;
   }
 
   addReplaceComponentMedia():void{
-    var currenComp={compo_name:"",compo_num:0};
+    var currenComp={compo_name:"",compo_num:0,id:0};
     if(this.Component_name.trim()!="" ){
-      currenComp.compo_name=this.Component_name;
+      currenComp.id=Number(this.Component_name);
+      currenComp.compo_name=this.getSelectedComponentByID(Number(this.Component_name)).name;
       currenComp.compo_num=this.Component_Num;
       this.replaceComponent.push(currenComp);
       this.compEditPopupViability.push(false);
-      this.replaceComponentPopupHide()
+      this.replaceComponentPopupHide();
       this.Component_name="";
       this.Component_Num=0;
     }
@@ -164,11 +183,17 @@ export class AddRequestComponent implements OnInit {
   }
 
   editComponent(index:number):void{
-    this.replaceComponent[index].compo_name=this.editComponent_name;
-    this.replaceComponent[index].compo_num=this.editComponent_Num;
-    this.replaceComponentEditPopupHide(index);
-    this.editComponent_name="";
-    this.editComponent_Num=0;
+    if(Number(this.editComponent_name)) {
+      this.replaceComponent[index].id=Number(this.editComponent_name);
+      this.replaceComponent[index].compo_name = this.getSelectedComponentByID(Number(this.editComponent_name)).name;
+
+    }
+    if(this.editComponent_Num!=0) {
+      this.replaceComponent[index].compo_num = this.editComponent_Num;
+    }
+      this.replaceComponentEditPopupHide(index);
+      this.editComponent_name = "";
+      this.editComponent_Num = 0;
 
   }
 
@@ -187,6 +212,7 @@ export class AddRequestComponent implements OnInit {
     this.selectedMediaID=selectedElem.value;
     var media=this.getSelectedMediaByID(Number(this.selectedMediaID));
     this.selectedMediaTypes = media.types;
+
   }
 
   getSelectedMediaByID(mediaID:number):any{
@@ -198,7 +224,19 @@ export class AddRequestComponent implements OnInit {
     return null;
   }
 
+  getSelectedComponentByID(componentID:number):any{
+    for(let component of this.componentArray){
+      if(component.id==componentID){
+        return component;
+      }
+    }
+    return null;
+  }
+
   getSelectedMediaTypeByID(mediaTypeID:number):any{
+    console.log(this.selectedMediaTypes);
+    console.log("mediaTypeID "+mediaTypeID);
+
     for(let mediaType of this.selectedMediaTypes){
       if(mediaType.id==mediaTypeID){
         return mediaType;
@@ -207,7 +245,6 @@ export class AddRequestComponent implements OnInit {
     return null;
   }
   getProjectByID(projectID:number):any{
-    console.log("projectID"+projectID);
     for(let project of this.projectsArray){
       if(project.id==projectID){
         return project;
@@ -216,8 +253,8 @@ export class AddRequestComponent implements OnInit {
     return null;
   }
 
+
   getProductByID(productID:number):any{
-    console.log("productID"+productID);
     for(let product of this.productsArray){
       if(product.id==productID){
         return product;
@@ -245,6 +282,17 @@ export class AddRequestComponent implements OnInit {
     this.dataBaseService.getMedia().subscribe(
       (media)=>{
         this.mediaArray=media;
+      }
+    );
+
+    this.dataBaseService.getComponents().subscribe(
+      (components)=>{
+        this.componentArray=components;
+
+        if(this.componentArray.length==0){
+          this.componentArray.push({name:"comp test name",id:33},{name:"comp test name22",id:3});
+        }
+
       }
     );
   }

@@ -38,11 +38,13 @@
           <div></div>
           <mat-form-field>
             <select matNativeControl [(ngModel)]="Product_NameID" placeholder="Product Name">
-            <option  *ngFor="let product of productsArray" [value]="product.id">{{product.name}}</option>
+              <option style="display:none;"></option>
+              <option  *ngFor="let product of productsArray" [value]="product.id">{{product.name}}</option>
           </select>
           </mat-form-field>
           <mat-form-field>
             <select matNativeControl [(ngModel)]="Project_NameID" placeholder="Project Name">
+              <option style="display:none;"></option>
             <option *ngFor="let project of projectsArray" [value]="project.id">{{project.name}}</option>
           </select>
           </mat-form-field>
@@ -72,27 +74,30 @@
           <div class="add">
             <span (click)="requestMediaPopupShow()">+ &nbsp;&nbsp; Add</span>
             <div class="addedContent">
-              <div class="addedMedia" *ngFor="let media of requestMedia;let i = index">
-                <div class="info">{{media.media_name}} &nbsp; (Qty : {{media.media_Quantity}} {{media.media_type}})</div>
+              <div class="addedMedia" *ngFor="let addedMedia of requestMedia;let i = index">
+                <div class="info">{{addedMedia.media_name}} &nbsp; (Qty : {{addedMedia.media_Quantity}} {{addedMedia.media_type}})</div>
                 <div class="sittings">
                   <i class="fa fa-pencil" aria-hidden="true" (click)="displayRequestEditPopup(i)"></i>
                   <div class="popup editPopup" *ngIf="requestMediaEditPopup[i]==true">
                     <mat-form-field>
-                      <select matNativeControl [(ngModel)]="editMedia_name" placeholder="media name" required>
-                        <option [value]="media.id" *ngFor="let media of mediaArray,let i =index">{{media.name}}</option>
+                      <select matNativeControl  (input)="editMedia_name=$event.target.value" [ngModel]="addedMedia.id" placeholder="media name" required (change)="modifySelectedMediaTypes($event.target)">
+                        <option [value]="media.id" *ngFor="let media of mediaArray" >{{media.name}}</option>
                       </select>
                     </mat-form-field>
                     <div class="media_info">
-                      <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="editMedia_Quantity" required></mat-form-field>
                       <mat-form-field>
-                        <select matNativeControl [(ngModel)]="editMedia_type" placeholder="media type" required (change)="modifySelectedMediaTypes(i)">
+                        <input matInput  type="number" placeholder="Quantity"  [(ngModel)]="editMedia_Quantity" required min="0">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <select matNativeControl  (input)="editMedia_type=$event.target.value"  [ngModel]="addedMedia.mediaID" placeholder="media type" required >
+                          <option style="display:none;"></option>
                           <option [value]="mediaType.id" *ngFor="let mediaType of selectedMediaTypes">{{mediaType.name}}</option>
                         </select>
                       </mat-form-field>
                     </div>
                     <div class="buttons">
                       <button class="cancelBtn" (click)="requestMediaEditPopupHide(i)">CANCEL</button>
-                      <button class="done" (click)="editRequestMedia(i)" >Done</button>
+                      <button class="done" (click)="editRequestMedia(i)" >Edit</button>
 
                     </div>
 
@@ -104,13 +109,15 @@
             <div class="popup">
               <mat-form-field>
                 <select matNativeControl [(ngModel)]="media_nameID" placeholder="media name" required (change)="modifySelectedMediaTypes($event.target)">
+                  <option style="display:none;"></option>
                   <option [value]="media.id" *ngFor="let media of mediaArray">{{media.name}}</option>
                 </select>
               </mat-form-field>
               <div class="media_info">
-                <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="media_Quantity" required></mat-form-field>
+                <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="media_Quantity" required  min="0"></mat-form-field>
                 <mat-form-field>
                   <select matNativeControl [(ngModel)]="media_typeID" placeholder="media type" required >
+                    <option style="display:none;"></option>
                     <option [value]="mediaType.id" *ngFor="let mediaType of selectedMediaTypes">{{mediaType.name}}</option>
                   </select>
 
@@ -132,20 +139,20 @@
           <div class="add">
             <span (click)="replaceComponentPopupShow()">+ &nbsp;&nbsp; Add</span>
             <div class="addedContent" >
-              <div class="addedComp" *ngFor="let comp of replaceComponent;let i = index">
+              <div class="addedComp" *ngFor="let addedComp of replaceComponent;let i = index">
 
-              <div class="info">{{comp.compo_name}} &nbsp; (Num : {{comp.compo_num}})</div>
+              <div class="info">{{addedComp.compo_name}} &nbsp; (Num : {{addedComp.compo_num}})</div>
                 <div class="sittings">
                   <i class="fa fa-pencil" aria-hidden="true" (click)="displayCompEditPopup(i)"></i>
                   <div class="popup editPopup" *ngIf="compEditPopupViability[i]==true">
                     <mat-form-field>
-                      <select matNativeControl [(ngModel)]="editComponent_name" placeholder="Component name" required>
-                        <option value="one">Component name1</option>
+                      <select matNativeControl (input)="editComponent_name=$event.target.value" [ngModel]="addedComp.id"   placeholder="Component name" required >
+                        <option [value]="component.id" *ngFor="let component of componentArray">{{component.name}}</option>
                       </select>
                     </mat-form-field>
                     <div class="media_info">
                       <mat-form-field>
-                        <input matInput  type="number" placeholder="Num"  [(ngModel)]="editComponent_Num" required>
+                        <input matInput  type="number" placeholder="Num"  [(ngModel)]="editComponent_Num"  required min="0">
                       </mat-form-field>
                     </div>
                     <div class="buttons">
@@ -161,12 +168,13 @@
             <div class="popup">
               <mat-form-field>
                 <select matNativeControl [(ngModel)]="Component_name" placeholder="Component name" required>
-                  <option value="one">Component name1</option>
+                  <option style="display:none;"></option>
+                  <option [value]="component.id" *ngFor="let component of componentArray">{{component.name}}</option>
                 </select>
               </mat-form-field>
               <div class="media_info">
                 <mat-form-field>
-                  <input matInput  type="number" placeholder="Num"  [(ngModel)]="Component_Num" required>
+                  <input matInput  type="number" placeholder="Num"  [(ngModel)]="Component_Num" required min="0">
                 </mat-form-field>
               </div>
               <div class="buttons">
