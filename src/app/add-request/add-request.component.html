@@ -112,15 +112,19 @@
                   <option style="display:none;"></option>
                   <option [value]="media.id" *ngFor="let media of mediaArray">{{media.name}}</option>
                 </select>
-                <mat-error>You must choose a value</mat-error>
+                <mat-error *ngIf="media_nameID_error">choose a value</mat-error>
               </mat-form-field>
               <div class="media_info">
-                <mat-form-field><input matInput  type="number" placeholder="Quantity"  [(ngModel)]="media_Quantity" required  min="0"></mat-form-field>
+                <mat-form-field>
+                  <input matInput  type="number" placeholder="Quantity"  [(ngModel)]="media_Quantity" required  min="0">
+                  <mat-error *ngIf="media_Quantity_error">choose a value</mat-error>
+                </mat-form-field>
                 <mat-form-field>
                   <select matNativeControl [(ngModel)]="media_typeID" placeholder="media type" required >
                     <option style="display:none;"></option>
                     <option [value]="mediaType.id" *ngFor="let mediaType of selectedMediaTypes">{{mediaType.name}}</option>
                   </select>
+                  <mat-error *ngIf="media_typeID_error">choose a value</mat-error>
                 </mat-form-field>
               </div>
               <div class="buttons">

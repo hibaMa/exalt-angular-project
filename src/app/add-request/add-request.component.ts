@@ -97,6 +97,7 @@ export class AddRequestComponent implements OnInit {
     this.media_nameID="";
     this.media_typeID="";
     this.media_Quantity=0;
+    this.requestClearErrors();
   }
 
   requestMediaEditPopupHide(index:number):void{
@@ -143,7 +144,7 @@ export class AddRequestComponent implements OnInit {
 
   addRequestMedia():void{
     var currenRequest={media_name:"",media_type:"",media_Quantity:0,id:0,mediaID:0};
-    if(this.media_nameID!="" && this.media_typeID!="" ){
+    if(this.media_nameID!="" && this.media_typeID!="" && this.media_Quantity!=0 ){
       currenRequest.id=Number(this.media_nameID);
       currenRequest.mediaID=Number(this.media_typeID);
       currenRequest.media_name=this.getSelectedMediaByID(Number(this.media_nameID)).name;
@@ -155,8 +156,25 @@ export class AddRequestComponent implements OnInit {
       this.media_nameID="";
       this.media_typeID="";
       this.media_Quantity=0;
+      this.requestClearErrors();
+    }else{
+      this.media_Quantity_error=true;
+    }
+    if(this.media_nameID==""){
+      this.media_nameID_error=true;
+    }
+    if(this.media_typeID==""){
+      this.media_typeID_error=true;
     }
 
+
+
+
+  }
+  requestClearErrors():void{
+    this.media_nameID_error=false;
+    this.media_Quantity_error=false;
+    this.media_typeID_error=false;
   }
   editRequestMedia(index:number):void{
     if(Number(this.editMedia_name)){
