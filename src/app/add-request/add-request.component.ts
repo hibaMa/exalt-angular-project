@@ -38,6 +38,13 @@ export class AddRequestComponent implements OnInit {
   editMedia_type:string;
   editMedia_Quantity=0;
 
+  media_nameID_error:Boolean;
+  media_typeID_error:Boolean;
+  media_Quantity_error:Boolean;
+  editMedia_name_error:Boolean;
+  editMedia_type_error:Boolean;
+  editMedia_Quantity_error:Boolean;
+
   requestMedia=[];
   requestMediaEditPopup=[];
 
@@ -47,6 +54,10 @@ export class AddRequestComponent implements OnInit {
   editComponent_Num:number;
   replaceComponent=[];
   compEditPopupViability=[];
+
+
+
+
 
   //calss data
   selectedMediaID:string;
@@ -132,7 +143,7 @@ export class AddRequestComponent implements OnInit {
 
   addRequestMedia():void{
     var currenRequest={media_name:"",media_type:"",media_Quantity:0,id:0,mediaID:0};
-    if(this.media_nameID.trim()!="" && this.media_typeID!="" ){
+    if(this.media_nameID!="" && this.media_typeID!="" ){
       currenRequest.id=Number(this.media_nameID);
       currenRequest.mediaID=Number(this.media_typeID);
       currenRequest.media_name=this.getSelectedMediaByID(Number(this.media_nameID)).name;
@@ -152,7 +163,7 @@ export class AddRequestComponent implements OnInit {
       this.requestMedia[index].id=Number(this.editMedia_name);
       this.requestMedia[index].media_name = this.getSelectedMediaByID(Number(this.editMedia_name)).name;
     }
-    if(this.editMedia_type.trim() !=""){
+    if(Number(this.editMedia_type)){
       this.requestMedia[index].mediaID=Number(this.editMedia_type);
       this.requestMedia[index].media_type = this.getSelectedMediaTypeByID(Number(this.editMedia_type)).name;
     }
@@ -169,7 +180,7 @@ export class AddRequestComponent implements OnInit {
 
   addReplaceComponentMedia():void{
     var currenComp={compo_name:"",compo_num:0,id:0};
-    if(this.Component_name.trim()!="" ){
+    if(Number(this.Component_name)){
       currenComp.id=Number(this.Component_name);
       currenComp.compo_name=this.getSelectedComponentByID(Number(this.Component_name)).name;
       currenComp.compo_num=this.Component_Num;
@@ -234,9 +245,6 @@ export class AddRequestComponent implements OnInit {
   }
 
   getSelectedMediaTypeByID(mediaTypeID:number):any{
-    console.log(this.selectedMediaTypes);
-    console.log("mediaTypeID "+mediaTypeID);
-
     for(let mediaType of this.selectedMediaTypes){
       if(mediaType.id==mediaTypeID){
         return mediaType;
