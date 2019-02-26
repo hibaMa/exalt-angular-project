@@ -92,9 +92,9 @@ export class AddRequestComponent implements OnInit {
     this.replaceComponentPopupHide();
   }
 
-  requestMediaPopupHide():void{
+  requestMediaPopupHide():void {
     $(".requestMedia .add .popup").hide(300);
-    this.media_nameID="";
+    this.media_nameID = "";
     this.media_typeID="";
     this.media_Quantity=0;
     this.requestClearErrors();
@@ -120,7 +120,7 @@ export class AddRequestComponent implements OnInit {
   }
 
   replaceComponentEditPopupHide(index:number):void{
-    this.compEditPopupViability[index]=false;
+    this.compEditPopupViability[index] = false;
     this.editComponent_name="";
     this.editComponent_Num=0;
   }
@@ -138,6 +138,9 @@ export class AddRequestComponent implements OnInit {
     for(var i=0;i<this.compEditPopupViability.length;i++){
       this.compEditPopupViability[i]=false;
     }
+    // this.compEditPopupViability.map((compObj)=>{
+    //   compObj=false;
+    // });
     this.compEditPopupViability[index]=true;
     this.editComponent_Num=this.replaceComponent[index].compo_num;
   }
