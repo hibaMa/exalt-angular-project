@@ -21,6 +21,10 @@
   background-color: white;
   margin: 10px;
 }
+
+.slider li.selected{
+  border:3px solid  #0096d6;
+}
 .slider li.slideItem .img{
   margin-top: 10px;
   height: 30px;

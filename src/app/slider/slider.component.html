@@ -3,7 +3,7 @@
   <div class="slideLeft" (click)="sliderLeftArrow()"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
   <div class="slideRight" (click)="sliderRightArrow()"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
   <ul>
-    <li class="slideItem" *ngFor="let item of pressesArray">
+    <li class="slideItem" *ngFor="let item of sliderService.pressesArray;let i=index" (click)="saveSelectedItem(i)" [class.selected]="sliderService.isPressSelected[i]">
       <div class="img">  <img [src]="baseURL+item.imageUrl" alt=""></div>
       <div class="title">{{item.name}}</div>
       <div class="subTitle">{{item.serialNumber}}</div>

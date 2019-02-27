@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {data} from '../constant';
 import {DataBaseService} from '../services/data-base.service';
+import {SliderService} from '../services/slider.service';
 
 @Component({
   selector: 'app-slider',
@@ -8,7 +9,7 @@ import {DataBaseService} from '../services/data-base.service';
   styleUrls: ['./slider.component.css']
 })
 export class SliderComponent implements OnInit {
-  pressesArray: [];
+
   baseURL:string=data.baseURL;
 
   slide={count:0,marginLeft:0,marginRight:0,width:0,slideToSHow:3,left:0,widthIncMargin:0,index:0};
@@ -16,7 +17,7 @@ export class SliderComponent implements OnInit {
     this.slide.marginLeft = 10;
     this.slide.marginRight = 10;
     this.slide.width = 170;
-    this.slide.count =  this.pressesArray ?this.pressesArray.length:0;
+    this.slide.count =  this.sliderService.pressesArray ?this.sliderService.pressesArray .length:0;
     this.slide.left = parseInt($('.slider ul').css('left'), 10);
     this.slide.widthIncMargin=this.slide.width+this.slide.marginLeft+this.slide.marginRight;
 
@@ -43,12 +44,23 @@ export class SliderComponent implements OnInit {
       this.slide.index++;
     }
   }
-  constructor(private dataBaseService:DataBaseService) { }
+  constructor(private dataBaseService:DataBaseService,public sliderService: SliderService) { }
+  saveSelectedItem(index:number):void{
+    this.sliderService.isPressSelected[index]=!this.sliderService.isPressSelected[index];
+    if(this.sliderService.isPressSelected[index]){
+      this.sliderService.chosenPressesArray.push(this.sliderService.pressesArray [index]);
+    }else{
+      this.sliderService.chosenPressesArray.splice( this.sliderService.chosenPressesArray.indexOf(this.sliderService.pressesArray [index]), 1);
+    }
+  }
 
   ngOnInit() {
     this.dataBaseService.getAvailablePresses().subscribe(
       (presses)=>{
-        this.pressesArray=presses;
+        this.sliderService.pressesArray =presses;
+        for(var i = 0; i < this.sliderService.pressesArray.length; i++) {
+          this.sliderService.isPressSelected.push(false);
+        }
         this.initSlider();
       }
     );
