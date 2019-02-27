@@ -203,9 +203,10 @@
     <wizard-step [title]="'Test plan'" >
       <div class="optionalText">Locate and upload your test plan document (optional)</div>
       <div id="fileBtns">
-        <app-upload-file *ngFor="let file of filesToUpload"></app-upload-file>
+        <app-upload-file *ngFor="let file of filesToUpload,let i = index" ></app-upload-file>
       </div>
       <div class="addFile" (click)="addFileBtn()"><div class="add" ><span>+</span></div><span class="text">Add File</span></div>
+      <div (click)="submitRequest()">addddd</div>
       <app-slider></app-slider>
     </wizard-step>
     <!--step4-->

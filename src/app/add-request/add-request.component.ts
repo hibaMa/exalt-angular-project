@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy} from '@angular/core';
 import * as jQuery from 'jquery';
 import {DataBaseService} from '../services/data-base.service';
+import {FileUploadService} from '../upload-file/file-upload.service';
 
 @Component({
   selector: 'app-add-request',
@@ -273,7 +274,7 @@ export class AddRequestComponent implements OnInit {
     this.filesToUpload.push(true);
   }
 
-  constructor(private dataBaseService: DataBaseService) {
+  constructor(private dataBaseService: DataBaseService, private fileUploadService: FileUploadService) {
   }
 
 
@@ -309,6 +310,139 @@ export class AddRequestComponent implements OnInit {
     );
   }
 
+  submitRequest(): void {
+    var requestID = 3;
+    this.submitFiles(requestID);
+  }
+
+
+  submitFiles(requestID: number): void {
+    var filesToUpload = [];
+    var filesTypes = [];
+    const children = document.getElementsByClassName('fileInputToUpload');
+    Array.from(children).forEach((child, index) => {
+      if ('files' in child) {
+        if (child.files.length == 0) {
+          console.log('Select one or more files.');
+        } else {
+          filesToUpload.push(child.files[0]);
+          filesTypes.push(this.getFileType(child.files[0].name.split('.').pop().toLowerCase()));
+        }
+      }
+    });
+    console.log(filesTypes);
+    // this.fileUploadService.uploadFiles(requestID, filesToUpload,filesTypes);
+  }
+
+  getFileType(str: string): string {
+    var fileType;
+    if (str == 'pdf') {
+      fileType = 'application/pdf';
+
+    } else if (str == 'png') {
+      fileType = 'image/png ';
+
+    } else if (str == 'gif') {
+      fileType = 'image/gif';
+
+    } else if (str == 'jpeg') {
+      fileType = 'image/jpeg';
+
+    } else if (str == 'jpg') {
+      fileType = 'image/jpeg';
+
+    } else if (str == 'zip') {
+      fileType = 'application/zip';
+
+    } else if (str == 'rar') {
+      fileType = 'application/zip';
+
+    } else if (str == 'doc') {
+      fileType = 'application/msword';
+
+    } else if (str == 'dot') {
+      fileType = 'application/msword';
+
+    } else if (str == 'docx') {
+      fileType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+
+    } else if (str == 'dotx') {
+      fileType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.template';
+
+    } else if (str == 'docm') {
+      fileType = 'application/vnd.ms-word.document.macroEnabled.12';
+
+    } else if (str == 'dotm') {
+      fileType = 'application/vnd.ms-word.template.macroEnabled.12';
+
+    } else if (str == 'xls') {
+      fileType = 'application/vnd.ms-excel';
+
+    } else if (str == 'xlt') {
+      fileType = 'application/vnd.ms-excel';
+
+    } else if (str == 'xla') {
+      fileType = 'application/vnd.ms-excel';
+
+    } else if (str == 'xlsx') {
+      fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+
+    } else if (str == 'xltx') {
+      fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.template';
+
+    } else if (str == 'xlsm') {
+      fileType = 'application/vnd.ms-excel.sheet.macroEnabled.12';
+
+    } else if (str == 'xltm') {
+      fileType = 'application/vnd.ms-excel.template.macroEnabled.12';
+
+    } else if (str == 'xlam') {
+      fileType = 'application/vnd.ms-excel.addin.macroEnabled.12';
+
+    } else if (str == 'xlsb') {
+      fileType = 'application/vnd.ms-excel.sheet.binary.macroEnabled.12';
+
+    } else if (str == 'ppt') {
+      fileType = 'application/vnd.ms-powerpoint';
+
+    } else if (str == 'pot') {
+      fileType = 'application/vnd.ms-powerpoint';
+
+    } else if (str == 'pps') {
+      fileType = 'application/vnd.ms-powerpoint';
+
+    } else if (str == 'ppa') {
+      fileType = 'application/vnd.ms-powerpoint';
+
+    } else if (str == 'pptx') {
+      fileType = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+
+    } else if (str == 'potx') {
+      fileType = 'application/vnd.openxmlformats-officedocument.presentationml.template';
+
+    } else if (str == 'ppsx') {
+      fileType = 'application/vnd.openxmlformats-officedocument.presentationml.slideshow';
+
+    } else if (str == 'ppam') {
+      fileType = 'application/vnd.ms-powerpoint.addin.macroEnabled.12';
+
+    } else if (str == 'pptm') {
+      fileType = 'application/vnd.ms-powerpoint.presentation.macroEnabled.12';
+
+    } else if (str == 'potm') {
+      fileType = 'application/vnd.ms-powerpoint.template.macroEnabled.12';
+
+    } else if (str == 'ppsm') {
+      fileType = 'application/vnd.ms-powerpoint.slideshow.macroEnabled.12';
+
+    } else if (str == 'txt') {
+      fileType = 'text/plain';
+
+    } else {
+      fileType = str;
+    }
+    return fileType;
+  }
 
 }
 
