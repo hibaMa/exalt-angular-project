@@ -1,0 +1,32 @@
+.testPlan {
+  /*margin-bottom: 200px;*/
+  display: flex;
+  flex-direction: column;
+}
+
+.testPlan .fileUpload{
+  display: block;
+  border-bottom: 1px solid #b9b9b9;
+}
+
+.testPlan .UploadFileTitle{
+  font-family: Roboto;
+  font-size: 12px;
+  color: #b9b9b9;
+  padding-bottom: 4px;
+}
+.testPlan .fileUpload input{
+  border: none;
+  width: 90%;
+  position: relative;
+  left: -94px;
+  font-family: Roboto;
+  font-size: 14px;
+  color: #5a5a5a;
+
+}
+.testPlan .fileUpload span{
+  font-family: Roboto;
+  font-size: 14px;
+  color: #0096d6
+}

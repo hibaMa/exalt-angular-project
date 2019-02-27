@@ -26,6 +26,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AddRequestComponent } from './add-request/add-request.component';
 import { SliderComponent } from './slider/slider.component';
 import { EnterComponent } from './enter/enter.component';
+import { UploadFileComponent } from './upload-file/upload-file.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { EnterComponent } from './enter/enter.component';
     MainPageComponent,
     AddRequestComponent,
     SliderComponent,
-    EnterComponent
+    EnterComponent,
+    UploadFileComponent
 
   ],
   imports: [

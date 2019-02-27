@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {DataBaseService} from './data-base.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,5 +8,5 @@ export class SliderService {
   chosenPressesArray=[];
   isPressSelected=[];
 
-  constructor(private dataBaseService:DataBaseService) { }
+  constructor( ) { }
 }

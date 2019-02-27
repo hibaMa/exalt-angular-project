@@ -117,19 +117,16 @@
                   <option style="display:none;"></option>
                   <option [value]="media.id" *ngFor="let media of mediaArray">{{media.name}}</option>
                 </select>
-                <mat-error *ngIf="media_nameID_error">choose a value</mat-error>
               </mat-form-field>
               <div class="media_info">
                 <mat-form-field>
                   <input matInput  type="number" placeholder="Quantity"  [(ngModel)]="media_Quantity" required  min="0">
-                  <mat-error *ngIf="media_Quantity_error">choose a value</mat-error>
                 </mat-form-field>
                 <mat-form-field>
                   <select matNativeControl [(ngModel)]="media_typeID" placeholder="media type" required >
                     <option style="display:none;"></option>
                     <option [value]="mediaType.id" *ngFor="let mediaType of selectedMediaTypes">{{mediaType.name}}</option>
                   </select>
-                  <mat-error *ngIf="media_typeID_error">choose a value</mat-error>
                 </mat-form-field>
               </div>
               <div class="buttons">
@@ -204,15 +201,11 @@
     </wizard-step>
     <!--step3-->
     <wizard-step [title]="'Test plan'" >
-      <div class="testPlan">
-        <div class="optionalText">Locate and upload your test plan document (optional)</div>
-        <div class="UploadFileTitle">Upload file</div>
-        <label class="fileUpload">
-          <input  type="file"/>
-          <span>Choose</span>
-        </label>
+      <div class="optionalText">Locate and upload your test plan document (optional)</div>
+      <div id="fileBtns">
+        <app-upload-file *ngFor="let file of filesToUpload"></app-upload-file>
       </div>
-
+      <div class="addFile" (click)="addFileBtn()"><div class="add" ><span>+</span></div><span class="text">Add File</span></div>
       <app-slider></app-slider>
     </wizard-step>
     <!--step4-->
