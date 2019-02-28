@@ -151,10 +151,14 @@ export class AddRequestComponent implements OnInit {
       this.requestMedia.push(currenRequest);
       this.requestMediaEditPopup.push(false);
       this.requestMediaPopupHide();
+      console.log("in"+this.media_nameID +"-"+  this.media_typeID + "-"+  this.media_Quantity );
+
       this.media_nameID = '';
       this.media_typeID = '';
       this.media_Quantity = 0;
     }
+
+    console.log(this.media_nameID +"-"+  this.media_typeID + "-"+  this.media_Quantity );
 
   }
 
@@ -398,7 +402,6 @@ export class AddRequestComponent implements OnInit {
       },
       description: null,
       testFileType:"",
-      rejectedComment:null,
       rejectedDetails:null,
       //true
       media:submitMediaArray,
