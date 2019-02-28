@@ -310,9 +310,15 @@ export class AddRequestComponent implements OnInit {
     );
   }
 
+  closeAddRequest(): void {
+    $('.addRequest').slideUp(200);
+
+  }
+
   submitRequest(): void {
-    var requestID = 3;
-    this.submitFiles(requestID);
+    $('.addRequest').slideUp(200);
+    // var requestID = 3;
+    // this.submitFiles(requestID);
   }
 
 
@@ -321,7 +327,7 @@ export class AddRequestComponent implements OnInit {
     var filesTypes = [];
     const children = document.getElementsByClassName('fileInputToUpload');
     Array.from(children).forEach((child, index) => {
-      if ('files' in child) {
+      if ('files' in child && child != null) {
         if (child.files.length == 0) {
           console.log('Select one or more files.');
         } else {

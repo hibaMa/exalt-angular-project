@@ -8,10 +8,14 @@
   background-color:white;
   padding: 10px;
 }
-.forms-container .formHeader ,
+
 .forms-container .formHeader {
   border-bottom: 1px solid #5a5a5a;
 
+}
+
+.forms-container .formHeader .close:hover{
+  cursor: pointer;
 }
 
 .forms-container .formTitle{

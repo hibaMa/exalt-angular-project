@@ -3,10 +3,11 @@
 <!--if there is many parameter put them in separate class-->
 <!-- map find ...-->
 <!---->
+<div class="addRequest">
 <div class="forms-container">
   <div class="formHeader">
     <div class="formTitle">New Press Request</div>
-    <div class="close">x</div>
+    <div class="close" (click)="closeAddRequest()">x</div>
   </div>
   <form-wizard>
     <!--step1-->
@@ -210,9 +211,7 @@
       <app-slider></app-slider>
     </wizard-step>
     <!--step4-->
-    <wizard-step [title]="'Submit'" >
-      <div [ngSwitch]="isCompleted">
-        <div *ngSwitchDefault>
+    <wizard-step [title]="'Submit'" (onComplete)="submitRequest()">
           <div class="submittedData">
           <div><span>isUrgent </span><span>{{isUrgent}}</span></div>
           <div><span>Product_Name </span><span *ngIf="Product_NameID">{{getProductByID(Product_NameID).name}}</span></div>
@@ -224,10 +223,10 @@
           <div *ngIf="Additional_Comment !=''"><span>Additional_Comment</span><span> {{Additional_Comment}}</span></div>
           <div><span>request Media Num </span><span>{{requestMedia.length}}</span></div>
           <div><span>replace Component Num </span><span>{{replaceComponent.length}}</span></div>
-          </div>
         </div>
-      </div>
     </wizard-step>
   </form-wizard>
 </div>
+</div>
+
 

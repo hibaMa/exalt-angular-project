@@ -46,9 +46,7 @@ export class RequestsComponent implements OnInit {
   }
 
   addRequest():void{
-    $(".addRequest").toggle();
+    $(".addRequest").slideDown(200);
   }
-
-
 
 }
