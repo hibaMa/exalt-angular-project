@@ -50,7 +50,8 @@ export class LogInComponent implements OnInit {
       (token)=>{
           this.saveToken(token);
           this.showErrorMsg=false;
-          this.router.navigate(['/main'])
+          this.router.navigate(['/main']);
+          this.dataBaseService.userInfo=token;
 
       },
       (error)=>{

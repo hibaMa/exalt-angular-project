@@ -81,7 +81,7 @@
             <span (click)="requestMediaPopupShow()">+ &nbsp;&nbsp; Add</span>
             <div class="addedContent">
               <div class="addedMedia" *ngFor="let addedMedia of requestMedia;let i = index">
-                <div class="info">{{addedMedia.media_name}} &nbsp; (Qty : {{addedMedia.media_Quantity}} {{addedMedia.media_type}})</div>
+                <div class="info">{{addedMedia.media_name}} &nbsp; (Qty : {{addedMedia.quantity}} {{addedMedia.media_type}})</div>
                 <div class="sittings">
                   <i class="fa fa-pencil" aria-hidden="true" (click)="displayRequestEditPopup(i)"></i>
                   <div class="popup editPopup" *ngIf="requestMediaEditPopup[i]==true">
@@ -92,7 +92,7 @@
                     </mat-form-field>
                     <div class="media_info">
                       <mat-form-field>
-                        <input matInput  type="number" placeholder="Quantity"  [(ngModel)]="editMedia_Quantity" required min="0">
+                        <input matInput  type="number" placeholder="Quantity"  [(ngModel)]="editquantity" required min="0">
                       </mat-form-field>
                       <mat-form-field>
                         <select matNativeControl  (input)="editMedia_type=$event.target.value"  [ngModel]="addedMedia.mediaID" placeholder="media type" required >
@@ -121,7 +121,7 @@
               </mat-form-field>
               <div class="media_info">
                 <mat-form-field>
-                  <input matInput  type="number" placeholder="Quantity"  [(ngModel)]="media_Quantity" required  min="0">
+                  <input matInput  type="number" placeholder="Quantity"  [(ngModel)]="quantity" required  min="0">
                 </mat-form-field>
                 <mat-form-field>
                   <select matNativeControl [(ngModel)]="media_typeID" placeholder="media type" required >

@@ -2,17 +2,21 @@ import {Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy} from '@an
 import * as jQuery from 'jquery';
 import {DataBaseService} from '../services/data-base.service';
 import {FileUploadService} from '../upload-file/file-upload.service';
+import { DatePipe } from '@angular/common';
+import {SliderService} from '../services/slider.service';
 
 @Component({
   selector: 'app-add-request',
   templateUrl: './add-request.component.html',
   styleUrls: ['./add-request.component.css'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.Default //to support ngFor does not update when array is updated
+  changeDetection: ChangeDetectionStrategy.Default, //to support ngFor does not update when array is updated
+  providers: [DatePipe]
 
 })
 export class AddRequestComponent implements OnInit {
 
+  //from DB
   productsArray = [];
   projectsArray = [];
   mediaArray = [];
@@ -50,7 +54,7 @@ export class AddRequestComponent implements OnInit {
   compEditPopupViability = [];
 
   filesToUpload = [];
-
+  submitRequesData={};
   //calss data
   selectedMediaID: string;
 
@@ -274,7 +278,7 @@ export class AddRequestComponent implements OnInit {
     this.filesToUpload.push(true);
   }
 
-  constructor(private dataBaseService: DataBaseService, private fileUploadService: FileUploadService) {
+  constructor(private sliderService: SliderService ,private datePipe: DatePipe,private dataBaseService: DataBaseService, private fileUploadService: FileUploadService) {
   }
 
 
@@ -315,29 +319,104 @@ export class AddRequestComponent implements OnInit {
 
   }
 
+
+  submitFiles(requestID: number): void {
+    // var filesToUpload = [];
+    // var filesTypes = [];
+    // const children = document.getElementsByClassName('fileInputToUpload');
+    // Array.from(children).forEach((child, index) => {
+    //   if ('files' in child && child != null) {
+    //     if (child.files.length == 0) {
+    //       console.log('Select one or more files.');
+    //     } else {
+    //       filesToUpload.push(child.files[0]);
+    //       filesTypes.push(this.getFileType(child.files[0].name.split('.').pop().toLowerCase()));
+    //     }
+    //   }
+    // });
+    // console.log(filesTypes);
+    // this.fileUploadService.uploadFiles(requestID, filesToUpload,filesTypes);
+  }
+
   submitRequest(): void {
     $('.addRequest').slideUp(200);
+    this.initSubmitData();
+    this.dataBaseService.createRequest(this.submitRequesData).subscribe(
+      (reqest)=>{
+        console.log(reqest);
+      },
+      (error)=>{
+        console.log(error);
+      }
+
+    );
     // var requestID = 3;
     // this.submitFiles(requestID);
   }
 
 
-  submitFiles(requestID: number): void {
-    var filesToUpload = [];
-    var filesTypes = [];
-    const children = document.getElementsByClassName('fileInputToUpload');
-    Array.from(children).forEach((child, index) => {
-      if ('files' in child && child != null) {
-        if (child.files.length == 0) {
-          console.log('Select one or more files.');
-        } else {
-          filesToUpload.push(child.files[0]);
-          filesTypes.push(this.getFileType(child.files[0].name.split('.').pop().toLowerCase()));
-        }
-      }
+
+
+  initSubmitData():void{
+    var submitMediaArray=[];
+    var selectedProject=this.getProjectByID(Number(this.Project_NameID));
+    var selectedProduct=this.getProductByID(Number(this.Product_NameID));
+    var submitMedia={mediaId: 0, name: "string", quantity: 0, type: "string"};
+    var submitMediaArray=[];
+    var submitComponentArray=[];
+    var submitComponent= {compId: 0, name: "string", quantity: 0};
+
+
+    this.requestMedia.map((media)=>{
+      submitMedia.mediaId=media.media_nameID;
+      submitMedia.name=this.getSelectedMediaByID(media.media_nameID);
+      submitMedia.quantity=media.media_Quantity;
+      submitMedia.type=this.getSelectedMediaTypeByID(media.media_type);
+      submitMediaArray.push(submitMedia);
+
     });
-    console.log(filesTypes);
-    // this.fileUploadService.uploadFiles(requestID, filesToUpload,filesTypes);
+    this.replaceComponent.map((comp)=>{
+      submitComponent.quantity=comp.compo_num;
+      submitComponent.name=comp.compo_name;
+      submitComponent.compId=comp.compId;
+      submitComponentArray.push(submitComponent);
+
+    });
+
+    this.submitRequesData={
+      //to check
+      status: "PENDING",
+      id: 0,
+      weekNumber: 0,
+      priority: 0,
+      isConsecutive: true,
+      created:this.datePipe.transform(new Date(),'YYYY-MM-DDEEEEEHH:MM:SSZ'),
+      rejectedComment:null,
+      hub: {
+        id: 1,
+        name: "Hub 1"
+      },
+      description: null,
+      testFileType:"",
+      rejectedComment:null,
+      rejectedDetails:null,
+      //true
+      media:submitMediaArray,
+      shiftsLength:this.shift,
+      type:this.Test_type,
+      isArgent:this.isUrgent,
+      comment:this.Additional_Comment,
+      name:this.Test_Name,
+      project:selectedProject,
+      product:selectedProduct,
+      testObjecteves:this.Test_Objectives,
+      components:submitComponentArray,
+      presses:this.sliderService.chosenPressesArray,
+      owner:this.dataBaseService.userInfo
+
+
+    };
+
   }
 
   getFileType(str: string): string {

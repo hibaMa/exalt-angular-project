@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 import { MatFormFieldModule, MatInputModule , MatSelectModule,MatButtonModule ,  MatNativeDateModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -60,6 +61,7 @@ import { UploadFileComponent } from './upload-file/upload-file.component';
     FormsModule
   ],
   providers: [
+    DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]

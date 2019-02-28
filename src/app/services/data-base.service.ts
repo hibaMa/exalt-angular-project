@@ -7,6 +7,8 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +21,8 @@ export class DataBaseService {
   private ProjectURL=data.baseURL+"/api/v1/projects"+"?hubId=1";
   private MediaURL=data.baseURL+"/api/v1/media"+"?hubId=1";
   private ComponentURL=data.baseURL+"/api/v1/components"+"?hubId=1";
-
+  private AddRequestURL=data.baseURL+"/api/v1/request";
+  userInfo={};
   constructor(private http: HttpClient) { }
 
   getLogInToken(userInfo:User):Observable<any>{
@@ -52,6 +55,8 @@ export class DataBaseService {
     return this.http.get<any>(this.ComponentURL, httpOptions);
   }
 
-
+  createRequest(submitRequestData):Observable<any>{
+    return this.http.post<any>(this.AddRequestURL, submitRequestData, httpOptions);
+  }
 
 }
