@@ -383,10 +383,7 @@ export class AddRequestComponent implements OnInit {
       submitComponentArray.push(submitComponent);
 
     });
-
     this.submitRequesData={
-      //to check
-      // id: 0,
       weekNumber: 0,
       priority: 1,
       isConsecutive: true,
@@ -395,7 +392,6 @@ export class AddRequestComponent implements OnInit {
         name: "Hub 1"
       },
       description: "",
-      //true
       media:submitMediaArray,
       shiftsLength:this.shift,
       type:this.Test_type,
@@ -406,10 +402,7 @@ export class AddRequestComponent implements OnInit {
       product: {},
       testObjecteves:this.Test_Objectives,
       components:submitComponentArray,
-      presses:this.sliderService.chosenPressesArray,
-      // owner:this.dataBaseService.userInfo
-
-
+      presses:this.sliderService.chosenPressesArray
     };
 
   }

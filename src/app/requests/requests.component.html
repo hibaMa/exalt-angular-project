@@ -1,4 +1,3 @@
-
 <div class="grid">
 
   <div class="request">
@@ -16,12 +15,17 @@
       <li></li>
     </ul>
 
-    <ul *ngFor="let request of requests;let i = index" [class.noted]="request.comment" >
+    <ul *ngFor="let request of requests;let i = index" [class.noted]="request.comment">
       <li>{{request.name}}</li>
       <li>{{request.project.name}}</li>
       <li>{{request.created | date:'dd-mm-yyyy' }}</li>
-      <li><img class="press_img inline-block" [src]="baseURL+request.presses[0].imageUrl"><div class="note inline-block">{{request.presses[0].name}}</div><a href="#" class="info-link"><i class="info-icon fa fa-info-circle" aria-hidden="true"></i></a></li>
-      <li *ngIf="request.status=='PENDING' || request.status=='PLANNED'" ><i class="pending icon fa fa-clock-o" aria-hidden="true"></i><div class="status inline-block">Pending Approval</div></li>
+      <li><img class="press_img inline-block" [src]="baseURL+request.presses[0].imageUrl">
+        <div class="note inline-block">{{request.presses[0].name}}</div>
+        <a href="#" class="info-link"><i class="info-icon fa fa-info-circle" aria-hidden="true"></i></a></li>
+      <li *ngIf="request.status=='PENDING' || request.status=='PLANNED'">
+        <i class="pending icon fa fa-clock-o" aria-hidden="true"></i>
+        <div class="status inline-block">Pending Approval</div>
+      </li>
       <!--<li [class.remove]="!(request.status=='PENDING' || request.status=='PLANNED')" ><i class="status-icon icon inline-block fa fa-check-circle-o"></i><div class=" status inline-block">Pending Approval</div></li>-->
 
       <li>
