@@ -121,7 +121,7 @@ li.active[_ngcontent-c6] a{
 .inputsForm{
   display: grid;
   grid-template-columns:1fr 1fr ;
-  grid-template-rows: repeat(3,60px);
+  grid-template-rows: repeat(3,65px);
 
 }
 .inputsForm input,.inputsForm select{

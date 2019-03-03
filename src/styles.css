@@ -21,3 +21,8 @@ body{
 .clearFix{
   clear: both;
 }
+
+.mat-form-field-appearance-legacy .mat-hint.errorTxt{
+  color: red;
+  font-size: 12px;
+}

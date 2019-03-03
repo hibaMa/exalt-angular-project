@@ -2,8 +2,9 @@ import {Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy} from '@an
 import * as jQuery from 'jquery';
 import {DataBaseService} from '../services/data-base.service';
 import {FileUploadService} from '../upload-file/file-upload.service';
-import { DatePipe } from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {SliderService} from '../services/slider.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-request',
@@ -53,7 +54,7 @@ export class AddRequestComponent implements OnInit {
   compEditPopupViability = [];
 
   filesToUpload = [];
-  submitRequesData={};
+  submitRequesData = {};
   //calss data
   selectedMediaID: string;
 
@@ -61,6 +62,11 @@ export class AddRequestComponent implements OnInit {
   //checkbox - function
   isTestChecked = false;
   isLabChecked = true;
+
+
+  //validation
+  registerForm1: FormGroup;
+
 
 
   toggleTest(): void {
@@ -150,14 +156,14 @@ export class AddRequestComponent implements OnInit {
       this.requestMedia.push(currenRequest);
       this.requestMediaEditPopup.push(false);
       this.requestMediaPopupHide();
-      console.log("in"+this.media_nameID +"-"+  this.media_typeID + "-"+  this.media_Quantity );
+      console.log('in' + this.media_nameID + '-' + this.media_typeID + '-' + this.media_Quantity);
 
       this.media_nameID = '';
       this.media_typeID = '';
       this.media_Quantity = 0;
     }
 
-    console.log(this.media_nameID +"-"+  this.media_typeID + "-"+  this.media_Quantity );
+    console.log(this.media_nameID + '-' + this.media_typeID + '-' + this.media_Quantity);
 
   }
 
@@ -281,7 +287,7 @@ export class AddRequestComponent implements OnInit {
     this.filesToUpload.push(true);
   }
 
-  constructor(private sliderService: SliderService ,private datePipe: DatePipe,private dataBaseService: DataBaseService, private fileUploadService: FileUploadService) {
+  constructor(private formBuilder: FormBuilder,private sliderService: SliderService, private datePipe: DatePipe, private dataBaseService: DataBaseService, private fileUploadService: FileUploadService) {
   }
 
 
@@ -315,11 +321,19 @@ export class AddRequestComponent implements OnInit {
 
       }
     );
+
+    //validation
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
 
   closeAddRequest(): void {
-    $('.addRequest').slideUp(100,function() {
-      $('app-add-request').css("display","none");
+    $('.addRequest').slideUp(100, function() {
+      $('app-add-request').css('display', 'none');
     });
 
   }
@@ -342,71 +356,69 @@ export class AddRequestComponent implements OnInit {
     // console.log(filesTypes);
     // this.fileUploadService.uploadFiles(requestID, filesToUpload,filesTypes);
   }
-  
+
   submitRequest(): void {
     this.closeAddRequest();
     this.initSubmitData();
     this.dataBaseService.createRequest(this.submitRequesData).subscribe(
-      (reqest)=>{
+      (reqest) => {
         console.log(reqest);
       },
-      (error)=>{
+      (error) => {
         console.log(error);
       }
-
     );
     // var requestID = 3;
     // this.submitFiles(requestID);
   }
 
-  initSubmitData():void{
-    var selectedProject=this.getProjectByID(Number(this.Project_NameID));
-    var selectedProduct=this.getProductByID(Number(this.Product_NameID));
-    var submitMedia={mediaId: 0, name: "string", quantity: 0, type: "string"};
-    var submitMediaArray=[];
-    var submitComponentArray=[];
-    var submitComponent= {compId: 0, name: "string", quantity: 0};
+  initSubmitData(): void {
+    var selectedProject = this.getProjectByID(Number(this.Project_NameID));
+    var selectedProduct = this.getProductByID(Number(this.Product_NameID));
+    var submitMedia = {mediaId: 0, name: 'string', quantity: 0, type: 'string'};
+    var submitMediaArray = [];
+    var submitComponentArray = [];
+    var submitComponent = {compId: 0, name: 'string', quantity: 0};
 
 
-    this.requestMedia.map((media)=>{
-      submitMedia.mediaId=media.media_nameID;
-      submitMedia.name=this.getSelectedMediaByID(media.media_nameID);
-      submitMedia.quantity=media.media_Quantity;
-      submitMedia.type=this.getSelectedMediaTypeByID(media.media_type);
+    this.requestMedia.map((media) => {
+      submitMedia.mediaId = media.media_nameID;
+      submitMedia.name = this.getSelectedMediaByID(media.media_nameID);
+      submitMedia.quantity = media.media_Quantity;
+      submitMedia.type = this.getSelectedMediaTypeByID(media.media_type);
       submitMediaArray.push(submitMedia);
 
     });
-    this.replaceComponent.map((comp)=>{
-      submitComponent.quantity=comp.compo_num;
-      submitComponent.name=comp.compo_name;
-      submitComponent.compId=comp.compId;
+    this.replaceComponent.map((comp) => {
+      submitComponent.quantity = comp.compo_num;
+      submitComponent.name = comp.compo_name;
+      submitComponent.compId = comp.compId;
       submitComponentArray.push(submitComponent);
 
     });
-    this.submitRequesData={
+    this.submitRequesData = {
       weekNumber: 0,
       priority: 1,
       isConsecutive: true,
       hub: {
         id: 1,
-        name: "Hub 1"
+        name: 'Hub 1'
       },
-      description: "",
-      media:submitMediaArray,
-      shiftsLength:this.shift,
-      type:this.Test_type,
-      isArgent:this.isUrgent,
-      comment:this.Additional_Comment,
-      name:this.Test_Name,
-      project:{},
+      description: '',
+      media: submitMediaArray,
+      shiftsLength: this.shift,
+      type: this.Test_type,
+      isArgent: this.isUrgent,
+      comment: this.Additional_Comment,
+      name: this.Test_Name,
+      project: {},
       product: {},
-      testObjecteves:this.Test_Objectives,
-      components:submitComponentArray,
-      presses:this.sliderService.chosenPressesArray
+      testObjecteves: this.Test_Objectives,
+      components: submitComponentArray,
+      presses: this.sliderService.chosenPressesArray
     };
 
   }
-
 
 
   getFileType(str: string): string {
