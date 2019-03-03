@@ -8,7 +8,6 @@ const httpOptions = {
 };
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -56,7 +55,7 @@ export class DataBaseService {
   }
 
   createRequest(submitRequestData):Observable<any>{
-    return this.http.post<any>(this.AddRequestURL, submitRequestData, httpOptions);
+    return this.http.post(this.AddRequestURL, submitRequestData);
   }
 
 }

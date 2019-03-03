@@ -15,7 +15,7 @@ export class RequestsComponent implements OnInit {
   noteDivs=[];
   baseURL=data.baseURL;
   ngOnInit() {
-
+    $('app-add-request').css("display","none");
     this.dataBaseService.getRequestByUserId().subscribe(
       (requests)=>{
         this.requests=requests;
@@ -46,7 +46,11 @@ export class RequestsComponent implements OnInit {
   }
 
   addRequest():void{
-    $(".addRequest").slideDown(200);
+    $('app-add-request').css("display","block");
+    $('.addRequest').slideDown(100);
+
   }
+
+
 
 }

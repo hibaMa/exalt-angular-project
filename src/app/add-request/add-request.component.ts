@@ -15,7 +15,6 @@ import {SliderService} from '../services/slider.service';
 
 })
 export class AddRequestComponent implements OnInit {
-
   //from DB
   productsArray = [];
   projectsArray = [];
@@ -319,7 +318,9 @@ export class AddRequestComponent implements OnInit {
   }
 
   closeAddRequest(): void {
-    $('.addRequest').slideUp(200);
+    $('.addRequest').slideUp(100,function() {
+      $('app-add-request').css("display","none");
+    });
 
   }
 
@@ -341,9 +342,9 @@ export class AddRequestComponent implements OnInit {
     // console.log(filesTypes);
     // this.fileUploadService.uploadFiles(requestID, filesToUpload,filesTypes);
   }
-
+  
   submitRequest(): void {
-    $('.addRequest').slideUp(200);
+    this.closeAddRequest();
     this.initSubmitData();
     this.dataBaseService.createRequest(this.submitRequesData).subscribe(
       (reqest)=>{
@@ -358,11 +359,7 @@ export class AddRequestComponent implements OnInit {
     // this.submitFiles(requestID);
   }
 
-
-
-
   initSubmitData():void{
-    var submitMediaArray=[];
     var selectedProject=this.getProjectByID(Number(this.Project_NameID));
     var selectedProduct=this.getProductByID(Number(this.Product_NameID));
     var submitMedia={mediaId: 0, name: "string", quantity: 0, type: "string"};
@@ -389,20 +386,15 @@ export class AddRequestComponent implements OnInit {
 
     this.submitRequesData={
       //to check
-      status: "PENDING",
-      id: 0,
+      // id: 0,
       weekNumber: 0,
-      priority: 0,
+      priority: 1,
       isConsecutive: true,
-      created:this.datePipe.transform(new Date(),'YYYY-MM-DDEEEEEHH:MM:SSZ'),
-      rejectedComment:null,
       hub: {
         id: 1,
         name: "Hub 1"
       },
-      description: null,
-      testFileType:"",
-      rejectedDetails:null,
+      description: "",
       //true
       media:submitMediaArray,
       shiftsLength:this.shift,
@@ -410,17 +402,19 @@ export class AddRequestComponent implements OnInit {
       isArgent:this.isUrgent,
       comment:this.Additional_Comment,
       name:this.Test_Name,
-      project:selectedProject,
-      product:selectedProduct,
+      project:{},
+      product: {},
       testObjecteves:this.Test_Objectives,
       components:submitComponentArray,
       presses:this.sliderService.chosenPressesArray,
-      owner:this.dataBaseService.userInfo
+      // owner:this.dataBaseService.userInfo
 
 
     };
 
   }
+
+
 
   getFileType(str: string): string {
     var fileType;

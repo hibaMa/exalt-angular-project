@@ -9,7 +9,7 @@
     <div class="formTitle">New Press Request</div>
     <div class="close" (click)="closeAddRequest()">x</div>
   </div>
-  <form-wizard>
+  <form-wizard >
     <!--step1-->
     <wizard-step [title]="'Basic info'"  >
 
@@ -67,7 +67,7 @@
 
       </div>
 
-      <button class="cancel">CANCEL</button>
+      <button class="cancel" (click)="closeAddRequest()">CANCEL</button>
 
     </wizard-step>
     <!--step2-->

@@ -4,7 +4,7 @@ import {data} from '../constant';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'multipart/form-data'})
+  headers: new HttpHeaders({'Content-Type': 'multipart/form-data',  'Accept': 'application/json'})
 };
 
 
