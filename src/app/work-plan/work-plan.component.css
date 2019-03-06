@@ -166,6 +166,9 @@
   text-align: center;
   padding: 5px 10px;
  }
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableHeader li:last-child {
+  border-right: none;
+}
 .weeklyWorkPlan .mainContainer .weeklyPlan .content .tableHeader li:first-child{
   text-align: left;
 }
@@ -178,8 +181,51 @@
 .weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow > div{
   flex: 1;
   border-right: 1px solid #e0e1e4;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow > div:last-child{
+  border-right:none;
 }
 .weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .press img {
-  padding: 10px;
-  width: 100%;
+  width: 99px;
+}
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .press .name {
+  font-family: Roboto;
+  font-size: 14px;
+  color: #5a5a5a;
+  font-weight: bold;
+  text-align: center;
+}
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .press .type {
+  font-family: Roboto;
+  font-size: 12px;
+  color: #5a5a5a;
+  text-align: center;
+  padding-bottom: 10px;
+}
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayOff {
+  font-family: Roboto;
+  color: #b9b9b9;
+}
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayOff i{
+  font-size: 16px;
+}
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayOff span{
+  width: 98.9px;
+  text-align: center;
+  font-size: 12px;
+}
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayShifts .shift{
+  width: 98.9px;
+  height: 30px;
+  border-radius: 4px;
+  border: dashed 1px #0096d6;
+  background-color: #f2f2f2;
+  text-align: center;
+  color: #0096d6;
+  margin: 5px 0;
 }

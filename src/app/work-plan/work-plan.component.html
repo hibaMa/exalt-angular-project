@@ -59,20 +59,19 @@
           <li>Sat</li>
         </ul>
 
-        <div class="tableRow">
+        <div class="tableRow" *ngFor="let weak of workingDaysPerWeek" >
            <div class="press">
              <img src="../../assets/images/press.png" alt="">
              <div class="name">T400S</div>
              <div class="type">A10203040</div>
            </div>
 
-          <div>shift</div>
-          <div>shift</div>
-          <div>shift</div>
-          <div>shift</div>
-          <div>shift</div>
-          <div>shift</div>
-          <div>shift</div>
+          <div  *ngFor="let day of weak" [class.dayOff]="!day.isWorkingDay" [class.dayShifts]="day.isWorkingDay" >
+            <i *ngIf="!day.isWorkingDay" class="fa fa-calendar-times-o" aria-hidden="true"></i>
+            <span *ngIf="!day.isWorkingDay">Day Off</span>
+            <div class="shift" *ngFor="let shift of [].constructor(day.shiftsNumber)">--</div>
+          </div>
+
 
         </div>
 
