@@ -26,6 +26,7 @@
   width: 247px;
   transform: translate(0px,0px);
   transition: transform 1s ease;
+  z-index: 100;
 
 }
 

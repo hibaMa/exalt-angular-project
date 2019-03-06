@@ -1,0 +1,185 @@
+.weeklyWorkPlan {
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+.weeklyWorkPlan .mainHeader{
+  display: flex;
+}
+
+.weeklyWorkPlan .mainHeader .buttons{
+  margin-left: auto;
+  position: relative;
+  top: 6px;
+}
+
+.weeklyWorkPlan .mainHeader .buttons .submit{
+  background-color: #b9b9b9;
+  width: 100px;
+  height: 26px;
+  font-family: Roboto;
+  font-size: 12px;
+  color: #ffffff;
+  font-weight: bold;
+  border: none;
+}
+
+.weeklyWorkPlan .mainHeader .buttons .submit i{
+   padding-right: 6px;
+}
+
+.weeklyWorkPlan .mainHeader .buttons .mode{
+  width: 140px;
+  height: 26px;
+  background-color: #0096d6;
+  border: none;
+  margin-right: 10px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.weeklyWorkPlan .mainHeader .buttons .mode i{
+  padding-right: 5px;
+  font-size: 15px;
+  position: relative;
+  top: 1px;
+}
+
+.weeklyWorkPlan .mainHeader .sideTitles > .title {
+  position: relative;
+  font-family: Roboto;
+  font-size: 16px;
+  color: #5a5a5a;
+  font-weight: bold;
+
+}
+
+.weeklyWorkPlan .mainHeader .sideTitles .status {
+  position: relative;
+}
+
+.weeklyWorkPlan .mainHeader .sideTitles .status .statusTitle {
+  font-family: Roboto;
+  font-size: 12px;
+  color: #5a5a5a;
+}
+
+.weeklyWorkPlan .mainHeader .sideTitles .status .info-icon {
+  font-size: 19px;
+  padding: 0 6px;
+  position: absolute;
+  top: 1px;
+}
+/*-----------------------------------*/
+.weeklyWorkPlan .mainContainer {
+  margin: 6px 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.weeklyWorkPlan .mainContainer .requests {
+  background-color: white;
+  margin-right: 10px;
+}
+
+.weeklyWorkPlan .mainContainer .requests > .title {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+  color: #5a5a5a;
+  padding: 5px 10px;
+  border-bottom: 1px solid #e0e1e4;
+}
+
+
+.weeklyWorkPlan .mainContainer .weeklyPlan {
+  flex: auto;
+  background-color: white;
+
+}
+
+.weeklyWorkPlan  .mainContainer .weeklyPlan .header  {
+  padding: 5px 10px;
+  display: flex;
+  border-bottom: 1px solid #e0e1e4;
+}
+.weeklyWorkPlan  .mainContainer .weeklyPlan .header   > .title {
+  font-family: Roboto;
+  font-size: 16px;
+  color: #5a5a5a;
+  font-weight: bold;
+}
+
+.weeklyWorkPlan  .mainContainer .weeklyPlan .header   > .status {
+  margin-left: auto;
+  font-family: Roboto;
+  font-size: 12px;
+  color: #0096d6;
+  font-weight: 500;
+  border-right: 1px solid #e0e1e4;
+  padding: 0 10px;
+}
+.weeklyWorkPlan  .mainContainer .weeklyPlan .header    .next {
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  color: #b9b9b9;
+  border-right: 1px solid #e0e1e4;
+  padding: 0 10px;
+}
+.weeklyWorkPlan  .mainContainer .weeklyPlan .header    .month {
+  font-family: Roboto;
+  font-size: 12px;
+  color: #5a5a5a;
+  padding: 0 5px;
+}
+.weeklyWorkPlan  .mainContainer .weeklyPlan .header    .month i{
+  padding: 0 4px;
+}
+.weeklyWorkPlan  .mainContainer .weeklyPlan .header    .month span{
+  padding: 0 2px;
+}
+
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content {
+
+}
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableHeader{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  border-bottom: 1px solid #e0e1e4;
+}
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableHeader li{
+  flex: 1;
+  color: #5a5a5a;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+  border-right: 1px solid #e0e1e4;
+  text-align: center;
+  padding: 5px 10px;
+ }
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableHeader li:first-child{
+  text-align: left;
+}
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow{
+  display: flex;
+  border-bottom: 1px solid #e0e1e4;
+}
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow > div{
+  flex: 1;
+  border-right: 1px solid #e0e1e4;
+}
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .press img {
+  padding: 10px;
+  width: 100%;
+}

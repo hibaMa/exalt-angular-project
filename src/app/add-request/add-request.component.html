@@ -39,10 +39,10 @@
           </div>
         </div>
 
-        <div class="inputsForm" >
+        <form class="inputsForm">
           <mat-form-field>
-            <input matInput #TestName  type="text" placeholder="Test Name" required minlength="2" [(ngModel)]="Test_Name">
-            <mat-hint class="errorTxt">invalid feild </mat-hint>
+            <input matInput   type="text" placeholder="Test Name" required minlength="2" [(ngModel)]="Test_Name">
+            <!--<mat-hint class="errorTxt" >invalid feild </mat-hint>-->
           </mat-form-field>
           <div></div>
           <mat-form-field>
@@ -50,24 +50,24 @@
               <option style="display:none;"></option>
               <option  *ngFor="let product of productsArray" [value]="product.id">{{product.name}}</option>
           </select>
-            <mat-hint class="errorTxt">invalid feild </mat-hint>
+            <!--<mat-hint class="errorTxt">invalid feild </mat-hint>-->
           </mat-form-field>
           <mat-form-field>
             <select matNativeControl [(ngModel)]="Project_NameID" placeholder="Project Name">
               <option style="display:none;"></option>
             <option *ngFor="let project of projectsArray" [value]="project.id">{{project.name}}</option>
           </select>
-            <mat-hint class="errorTxt">invalid feild </mat-hint>
+            <!--<mat-hint class="errorTxt">invalid feild </mat-hint>-->
           </mat-form-field>
           <mat-form-field>
             <input  matInput type="number" [disabled]="isHalfShift" [(ngModel)]="shift"  min="0">
-            <mat-hint class="errorTxt">invalid feild </mat-hint>
+            <!--<mat-hint class="errorTxt">invalid feild </mat-hint>-->
           </mat-form-field>
           <div class="halfShift" >
             <span class="halfShiftText" >Half shift</span>
             <mat-slide-toggle [(ngModel)]="isHalfShift" (change)="HalfShiftChange()"></mat-slide-toggle>
           </div>
-        </div>
+        </form>
 
         <app-slider></app-slider>
 

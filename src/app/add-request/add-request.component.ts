@@ -4,7 +4,6 @@ import {DataBaseService} from '../services/data-base.service';
 import {FileUploadService} from '../upload-file/file-upload.service';
 import {DatePipe} from '@angular/common';
 import {SliderService} from '../services/slider.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-request',
@@ -62,11 +61,6 @@ export class AddRequestComponent implements OnInit {
   //checkbox - function
   isTestChecked = false;
   isLabChecked = true;
-
-
-  //validation
-  registerForm1: FormGroup;
-
 
 
   toggleTest(): void {
@@ -287,7 +281,7 @@ export class AddRequestComponent implements OnInit {
     this.filesToUpload.push(true);
   }
 
-  constructor(private formBuilder: FormBuilder,private sliderService: SliderService, private datePipe: DatePipe, private dataBaseService: DataBaseService, private fileUploadService: FileUploadService) {
+  constructor(private sliderService: SliderService, private datePipe: DatePipe, private dataBaseService: DataBaseService, private fileUploadService: FileUploadService) {
   }
 
 
@@ -322,13 +316,6 @@ export class AddRequestComponent implements OnInit {
       }
     );
 
-    //validation
-    this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
   }
 
   closeAddRequest(): void {

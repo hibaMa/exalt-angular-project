@@ -1,0 +1,88 @@
+
+.request {
+  display: flex;
+  flex-direction: row;
+  width: 242px;
+  height: 104px;
+  border-radius: 4px;
+  margin: 10px;
+  border: solid 1px #e0e1e4;
+  background-color: #ffffff;
+}
+
+.request:hover {
+  border: solid 1px #0096d6;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+.request.halfShift {
+  border: solid 1px #e0e1e4;
+  background-color: #fef0da;
+}
+.request:hover .manageInfo .icons{
+  visibility: visible;
+}
+
+
+.request .info {
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto;
+  font-size: 11px;
+  border-right: 1px solid #e0e1e4;
+  margin: 10px;
+  margin-right: 0;
+  padding-right: 8px;
+
+}
+
+.request .info div {
+
+  font-family: Roboto;
+  font-size: 11px;
+  color: #5a5a5a;
+  line-height: 1.36;
+}
+
+.request .info > .title {
+
+  color: #0096d6;
+  font-weight: bold;
+  font-family: Roboto;
+  font-size: 14px;
+  padding-bottom: 6px;
+}
+
+.request .manageInfo {
+  flex: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.request .manageInfo .shiftType {
+  font-family: Roboto;
+  font-size: 14px;
+  color: #5a5a5a;
+}
+
+.request .manageInfo .shifts {
+
+  font-family: Roboto;
+  font-size: 10px;
+  color: #5a5a5a;
+}
+
+.request .manageInfo .icons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: #5a5a5a;
+  font-size: 16px;
+  padding: 10px;
+  width: 59px;
+  display: flex;
+  justify-content: space-between;
+  visibility: hidden;
+}

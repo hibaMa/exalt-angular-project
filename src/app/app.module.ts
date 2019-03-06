@@ -28,6 +28,7 @@ import { AddRequestComponent } from './add-request/add-request.component';
 import { SliderComponent } from './slider/slider.component';
 import { EnterComponent } from './enter/enter.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
+import { RequestCardComponent } from './request-card/request-card.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { UploadFileComponent } from './upload-file/upload-file.component';
     AddRequestComponent,
     SliderComponent,
     EnterComponent,
-    UploadFileComponent
+    UploadFileComponent,
+    RequestCardComponent
 
   ],
   imports: [
