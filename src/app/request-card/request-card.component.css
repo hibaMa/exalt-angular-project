@@ -10,15 +10,17 @@
   background-color: #ffffff;
 }
 
-.request:hover {
-  border: solid 1px #0096d6;
-  background-color: #f2f2f2;
-  cursor: pointer;
-}
+
 .request.halfShift {
   border: solid 1px #e0e1e4;
   background-color: #fef0da;
 }
+
+.request:hover {
+   border: solid 1px #0096d6;
+   background-color: #f2f2f2;
+   cursor: pointer;
+ }
 .request:hover .manageInfo .icons{
   visibility: visible;
 }
