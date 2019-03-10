@@ -4,17 +4,18 @@
   background-color: #f2f2f2;
   padding: 10px;
 }
-.weeklyWorkPlan .mainHeader{
+
+.weeklyWorkPlan .mainHeader {
   display: flex;
 }
 
-.weeklyWorkPlan .mainHeader .buttons{
+.weeklyWorkPlan .mainHeader .buttons {
   margin-left: auto;
   position: relative;
   top: 6px;
 }
 
-.weeklyWorkPlan .mainHeader .buttons .submit{
+.weeklyWorkPlan .mainHeader .buttons .submit {
   background-color: #b9b9b9;
   width: 100px;
   height: 26px;
@@ -25,11 +26,11 @@
   border: none;
 }
 
-.weeklyWorkPlan .mainHeader .buttons .submit i{
-   padding-right: 6px;
+.weeklyWorkPlan .mainHeader .buttons .submit i {
+  padding-right: 6px;
 }
 
-.weeklyWorkPlan .mainHeader .buttons .mode{
+.weeklyWorkPlan .mainHeader .buttons .mode {
   width: 140px;
   height: 26px;
   background-color: #0096d6;
@@ -41,7 +42,7 @@
   color: #ffffff;
 }
 
-.weeklyWorkPlan .mainHeader .buttons .mode i{
+.weeklyWorkPlan .mainHeader .buttons .mode i {
   padding-right: 5px;
   font-size: 15px;
   position: relative;
@@ -73,11 +74,12 @@
   position: absolute;
   top: 1px;
 }
+
 /*-----------------------------------*/
 .weeklyWorkPlan .mainContainer {
   margin: 6px 0;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 273px auto;
 }
 
 .weeklyWorkPlan .mainContainer .requests {
@@ -95,25 +97,118 @@
 }
 
 
+.mainContainer .requests .content .request {
+  display: flex;
+  flex-direction: row;
+  width: 242px;
+  height: 104px;
+  border-radius: 4px;
+  margin: 10px;
+  border: solid 1px #e0e1e4;
+  background-color: #ffffff;
+}
+
+
+.mainContainer .requests .content .request.halfShift {
+  border: solid 1px #e0e1e4;
+  background-color: #fef0da;
+}
+
+.mainContainer .requests .content .request:hover {
+  border: solid 1px #0096d6;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.mainContainer .requests .content .request:hover .manageInfo .icons {
+  visibility: visible;
+}
+
+
+.mainContainer .requests .content .request .info {
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto;
+  font-size: 11px;
+  border-right: 1px solid #e0e1e4;
+  margin: 10px;
+  margin-right: 0;
+  padding-right: 8px;
+
+}
+
+.mainContainer .requests .content .request .info div {
+
+  font-family: Roboto;
+  font-size: 11px;
+  color: #5a5a5a;
+  line-height: 1.36;
+}
+
+.mainContainer .requests .content .request .info > .title {
+
+  color: #0096d6;
+  font-weight: bold;
+  font-family: Roboto;
+  font-size: 14px;
+  padding-bottom: 6px;
+}
+
+.mainContainer .requests .content .request .manageInfo {
+  flex: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainContainer .requests .content .request .manageInfo .shiftType {
+  font-family: Roboto;
+  font-size: 14px;
+  color: #5a5a5a;
+}
+
+.mainContainer .requests .content .request .manageInfo .shifts {
+
+  font-family: Roboto;
+  font-size: 10px;
+  color: #5a5a5a;
+}
+
+.mainContainer .requests .content .request .manageInfo .icons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: #5a5a5a;
+  font-size: 16px;
+  padding: 10px;
+  width: 59px;
+  display: flex;
+  justify-content: space-between;
+  visibility: hidden;
+}
+
+
 .weeklyWorkPlan .mainContainer .weeklyPlan {
   flex: auto;
   background-color: white;
 
 }
 
-.weeklyWorkPlan  .mainContainer .weeklyPlan .header  {
+.weeklyWorkPlan .mainContainer .weeklyPlan .header {
   padding: 5px 10px;
   display: flex;
   border-bottom: 1px solid #e0e1e4;
 }
-.weeklyWorkPlan  .mainContainer .weeklyPlan .header   > .title {
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .header > .title {
   font-family: Roboto;
   font-size: 16px;
   color: #5a5a5a;
   font-weight: bold;
 }
 
-.weeklyWorkPlan  .mainContainer .weeklyPlan .header   > .status {
+.weeklyWorkPlan .mainContainer .weeklyPlan .header > .status {
   margin-left: auto;
   font-family: Roboto;
   font-size: 12px;
@@ -122,7 +217,8 @@
   border-right: 1px solid #e0e1e4;
   padding: 0 10px;
 }
-.weeklyWorkPlan  .mainContainer .weeklyPlan .header    .next {
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .header .next {
   font-family: Roboto;
   font-size: 12px;
   font-weight: 500;
@@ -130,16 +226,19 @@
   border-right: 1px solid #e0e1e4;
   padding: 0 10px;
 }
-.weeklyWorkPlan  .mainContainer .weeklyPlan .header    .month {
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .header .month {
   font-family: Roboto;
   font-size: 12px;
   color: #5a5a5a;
   padding: 0 5px;
 }
-.weeklyWorkPlan  .mainContainer .weeklyPlan .header    .month i{
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .header .month i {
   padding: 0 4px;
 }
-.weeklyWorkPlan  .mainContainer .weeklyPlan .header    .month span{
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .header .month span {
   padding: 0 2px;
 }
 
@@ -148,7 +247,7 @@
 
 }
 
-.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableHeader{
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableHeader {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -156,7 +255,7 @@
   border-bottom: 1px solid #e0e1e4;
 }
 
-.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableHeader li{
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableHeader li {
   flex: 1;
   color: #5a5a5a;
   font-family: Roboto;
@@ -165,20 +264,22 @@
   border-right: 1px solid #e0e1e4;
   text-align: center;
   padding: 5px 10px;
- }
+}
+
 .weeklyWorkPlan .mainContainer .weeklyPlan .content .tableHeader li:last-child {
   border-right: none;
 }
-.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableHeader li:first-child{
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableHeader li:first-child {
   text-align: left;
 }
 
-.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow{
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow {
   display: flex;
   border-bottom: 1px solid #e0e1e4;
 }
 
-.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow > div{
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow > div {
   flex: 1;
   border-right: 1px solid #e0e1e4;
   padding: 10px;
@@ -187,12 +288,15 @@
   align-items: center;
   flex-direction: column;
 }
-.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow > div:last-child{
-  border-right:none;
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow > div:last-child {
+  border-right: none;
 }
+
 .weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .press img {
   width: 99px;
 }
+
 .weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .press .name {
   font-family: Roboto;
   font-size: 14px;
@@ -200,6 +304,7 @@
   font-weight: bold;
   text-align: center;
 }
+
 .weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .press .type {
   font-family: Roboto;
   font-size: 12px;
@@ -207,19 +312,23 @@
   text-align: center;
   padding-bottom: 10px;
 }
+
 .weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayOff {
   font-family: Roboto;
   color: #b9b9b9;
 }
-.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayOff i{
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayOff i {
   font-size: 16px;
 }
-.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayOff span{
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayOff span {
   width: 98.9px;
   text-align: center;
   font-size: 12px;
 }
-.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayShifts .shift{
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayShifts .shift {
   width: 98.9px;
   height: 30px;
   border-radius: 4px;
@@ -228,4 +337,35 @@
   text-align: center;
   color: #0096d6;
   margin: 5px 0;
+  font-size: 12px;
+  position: relative;
+}
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayShifts .shift.dragOver {
+  background-color: white;
+
+}
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayShifts .shift.dragOver .slash {
+  display: none;
+  pointer-events: none;
+
+}
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayShifts .shift .drop {
+  display: none;
+  pointer-events: none;
+
+}
+
+.weeklyWorkPlan .mainContainer .weeklyPlan .content .tableRow .dayShifts .shift.dragOver .drop {
+  display: block;
+}
+
+.requestInShift{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background: red;
 }
