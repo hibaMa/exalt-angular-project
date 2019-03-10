@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./work-plan.component.css']
 })
 export class WorkPlanComponent implements OnInit {
-  requests = [{id: 0, name: 'req0',shiftsLength:1}, {id: 1, name: 'req1',shiftsLength:1}, {id: 2, name: 'req2',shiftsLength:2}];
+  requests = [{id: 0, name: 'req0', shiftsLength: 1}, {id: 1, name: 'req1', shiftsLength: 2}, {id: 2, name: 'req2', shiftsLength: 3}];
   workingDays = [
     {
       'dayIndex': 0,
@@ -138,17 +138,23 @@ export class WorkPlanComponent implements OnInit {
   dropRequest(event, w, d, s) {
     event.preventDefault();
     let randomColor = this.getRandomColor();
-    // let numShift = this.darggedData.shiftsLength;
-    this.shiftsReqID[w][d][s] = this.darggedDataID;
-    this.shiftsReqColors[w][d][s] = randomColor;
+    let numShift = this.darggedData.shiftsLength;
 
+    for (let i = s; i < this.shiftsReqID[w][d].length; i++) {
+      if (this.shiftsReqID[w][d][i] == -1 && numShift != 0) {
+        this.shiftsReqID[w][d][i] = this.darggedDataID;
+        this.shiftsReqColors[w][d][i] = randomColor;
+        numShift--;
+      }
+    }
+
+    //remove req
     if (this.shiftsReqID[w][d][s] != -1) {
       this.removeElementWithId(this.darggedDataID, this.requests);
     }
-
     event.target.classList.remove('dragOver');
-
   }
+
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
