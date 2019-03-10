@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./work-plan.component.css']
 })
 export class WorkPlanComponent implements OnInit {
-  requests = [{id: 0, name: 'req0'}, {id: 1, name: 'req1'}, {id: 2, name: 'req2'}];
+  requests = [{id: 0, name: 'req0',shiftsLength:1}, {id: 1, name: 'req1',shiftsLength:1}, {id: 2, name: 'req2',shiftsLength:2}];
   workingDays = [
     {
       'dayIndex': 0,
@@ -132,13 +132,13 @@ export class WorkPlanComponent implements OnInit {
   requestDragged(event: DragEvent, id: number, index: number) {
     this.requests.slice(index, 1);
     this.darggedDataID = id;
-    this.darggedData = this.getReqWithID(id, this.requests);
+    this.darggedData = this.getReqWithID(id);
   }
 
   dropRequest(event, w, d, s) {
     event.preventDefault();
     let randomColor = this.getRandomColor();
-    // let numShift = this.darggedData.shiftsNumber;
+    // let numShift = this.darggedData.shiftsLength;
     this.shiftsReqID[w][d][s] = this.darggedDataID;
     this.shiftsReqColors[w][d][s] = randomColor;
 
