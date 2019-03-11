@@ -6,7 +6,13 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./work-plan.component.css']
 })
 export class WorkPlanComponent implements OnInit {
-  requests = [{id: 0, name: 'req0', shiftsLength: 1}, {id: 1, name: 'req1', shiftsLength: 2}, {id: 2, name: 'req2', shiftsLength: 3}];
+  requests = [
+    {id: 0, name: 'req0', shiftsLength: 5},
+    {id: 1, name: 'req1', shiftsLength: 2},
+    {id: 2, name: 'req2', shiftsLength: 3},
+    {id: 3, name: 'req3', shiftsLength: 4},
+    {id: 4, name: 'req4', shiftsLength: 1}
+    ];
   workingDays = [
     {
       'dayIndex': 0,
@@ -94,7 +100,7 @@ export class WorkPlanComponent implements OnInit {
     }
   ];
   workingDaysPerWeek = [];
-  shiftsReqID = [[[]]];
+  shiftsReq = [[[]]];
   shiftsReqColors = [[[]]];
 
   constructor() {
@@ -106,12 +112,12 @@ export class WorkPlanComponent implements OnInit {
     for (const day of this.workingDays) {
       if (day.dayIndex == 0) {
         w++;
-        this.shiftsReqID[w] = [[]];
+        this.shiftsReq[w] = [[]];
         this.shiftsReqColors[w] = [[]];
         week = [];
       }
       week.push(day);
-      this.shiftsReqID[w][d] = new Array(day.shiftsNumber).fill(-1);
+      this.shiftsReq[w][d] = new Array(day.shiftsNumber).fill(null);
       this.shiftsReqColors[w][d] = new Array(day.shiftsNumber).fill(-1);
       d++;
       if (day.dayIndex == 6) {
@@ -120,39 +126,73 @@ export class WorkPlanComponent implements OnInit {
       }
     }
 
-    console.log(this.shiftsReqID);
+    console.log(this.shiftsReq);
 
   }
 
   // drag & drop
 
   darggedData;
-  darggedDataID;
 
   requestDragged(event: DragEvent, id: number, index: number) {
     this.requests.slice(index, 1);
-    this.darggedDataID = id;
     this.darggedData = this.getReqWithID(id);
   }
 
   dropRequest(event, w, d, s) {
     event.preventDefault();
+    if (this.darggedData == null || this.shiftsReq[w][d][s] != null){
+      let elem = event.target as HTMLDivElement;
+      elem.classList.remove('dragOver');
+      return;
+    }
     let randomColor = this.getRandomColor();
     let numShift = this.darggedData.shiftsLength;
-
-    for (let i = s; i < this.shiftsReqID[w][d].length; i++) {
-      if (this.shiftsReqID[w][d][i] == -1 && numShift != 0) {
-        this.shiftsReqID[w][d][i] = this.darggedDataID;
+    //add to same day
+    for (let i = s; i < this.shiftsReq[w][d].length; i++) {
+      if (this.shiftsReq[w][d][i] == null && numShift != 0) {
+        this.shiftsReq[w][d][i] = this.darggedData;
         this.shiftsReqColors[w][d][i] = randomColor;
         numShift--;
       }
     }
+    //add to next dayes in the week
+    if (numShift != 0) {
+      for (let di = d + 1; di < this.shiftsReq[w].length; di++) {
+        for (let si = 0; si < this.shiftsReq[w][di].length; si++) {
+          if (this.shiftsReq[w][di][si] == null && numShift != 0) {
+            this.shiftsReq[w][di][si] = this.darggedData;
+            this.shiftsReqColors[w][di][si] = randomColor;
+            numShift--;
+          }
+        }
+      }
+    }
+
+    //add to next week in the week
+    if (numShift != 0) {
+      for (let wi = w+1; wi < this.shiftsReq.length; wi++) {
+        for (let di = 0; di < this.shiftsReq[wi].length; di++) {
+          for (let si = 0; si < this.shiftsReq[wi][di].length; si++) {
+            if (this.shiftsReq[wi][di][si] == null && numShift != 0) {
+              this.shiftsReq[wi][di][si] = this.darggedData;
+              this.shiftsReqColors[wi][di][si] = randomColor;
+              numShift--;
+            }
+          }
+        }
+      }
+    }
+
+    console.log(this.shiftsReq);
 
     //remove req
-    if (this.shiftsReqID[w][d][s] != -1) {
-      this.removeElementWithId(this.darggedDataID, this.requests);
+    if (this.shiftsReq[w][d][s] != null) {
+      this.removeReq(this.darggedData);
     }
-    event.target.classList.remove('dragOver');
+    this.darggedData = null;
+    let elem = event.target as HTMLDivElement;
+    elem.classList.remove('dragOver');
   }
 
 
@@ -161,21 +201,22 @@ export class WorkPlanComponent implements OnInit {
   }
 
   onDragenter(event: DragEvent) {
-    event.target.classList.add('dragOver');
+    if (this.darggedData != null){
+      let elem = event.target as HTMLDivElement;
+      elem.classList.add('dragOver');
+    }
+
   }
 
   onDragLeave(event: DragEvent) {
     event.preventDefault();
-    event.target.classList.remove('dragOver');
+    let elem = event.target as HTMLDivElement;
+    elem.classList.remove('dragOver');
   }
 
-  removeElementWithId(id: number, array: []): void {
-    array.map((req) => {
-      if (req.id == id) {
-        const index = array.indexOf(req, 0);
-        array.splice(index, 1);
-      }
-    });
+  removeReq(req): void {
+    const index = this.requests.indexOf(req, 0);
+    this.requests.splice(index, 1);
   }
 
   getReqWithID(id: number) {
