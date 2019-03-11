@@ -148,33 +148,14 @@ export class WorkPlanComponent implements OnInit {
     }
     let randomColor = this.getRandomColor();
     let numShift = this.darggedData.shiftsLength;
-    //add to same day
-    for (let i = s; i < this.shiftsReq[w][d].length; i++) {
-      if (this.shiftsReq[w][d][i] == null && numShift != 0) {
-        this.shiftsReq[w][d][i] = this.darggedData;
-        this.shiftsReqColors[w][d][i] = randomColor;
-        numShift--;
-      }
-    }
-    //add to next dayes in the week
     if (numShift != 0) {
-      for (let di = d + 1; di < this.shiftsReq[w].length; di++) {
-        for (let si = 0; si < this.shiftsReq[w][di].length; si++) {
-          if (this.shiftsReq[w][di][si] == null && numShift != 0) {
-            this.shiftsReq[w][di][si] = this.darggedData;
-            this.shiftsReqColors[w][di][si] = randomColor;
-            numShift--;
-          }
-        }
-      }
-    }
-
-    //add to next week in the week
-    if (numShift != 0) {
-      for (let wi = w+1; wi < this.shiftsReq.length; wi++) {
-        for (let di = 0; di < this.shiftsReq[wi].length; di++) {
-          for (let si = 0; si < this.shiftsReq[wi][di].length; si++) {
-            if (this.shiftsReq[wi][di][si] == null && numShift != 0) {
+      for (let wi = w; wi < this.shiftsReq.length; wi++) {
+        let di = wi==w?d:0;
+        for (; di < this.shiftsReq[wi].length; di++) {
+          let si = (wi==w && di==d)?s:0;
+          for (; si < this.shiftsReq[wi][di].length; si++) {
+            if(numShift == 0)break;
+            if (this.shiftsReq[wi][di][si] == null) {
               this.shiftsReq[wi][di][si] = this.darggedData;
               this.shiftsReqColors[wi][di][si] = randomColor;
               numShift--;
@@ -183,9 +164,7 @@ export class WorkPlanComponent implements OnInit {
         }
       }
     }
-
     console.log(this.shiftsReq);
-
     //remove req
     if (this.shiftsReq[w][d][s] != null) {
       this.removeReq(this.darggedData);
@@ -194,6 +173,8 @@ export class WorkPlanComponent implements OnInit {
     let elem = event.target as HTMLDivElement;
     elem.classList.remove('dragOver');
   }
+
+
 
 
   onDragOver(event: DragEvent) {

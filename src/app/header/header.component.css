@@ -2,13 +2,14 @@
   display:flex;
   border-bottom:2px solid #0096d6;
   background-color: white;
-  height: 50px;
+  height: 55px;
 }
 
 .mainNavbar .nav_icon{
-  padding: 13px;
+  padding: 18px;
   color: #5a5a5a;
   cursor: pointer;
+  font-size: 18px;
 }
 .mainNavbar .nav_icon:hover{
   transform: scale(1.1);
@@ -16,9 +17,9 @@
 }
 
 .logo{
-  width: 30px;
-  height: 30px;
-  margin-top: 5px;
+  width: 32px;
+  height: 32px;
+  margin-top: 10px;
 }
 
 .mainNavbar .title{

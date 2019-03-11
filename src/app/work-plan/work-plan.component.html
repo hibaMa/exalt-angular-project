@@ -90,9 +90,8 @@
           <div  *ngFor="let day of weak;let d=index" [class.dayOff]="!day.isWorkingDay" [class.dayShifts]="day.isWorkingDay" >
             <i *ngIf="!day.isWorkingDay" class="fa fa-calendar-times-o" aria-hidden="true"></i>
             <span *ngIf="!day.isWorkingDay">Day Off</span>
-            <div class="shift" [class.hasReq]="shiftsReq[w][d][s]!=null"
-                 [style.borderColor]="shiftsReqColors[w][d][s]=='red'?'#0096d6':shiftsReqColors[w][d][s]"
-                 [style.backgroundColor]="shiftsReqColors[w][d][s]=='red'?'#0096d6':shiftsReqColors[w][d][s]"
+
+            <div class="shift"
                  *ngFor="let shift of [].constructor(day.shiftsNumber);let s=index"
                  (drop)="dropRequest($event,w,d,s)"
                  (dragover)="onDragOver($event)"
@@ -100,10 +99,17 @@
                  (dragenter)="onDragenter($event)">
               <span class="slash">--</span>
               <span class="drop">Done</span>
-              <div class="requestInShift"
+
+              <div class=" requestInShift " [class.half1RequestInShift]="false"
                    [style.background-color]="shiftsReqColors[w][d][s]"
                    *ngIf="shiftsReq[w][d][s]!=null">req id:{{(shiftsReq[w][d][s]).name}}</div>
+
+              <div class=" requestInShift half2RequestInShift"
+                   [style.background-color]="shiftsReqColors[w][d][s]"
+                   *ngIf="false && shiftsReq[w][d][s]!=null">req id:{{(shiftsReq[w][d][s]).name}}</div>
+
             </div>
+
           </div>
 
 
