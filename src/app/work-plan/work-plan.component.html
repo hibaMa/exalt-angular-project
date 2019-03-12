@@ -30,7 +30,7 @@
       <div class="title">Requests</div>
       <div class="content">
 
-       <!--req card (dragstart)-->
+        <!--req card (dragstart)-->
         <div class="request " [class.halfShift]="req.shiftsLength==0.5" *ngFor="let req of requests;let i=index"
              draggable="true" (drag)="requestDragged($event,req.id,i)">
           <div class="info">
@@ -42,7 +42,9 @@
           </div>
           <div class="manageInfo">
             <div class="shift">
-              <div class="shiftType">{{req.shiftsLength}} Cons</div>
+              <div class="shiftType">{{req.shiftsLength}}
+                <span *ngIf="req.isConsecutive">Cons</span>
+              </div>
               <div class="shifts">Shifts</div>
             </div>
             <div class="icons">
@@ -51,7 +53,7 @@
             </div>
           </div>
         </div>
-       <!--req card -->
+        <!--req card -->
 
       </div>
     </div>
@@ -80,14 +82,15 @@
           <li>Sat</li>
         </ul>
 
-        <div class="tableRow" *ngFor="let weak of workingDaysPerWeek;let w=index" >
-           <div class="press">
-             <img src="../../assets/images/press.png" alt="">
-             <div class="name">T400S</div>
-             <div class="type">A10203040</div>
-           </div>
+        <div class="tableRow" *ngFor="let weak of workingDaysPerWeek;let w=index">
+          <div class="press">
+            <img src="../../assets/images/press.png" alt="">
+            <div class="name">T400S</div>
+            <div class="type">A10203040</div>
+          </div>
 
-          <div  *ngFor="let day of weak;let d=index" [class.dayOff]="!day.isWorkingDay" [class.dayShifts]="day.isWorkingDay" >
+          <div *ngFor="let day of weak;let d=index" [class.dayOff]="!day.isWorkingDay"
+               [class.dayShifts]="day.isWorkingDay">
             <i *ngIf="!day.isWorkingDay" class="fa fa-calendar-times-o" aria-hidden="true"></i>
             <span *ngIf="!day.isWorkingDay">Day Off</span>
 
@@ -105,20 +108,22 @@
                    [style.background-color]="shiftsReqColors[w][d][s].firstR"
                    *ngIf="shiftsReq[w][d][s].firstR!=null">
                 <div>
-                  <div>{{(shiftsReq[w][d][s]).firstR!=null?(shiftsReq[w][d][s]).firstR.name:""}}</div>
+                  <div>{{(shiftsReq[w][d][s]).firstR != null ? (shiftsReq[w][d][s]).firstR.name : ""}}</div>
                   <div>Private..</div>
                 </div>
-                <i class="fa fa-info" aria-hidden="true" [class.shiftIcon]="shiftsReq[w][d][s].firstR.shiftsLength!=0.5"></i>
+                <i class="fa fa-info" aria-hidden="true"
+                   [class.shiftIcon]="shiftsReq[w][d][s].firstR.shiftsLength!=0.5"></i>
               </div>
 
               <div class=" requestInShift half2RequestInShift"
                    [style.background-color]="shiftsReqColors[w][d][s].secondR"
                    *ngIf="shiftsReq[w][d][s].secondR!=null">
                 <div>
-                  <div>{{(shiftsReq[w][d][s]).secondR!=null?(shiftsReq[w][d][s]).secondR.name:""}}</div>
+                  <div>{{(shiftsReq[w][d][s]).secondR != null ? (shiftsReq[w][d][s]).secondR.name : ""}}</div>
                   <div>Private..</div>
                 </div>
-                <i class="fa fa-info" aria-hidden="true" [class.shiftIcon]="shiftsReq[w][d][s].firstR.shiftsLength!=0.5"></i>
+                <i class="fa fa-info" aria-hidden="true"
+                   [class.shiftIcon]="shiftsReq[w][d][s].firstR.shiftsLength!=0.5"></i>
               </div>
 
             </div>
