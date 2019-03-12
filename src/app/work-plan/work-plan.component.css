@@ -371,14 +371,30 @@
   right: -1px;
   bottom: -1px;
   background: red;
-  padding: 5px;
+  padding: 0px 5px;
   color: white;
   font-family: Roboto;
   font-size: 10px;
   font-weight: bold;
   border-radius: 3px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
 }
+
+.requestInShift div {
+  text-align: left;
+}
+.requestInShift .shiftIcon{
+  border: 1px solid white;
+  border-radius: 50%;
+  height: 18px;
+  width: 18px;
+  padding: 3px;
+  margin-top: 6px;
+  margin-left: auto;
+}
+
 .half1RequestInShift{
   right: 50%;
   border-radius: 3px 0 0 3px;

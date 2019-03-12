@@ -31,7 +31,7 @@
       <div class="content">
 
        <!--req card (dragstart)-->
-        <div class="request " [class.halfShift]="false" *ngFor="let req of requests;let i=index"
+        <div class="request " [class.halfShift]="req.shiftsLength==0.5" *ngFor="let req of requests;let i=index"
              draggable="true" (drag)="requestDragged($event,req.id,i)">
           <div class="info">
             <div class="title">Yegor G.{{req.name}}</div>
@@ -100,13 +100,26 @@
               <span class="slash">--</span>
               <span class="drop">Done</span>
 
-              <div class=" requestInShift " [class.half1RequestInShift]="false"
-                   [style.background-color]="shiftsReqColors[w][d][s]"
-                   *ngIf="shiftsReq[w][d][s]!=null">req id:{{(shiftsReq[w][d][s]).name}}</div>
+              <div class=" requestInShift "
+                   [class.half1RequestInShift]="shiftsReq[w][d][s].firstR!=null && shiftsReq[w][d][s].firstR.shiftsLength==0.5"
+                   [style.background-color]="shiftsReqColors[w][d][s].firstR"
+                   *ngIf="shiftsReq[w][d][s].firstR!=null">
+                <div>
+                  <div>{{(shiftsReq[w][d][s]).firstR!=null?(shiftsReq[w][d][s]).firstR.name:""}}</div>
+                  <div>Private..</div>
+                </div>
+                <i class="fa fa-info" aria-hidden="true" [class.shiftIcon]="shiftsReq[w][d][s].firstR.shiftsLength!=0.5"></i>
+              </div>
 
               <div class=" requestInShift half2RequestInShift"
-                   [style.background-color]="shiftsReqColors[w][d][s]"
-                   *ngIf="false && shiftsReq[w][d][s]!=null">req id:{{(shiftsReq[w][d][s]).name}}</div>
+                   [style.background-color]="shiftsReqColors[w][d][s].secondR"
+                   *ngIf="shiftsReq[w][d][s].secondR!=null">
+                <div>
+                  <div>{{(shiftsReq[w][d][s]).secondR!=null?(shiftsReq[w][d][s]).secondR.name:""}}</div>
+                  <div>Private..</div>
+                </div>
+                <i class="fa fa-info" aria-hidden="true" [class.shiftIcon]="shiftsReq[w][d][s].firstR.shiftsLength!=0.5"></i>
+              </div>
 
             </div>
 

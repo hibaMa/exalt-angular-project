@@ -7,7 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class WorkPlanComponent implements OnInit {
   requests = [
-    {id: 0, name: 'req0', shiftsLength: 5},
+    {id: 0, name: 'req0', shiftsLength: 0.5},
+    {id: 5, name: 'req0', shiftsLength: 0.5},
     {id: 1, name: 'req1', shiftsLength: 2},
     {id: 2, name: 'req2', shiftsLength: 3},
     {id: 3, name: 'req3', shiftsLength: 4},
@@ -117,16 +118,14 @@ export class WorkPlanComponent implements OnInit {
         week = [];
       }
       week.push(day);
-      this.shiftsReq[w][d] = new Array(day.shiftsNumber).fill(null);
-      this.shiftsReqColors[w][d] = new Array(day.shiftsNumber).fill(-1);
+      this.shiftsReq[w][d] = new Array(day.shiftsNumber).fill(null).map(()=> ({firstR:null,secondR:null}));
+      this.shiftsReqColors[w][d] = new Array(day.shiftsNumber).fill(null).map(()=> ({firstR:null,secondR:null}));
       d++;
       if (day.dayIndex == 6) {
         d = 0;
         this.workingDaysPerWeek.push(week);
       }
     }
-
-    console.log(this.shiftsReq);
 
   }
 
@@ -141,7 +140,7 @@ export class WorkPlanComponent implements OnInit {
 
   dropRequest(event, w, d, s) {
     event.preventDefault();
-    if (this.darggedData == null || this.shiftsReq[w][d][s] != null){
+    if (this.darggedData == null || this.shiftsReq[w][d][s].firstR != null&&this.shiftsReq[w][d][s].secondR){
       let elem = event.target as HTMLDivElement;
       elem.classList.remove('dragOver');
       return;
@@ -149,15 +148,23 @@ export class WorkPlanComponent implements OnInit {
     let randomColor = this.getRandomColor();
     let numShift = this.darggedData.shiftsLength;
     if (numShift != 0) {
-      for (let wi = w; wi < this.shiftsReq.length; wi++) {
+      for (let wi = w; wi < this.shiftsReq.length && (numShift != 0); wi++) {
         let di = wi==w?d:0;
-        for (; di < this.shiftsReq[wi].length; di++) {
+        for (; di < this.shiftsReq[wi].length && (numShift != 0); di++) {
           let si = (wi==w && di==d)?s:0;
           for (; si < this.shiftsReq[wi][di].length; si++) {
             if(numShift == 0)break;
-            if (this.shiftsReq[wi][di][si] == null) {
-              this.shiftsReq[wi][di][si] = this.darggedData;
-              this.shiftsReqColors[wi][di][si] = randomColor;
+            if(this.darggedData.shiftsLength==0.5 && this.shiftsReq[wi][di][si].firstR==null){
+              this.shiftsReq[wi][di][si].firstR = this.darggedData;
+              this.shiftsReqColors[wi][di][si].firstR = randomColor;
+              numShift-=0.5;
+            }else if(this.darggedData.shiftsLength==0.5 && this.shiftsReq[wi][di][si].secondR==null && this.shiftsReq[wi][di][si].firstR.shiftsLength==0.5){
+              this.shiftsReq[wi][di][si].secondR = this.darggedData;
+              this.shiftsReqColors[wi][di][si].secondR = randomColor;
+              numShift-=0.5;
+            }else if(this.shiftsReq[wi][di][si].firstR==null && this.shiftsReq[wi][di][si].secondR==null){
+              this.shiftsReq[wi][di][si].firstR = this.darggedData;
+              this.shiftsReqColors[wi][di][si].firstR = randomColor;
               numShift--;
             }
           }
@@ -166,7 +173,7 @@ export class WorkPlanComponent implements OnInit {
     }
     console.log(this.shiftsReq);
     //remove req
-    if (this.shiftsReq[w][d][s] != null) {
+    if (numShift == 0){
       this.removeReq(this.darggedData);
     }
     this.darggedData = null;
