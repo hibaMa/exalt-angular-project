@@ -11,7 +11,7 @@ export class WorkPlanComponent implements OnInit {
     {id: 5, name: 'req0', shiftsLength: 0.5, isConsecutive: true},
     {id: 7, name: 'req0', shiftsLength: 0.5, isConsecutive: true},
     {id: 8, name: 'req0', shiftsLength: 0.5, isConsecutive: true},
-    {id: 6, name: 'req0', shiftsLength: 0.5, isConsecutive: true},
+    {id: 6, name: 'req0', shiftsLength: 5, isConsecutive: true},
     {id: 1, name: 'req1', shiftsLength: 2, isConsecutive: true},
     {id: 2, name: 'req2', shiftsLength: 3, isConsecutive: true},
     {id: 3, name: 'req3', shiftsLength: 4, isConsecutive: false},
@@ -185,6 +185,7 @@ export class WorkPlanComponent implements OnInit {
         addedSuccessfully = this.fillRequestShiftIndex(this.darggedData.shiftsLength, randomColor);
 
       } else if (numShift != 0) {
+        addedSuccessfully=false;
         alert('not enough shifts');
       }
 
