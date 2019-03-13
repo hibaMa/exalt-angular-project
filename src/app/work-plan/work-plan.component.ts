@@ -55,8 +55,8 @@ export class WorkPlanComponent implements OnInit {
     {
       'dayIndex': 6,
       'id': 0,
-      'isWorkingDay': false,
-      'shiftsNumber': 0
+      'isWorkingDay': true,
+      'shiftsNumber': 3
     },
     {
       'dayIndex': 0,
@@ -179,19 +179,18 @@ export class WorkPlanComponent implements OnInit {
       }
     } else {
 
-      numShift = this.fillIndexs(numShift, randomColor, w, d, s);
+      numShift = this.fillIndexs(numShift, w, d, s, this.draggedData);
       //fill data in the index's from consIndexArray
       if (this.draggedData.isConsecutive == true && numShift == 0) {
-        let x = this.areConsecutiveShifts();
         if (this.areConsecutiveShifts()) {
-          addedSuccessfully = this.fillRequestShiftIndex(this.draggedData.shiftsLength, randomColor);
+          addedSuccessfully = this.fillRequestShiftIndex(this.draggedData.shiftsLength, randomColor, this.draggedData);
         } else {
           addedSuccessfully = false;
           alert('not consecutive shifts');
         }
 
       } else if (this.draggedData.isConsecutive == false && numShift == 0) {
-        addedSuccessfully = this.fillRequestShiftIndex(this.draggedData.shiftsLength, randomColor);
+        addedSuccessfully = this.fillRequestShiftIndex(this.draggedData.shiftsLength, randomColor, this.draggedData);
 
       } else if (numShift != 0) {
         addedSuccessfully = false;
@@ -209,13 +208,13 @@ export class WorkPlanComponent implements OnInit {
     elem.classList.remove('dragOver');
   }
 
-  fillIndexs(numShift, randomColor, w, d, s): number {
+  fillIndexs(numShift, w, d, s, draggedData): number {
     for (let wi = w; wi < this.shiftsReq.length && (numShift != 0); wi++) {
       let di = wi == w ? d : 0;
       for (; di < this.shiftsReq[wi].length && (numShift != 0); di++) {
         let si = (wi == w && di == d) ? s : 0;
         for (; si < this.shiftsReq[wi][di].length && (numShift != 0); si++) {
-          if (this.shiftsReq[wi][di][si].firstR == null && this.shiftsReq[wi][di][si].secondR == null && this.draggedData.isConsecutive) {
+          if (this.shiftsReq[wi][di][si].firstR == null && this.shiftsReq[wi][di][si].secondR == null && draggedData.isConsecutive) {
             //add available index's to the consIndexArray array
             let consIndex = {w: wi, d: di, s: si};
             this.consIndexArray.push(consIndex);
@@ -260,9 +259,9 @@ export class WorkPlanComponent implements OnInit {
     return canAddConsecutiveReq;
   }
 
-  fillRequestShiftIndex(numShift, randomColor): boolean {
+  fillRequestShiftIndex(numShift, randomColor, draggedData): boolean {
     this.consIndexArray.map((index) => {
-      this.shiftsReq[index.w][index.d][index.s].firstR = this.draggedData;
+      this.shiftsReq[index.w][index.d][index.s].firstR = draggedData;
       this.shiftsReqColors[index.w][index.d][index.s].firstR = randomColor;
       numShift--;
     });
@@ -337,9 +336,9 @@ export class WorkPlanComponent implements OnInit {
 
     }
 
-    if(oldRequest.shiftsLength == 0.5 &&   this.shiftsReq[newW][newD][newS].firstR != null && this.shiftsReq[newW][newD][newS].secondR != null  ||
-      (oldRequest.shiftsLength == 0.5 &&   this.shiftsReq[newW][newD][newS].firstR != null && this.shiftsReq[newW][newD][newS].firstR.shiftsLength != 0.5) ||
-      (oldRequest.shiftsLength != 0.5 &&  (this.shiftsReq[newW][newD][newS].firstR != null || this.shiftsReq[newW][newD][newS].secondR != null))) {
+    if (oldRequest.shiftsLength == 0.5 && this.shiftsReq[newW][newD][newS].firstR != null && this.shiftsReq[newW][newD][newS].secondR != null ||
+      (oldRequest.shiftsLength == 0.5 && this.shiftsReq[newW][newD][newS].firstR != null && this.shiftsReq[newW][newD][newS].firstR.shiftsLength != 0.5) ||
+      (oldRequest.shiftsLength != 0.5 && (this.shiftsReq[newW][newD][newS].firstR != null || this.shiftsReq[newW][newD][newS].secondR != null))) {
 
       alert('this shift is full ');
       this.draggedShiftPart = '';
@@ -372,7 +371,24 @@ export class WorkPlanComponent implements OnInit {
       }
 
     } else {
-      alert('Consecutive')
+      let numShift = this.fillIndexs(oldRequest.shiftsLength, newW, newD, newS, this.draggedShift);
+      if (this.areConsecutiveShifts() && numShift == 0) {
+
+        for (let wi = 0; wi < this.shiftsReq.length; wi++) {
+          for (let di = 0; di < this.shiftsReq[wi].length; di++) {
+            for (let si = 0; si < this.shiftsReq[wi][di].length; si++) {
+               if(this.shiftsReq[wi][di][si].firstR!=null && this.shiftsReq[wi][di][si].firstR.id==oldRequest.id){
+                 this.shiftsReq[wi][di][si].firstR=null;
+               }
+            }
+          }
+        }
+        this.fillRequestShiftIndex(oldRequest.shiftsLength, oldColor, oldRequest);
+
+      } else {
+        alert('there is no consecutive shifts');
+      }
+      this.consIndexArray = [];
     }
 
     this.draggedShiftPart = '';
