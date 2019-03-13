@@ -9,10 +9,10 @@ export class WorkPlanComponent implements OnInit {
   requests = [
     {id: 0, name: 'req0', shiftsLength: 0.5, isConsecutive: false},
     {id: 5, name: 'req5', shiftsLength: 0.5, isConsecutive: false},
-    {id: 6, name: 'req6', shiftsLength: 0.5, isConsecutive: false},
     {id: 1, name: 'req1', shiftsLength: 2, isConsecutive: true},
     {id: 2, name: 'req2', shiftsLength: 3, isConsecutive: true},
     {id: 3, name: 'req3', shiftsLength: 4, isConsecutive: false},
+    {id: 6, name: 'req6', shiftsLength: 0.5, isConsecutive: false},
     {id: 4, name: 'req4', shiftsLength: 1, isConsecutive: false}
   ];
   workingDays = [
@@ -383,6 +383,7 @@ export class WorkPlanComponent implements OnInit {
             }
           }
         }
+        
         this.fillRequestShiftIndex(oldRequest.shiftsLength, oldColor, oldRequest);
 
       } else {
