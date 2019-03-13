@@ -9,6 +9,9 @@ export class WorkPlanComponent implements OnInit {
   requests = [
     {id: 0, name: 'req0', shiftsLength: 0.5, isConsecutive: false},
     {id: 5, name: 'req0', shiftsLength: 0.5, isConsecutive: true},
+    {id: 7, name: 'req0', shiftsLength: 0.5, isConsecutive: true},
+    {id: 8, name: 'req0', shiftsLength: 0.5, isConsecutive: true},
+    {id: 6, name: 'req0', shiftsLength: 0.5, isConsecutive: true},
     {id: 1, name: 'req1', shiftsLength: 2, isConsecutive: true},
     {id: 2, name: 'req2', shiftsLength: 3, isConsecutive: true},
     {id: 3, name: 'req3', shiftsLength: 4, isConsecutive: false},
@@ -153,7 +156,7 @@ export class WorkPlanComponent implements OnInit {
 
     let randomColor = this.getRandomColor();
     let numShift = this.darggedData.shiftsLength;
-
+    let addedSuccessfully = true;
     if (this.darggedData.shiftsLength == 0.5) {
       if (this.shiftsReq[w][d][s].firstR == null) {
         this.shiftsReq[w][d][s].firstR = this.darggedData;
@@ -163,6 +166,8 @@ export class WorkPlanComponent implements OnInit {
         this.shiftsReq[w][d][s].secondR = this.darggedData;
         this.shiftsReqColors[w][d][s].secondR = randomColor;
         numShift -= 0.5;
+      }else{
+        addedSuccessfully = false;
       }
     } else if (numShift != 0) {
 
@@ -170,13 +175,14 @@ export class WorkPlanComponent implements OnInit {
       //fill data in the index's from consIndexArray
       if (this.darggedData.isConsecutive == true && numShift == 0) {
         if (this.areConsecutiveShifts()) {
-          numShift = this.fillRequestShiftIndex(numShift, randomColor);
+          addedSuccessfully = this.fillRequestShiftIndex(this.darggedData.shiftsLength, randomColor);
         } else {
+          addedSuccessfully = false;
           alert('not consecutive shifts');
         }
 
       } else if (this.darggedData.isConsecutive == false && numShift == 0) {
-        numShift = this.fillRequestShiftIndex(numShift, randomColor);
+        addedSuccessfully = this.fillRequestShiftIndex(this.darggedData.shiftsLength, randomColor);
 
       } else if (numShift != 0) {
         alert('not enough shifts');
@@ -185,7 +191,7 @@ export class WorkPlanComponent implements OnInit {
     }
 
     this.consIndexArray = [];
-    if (numShift == 0) {
+    if (addedSuccessfully) {
       this.removeReq(this.darggedData);
     }
     this.darggedData = null;
@@ -243,13 +249,13 @@ export class WorkPlanComponent implements OnInit {
     return canAddConsecutiveReq;
   }
 
-  fillRequestShiftIndex(numShift, randomColor): number {
+  fillRequestShiftIndex(numShift, randomColor): boolean {
     this.consIndexArray.map((index) => {
       this.shiftsReq[index.w][index.d][index.s].firstR = this.darggedData;
       this.shiftsReqColors[index.w][index.d][index.s].firstR = randomColor;
       numShift--;
     });
-    return numShift;
+    return numShift == 0 ? true : false;
   }
 
   onDragOver(event: DragEvent) {
