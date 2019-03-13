@@ -8,10 +8,8 @@ import {Component, OnInit} from '@angular/core';
 export class WorkPlanComponent implements OnInit {
   requests = [
     {id: 0, name: 'req0', shiftsLength: 0.5, isConsecutive: false},
-    {id: 5, name: 'req0', shiftsLength: 0.5, isConsecutive: true},
-    {id: 7, name: 'req0', shiftsLength: 0.5, isConsecutive: true},
-    {id: 8, name: 'req0', shiftsLength: 0.5, isConsecutive: true},
-    {id: 6, name: 'req0', shiftsLength: 5, isConsecutive: true},
+    {id: 5, name: 'req5', shiftsLength: 0.5, isConsecutive: false},
+    {id: 6, name: 'req6', shiftsLength: 0.5, isConsecutive: false},
     {id: 1, name: 'req1', shiftsLength: 2, isConsecutive: true},
     {id: 2, name: 'req2', shiftsLength: 3, isConsecutive: true},
     {id: 3, name: 'req3', shiftsLength: 4, isConsecutive: false},
@@ -106,6 +104,7 @@ export class WorkPlanComponent implements OnInit {
   workingDaysPerWeek = [];
   shiftsReq = [[[]]];
   shiftsReqColors = [[[]]];
+  private draggedShiftPart: string;
 
   constructor() {
   }
@@ -134,59 +133,68 @@ export class WorkPlanComponent implements OnInit {
 
   // drag & drop
 
-  darggedData;
+  draggedData;
   consIndexArray = [];
+  draggedShift;
+  draggedShiftIndex = {w: 0, d: 0, s: 0};
 
   requestDragged(event: DragEvent, id: number, index: number) {
     // this.requests.slice(index, 1);
-    this.darggedData = this.getReqWithID(id);
+    this.draggedData = this.getReqWithID(id);
   }
 
   dropRequest(event, w, d, s) {
     event.preventDefault();
+    if (this.draggedData == null && this.draggedShift != null) {
+      this.dropShift(event, w, d, s);
+      this.draggedData = null;
+      return;
+    }
     //check if drop shift is not full
-    if (this.darggedData == null || (this.shiftsReq[w][d][s].firstR != null && this.shiftsReq[w][d][s].secondR != null && this.darggedData.shiftsLength == 0.5) ||
-      (this.darggedData.shiftsLength == 0.5 && this.shiftsReq[w][d][s].firstR != null && this.shiftsReq[w][d][s].firstR.shiftsLength != 0.5) ||
-      (this.shiftsReq[w][d][s].firstR != null && this.darggedData.shiftsLength != 0.5)) {
+    if (this.draggedData == null ||
+      (this.draggedData.shiftsLength == 0.5 && this.shiftsReq[w][d][s].firstR != null && this.shiftsReq[w][d][s].secondR != null) ||
+      (this.draggedData.shiftsLength == 0.5 && this.shiftsReq[w][d][s].firstR != null && this.shiftsReq[w][d][s].firstR.shiftsLength != 0.5) ||
+      (this.draggedData.shiftsLength != 0.5 && !(this.shiftsReq[w][d][s].firstR == null && this.shiftsReq[w][d][s].secondR == null))) {
       let elem = event.target as HTMLDivElement;
       elem.classList.remove('dragOver');
-      alert('shift is full');
+      this.draggedData == null ? alert('null request') : alert('shift is full');
+      this.draggedData = null;
       return;
     }
 
     let randomColor = this.getRandomColor();
-    let numShift = this.darggedData.shiftsLength;
+    let numShift = this.draggedData.shiftsLength;
     let addedSuccessfully = true;
-    if (this.darggedData.shiftsLength == 0.5) {
+    if (this.draggedData.shiftsLength == 0.5) {
       if (this.shiftsReq[w][d][s].firstR == null) {
-        this.shiftsReq[w][d][s].firstR = this.darggedData;
+        this.shiftsReq[w][d][s].firstR = this.draggedData;
         this.shiftsReqColors[w][d][s].firstR = randomColor;
         numShift -= 0.5;
       } else if (this.shiftsReq[w][d][s].secondR == null && this.shiftsReq[w][d][s].firstR.shiftsLength == 0.5) {
-        this.shiftsReq[w][d][s].secondR = this.darggedData;
+        this.shiftsReq[w][d][s].secondR = this.draggedData;
         this.shiftsReqColors[w][d][s].secondR = randomColor;
         numShift -= 0.5;
-      }else{
+      } else {
         addedSuccessfully = false;
       }
     } else {
 
       numShift = this.fillIndexs(numShift, randomColor, w, d, s);
       //fill data in the index's from consIndexArray
-      if (this.darggedData.isConsecutive == true && numShift == 0) {
-        let x= this.areConsecutiveShifts();
+      if (this.draggedData.isConsecutive == true && numShift == 0) {
+        let x = this.areConsecutiveShifts();
         if (this.areConsecutiveShifts()) {
-          addedSuccessfully = this.fillRequestShiftIndex(this.darggedData.shiftsLength, randomColor);
+          addedSuccessfully = this.fillRequestShiftIndex(this.draggedData.shiftsLength, randomColor);
         } else {
           addedSuccessfully = false;
           alert('not consecutive shifts');
         }
 
-      } else if (this.darggedData.isConsecutive == false && numShift == 0) {
-        addedSuccessfully = this.fillRequestShiftIndex(this.darggedData.shiftsLength, randomColor);
+      } else if (this.draggedData.isConsecutive == false && numShift == 0) {
+        addedSuccessfully = this.fillRequestShiftIndex(this.draggedData.shiftsLength, randomColor);
 
       } else if (numShift != 0) {
-        addedSuccessfully=false;
+        addedSuccessfully = false;
         alert('not enough shifts');
       }
 
@@ -194,9 +202,9 @@ export class WorkPlanComponent implements OnInit {
 
     this.consIndexArray = [];
     if (addedSuccessfully) {
-      this.removeReq(this.darggedData);
+      this.removeReq(this.draggedData);
     }
-    this.darggedData = null;
+    this.draggedData = null;
     let elem = event.target as HTMLDivElement;
     elem.classList.remove('dragOver');
   }
@@ -207,7 +215,7 @@ export class WorkPlanComponent implements OnInit {
       for (; di < this.shiftsReq[wi].length && (numShift != 0); di++) {
         let si = (wi == w && di == d) ? s : 0;
         for (; si < this.shiftsReq[wi][di].length && (numShift != 0); si++) {
-          if (this.shiftsReq[wi][di][si].firstR == null && this.shiftsReq[wi][di][si].secondR == null && this.darggedData.isConsecutive) {
+          if (this.shiftsReq[wi][di][si].firstR == null && this.shiftsReq[wi][di][si].secondR == null && this.draggedData.isConsecutive) {
             //add available index's to the consIndexArray array
             let consIndex = {w: wi, d: di, s: si};
             this.consIndexArray.push(consIndex);
@@ -236,7 +244,7 @@ export class WorkPlanComponent implements OnInit {
       }
       //same week
       else if (this.consIndexArray[i].w == cw && this.consIndexArray[i].d - cd == 1 && this.consIndexArray[i].s == 0) {
-        let j = cd==this.consIndexArray[0].d?cs:0;
+        let j = cd == this.consIndexArray[0].d ? cs : 0;
         for (; j < this.shiftsReq[cw][cd].length; j++) {
           if (this.containsShiftIndexObject({w: cw, d: cd, s: j}, this.consIndexArray) == false) {
             canAddConsecutiveReq = false;
@@ -254,7 +262,7 @@ export class WorkPlanComponent implements OnInit {
 
   fillRequestShiftIndex(numShift, randomColor): boolean {
     this.consIndexArray.map((index) => {
-      this.shiftsReq[index.w][index.d][index.s].firstR = this.darggedData;
+      this.shiftsReq[index.w][index.d][index.s].firstR = this.draggedData;
       this.shiftsReqColors[index.w][index.d][index.s].firstR = randomColor;
       numShift--;
     });
@@ -266,7 +274,7 @@ export class WorkPlanComponent implements OnInit {
   }
 
   onDragenter(event: DragEvent) {
-    if (this.darggedData != null) {
+    if (this.draggedData != null) {
       let elem = event.target as HTMLDivElement;
       elem.classList.add('dragOver');
     }
@@ -308,4 +316,89 @@ export class WorkPlanComponent implements OnInit {
     }
     return false;
   }
+
+  shiftDragged($event, w, d, s, shiftPart) {
+    this.draggedShift = this.shiftsReq[w][d][s];
+    this.draggedShiftIndex = {w: w, d: d, s: s};
+    this.draggedShiftPart = shiftPart;
+  }
+
+  dropShift(event, newW: number, newD: number, newS: number) {
+    let oldRequest;
+    let oldColor;
+
+    if (this.draggedShiftPart.localeCompare('firstHalf') == 0) {
+      oldRequest = this.shiftsReq[this.draggedShiftIndex.w][this.draggedShiftIndex.d][this.draggedShiftIndex.s].firstR;
+      oldColor = this.shiftsReqColors[this.draggedShiftIndex.w][this.draggedShiftIndex.d][this.draggedShiftIndex.s].firstR;
+
+    } else if (this.draggedShiftPart.localeCompare('secondHalf') == 0) {
+      oldRequest = this.shiftsReq[this.draggedShiftIndex.w][this.draggedShiftIndex.d][this.draggedShiftIndex.s].secondR;
+      oldColor = this.shiftsReqColors[this.draggedShiftIndex.w][this.draggedShiftIndex.d][this.draggedShiftIndex.s].secondR;
+
+    }
+
+    if(oldRequest.shiftsLength == 0.5 &&   this.shiftsReq[newW][newD][newS].firstR != null && this.shiftsReq[newW][newD][newS].secondR != null  ||
+      (oldRequest.shiftsLength == 0.5 &&   this.shiftsReq[newW][newD][newS].firstR != null && this.shiftsReq[newW][newD][newS].firstR.shiftsLength != 0.5) ||
+      (oldRequest.shiftsLength != 0.5 &&  (this.shiftsReq[newW][newD][newS].firstR != null || this.shiftsReq[newW][newD][newS].secondR != null))) {
+
+      alert('this shift is full ');
+      this.draggedShiftPart = '';
+      this.draggedShiftIndex = {w: null, d: null, s: null};
+      this.draggedShift = null;
+      return;
+    }
+
+    if (oldRequest.isConsecutive == false && oldRequest.shiftsLength != 0.5) {
+      this.shiftsReq[newW][newD][newS].firstR = oldRequest;
+      this.shiftsReqColors[newW][newD][newS].firstR = oldColor;
+      this.shiftsReq[this.draggedShiftIndex.w][this.draggedShiftIndex.d][this.draggedShiftIndex.s].firstR = null;
+      this.shiftsReqColors[this.draggedShiftIndex.w][this.draggedShiftIndex.d][this.draggedShiftIndex.s].firstR = null;
+    } else if (oldRequest.shiftsLength == 0.5) {
+
+      if (this.shiftsReq[newW][newD][newS].firstR == null) {
+        this.shiftsReq[newW][newD][newS].firstR = oldRequest;
+        this.shiftsReqColors[newW][newD][newS].firstR = oldColor;
+      } else {
+        this.shiftsReq[newW][newD][newS].secondR = oldRequest;
+        this.shiftsReqColors[newW][newD][newS].secondR = oldColor;
+      }
+
+      if (this.draggedShiftPart.localeCompare('firstHalf') == 0) {
+        this.shiftsReq[this.draggedShiftIndex.w][this.draggedShiftIndex.d][this.draggedShiftIndex.s].firstR = null;
+        this.shiftsReqColors[this.draggedShiftIndex.w][this.draggedShiftIndex.d][this.draggedShiftIndex.s].firstR = null;
+      } else {
+        this.shiftsReq[this.draggedShiftIndex.w][this.draggedShiftIndex.d][this.draggedShiftIndex.s].secondR = null;
+        this.shiftsReqColors[this.draggedShiftIndex.w][this.draggedShiftIndex.d][this.draggedShiftIndex.s].secondR = null;
+      }
+
+    } else {
+      alert('Consecutive')
+    }
+
+    this.draggedShiftPart = '';
+    this.draggedShiftIndex = {w: null, d: null, s: null};
+    this.draggedShift = null;
+  }
+
+  dragShiftEnd() {
+    this.draggedShiftPart = '';
+    this.draggedShiftIndex = {w: null, d: null, s: null};
+    this.draggedShift = null;
+  }
+
+
+  dragRequestEnd() {
+    this.draggedData = null;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+

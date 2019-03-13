@@ -32,7 +32,7 @@
 
         <!--req card (dragstart)-->
         <div class="request " [class.halfShift]="req.shiftsLength==0.5" *ngFor="let req of requests;let i=index"
-             draggable="true" (drag)="requestDragged($event,req.id,i)">
+             draggable="true" (drag)="requestDragged($event,req.id,i)" (dragend)="dragRequestEnd()">
           <div class="info">
             <div class="title">Yegor G.{{req.name}}</div>
             <div class="event">VIP event preparation</div>
@@ -106,7 +106,7 @@
               <span class="slash">--</span>
               <span class="drop">Done</span>
 
-              <div class=" requestInShift " (drag)="requestDragged($event,req.id,i)"
+              <div class="requestInShift" (drag)="shiftDragged($event,w,d,s,'firstHalf')"  draggable="true" (dragend)="dragShiftEnd()"
                    [class.half1RequestInShift]="shiftsReq[w][d][s].firstR!=null && shiftsReq[w][d][s].firstR.shiftsLength==0.5"
                    [style.background-color]="shiftsReqColors[w][d][s].firstR"
                    *ngIf="shiftsReq[w][d][s].firstR!=null">
@@ -118,7 +118,7 @@
                    [class.shiftIcon]="shiftsReq[w][d][s].firstR.shiftsLength!=0.5"></i>
               </div>
 
-              <div class=" requestInShift half2RequestInShift"
+              <div class=" requestInShift half2RequestInShift"  (drag)="shiftDragged($event,w,d,s,'secondHalf')"  draggable="true" (dragend)="dragShiftEnd()"
                    [style.background-color]="shiftsReqColors[w][d][s].secondR"
                    *ngIf="shiftsReq[w][d][s].secondR!=null">
                 <div>
@@ -126,7 +126,7 @@
                   <div>Private..</div>
                 </div>
                 <i class="fa fa-info" aria-hidden="true"
-                   [class.shiftIcon]="shiftsReq[w][d][s].firstR.shiftsLength!=0.5"></i>
+                   [class.shiftIcon]="shiftsReq[w][d][s].secondR.shiftsLength!=0.5"></i>
               </div>
 
             </div>
