@@ -138,7 +138,7 @@ export class WorkPlanComponent implements OnInit {
   consIndexArray = [];
 
   requestDragged(event: DragEvent, id: number, index: number) {
-    this.requests.slice(index, 1);
+    // this.requests.slice(index, 1);
     this.darggedData = this.getReqWithID(id);
   }
 
@@ -169,11 +169,12 @@ export class WorkPlanComponent implements OnInit {
       }else{
         addedSuccessfully = false;
       }
-    } else if (numShift != 0) {
+    } else {
 
       numShift = this.fillIndexs(numShift, randomColor, w, d, s);
       //fill data in the index's from consIndexArray
       if (this.darggedData.isConsecutive == true && numShift == 0) {
+        let x= this.areConsecutiveShifts();
         if (this.areConsecutiveShifts()) {
           addedSuccessfully = this.fillRequestShiftIndex(this.darggedData.shiftsLength, randomColor);
         } else {
@@ -235,7 +236,8 @@ export class WorkPlanComponent implements OnInit {
       }
       //same week
       else if (this.consIndexArray[i].w == cw && this.consIndexArray[i].d - cd == 1 && this.consIndexArray[i].s == 0) {
-        for (let j = cs; j < this.shiftsReq[cw][cd].length; j++) {
+        let j = cd==this.consIndexArray[0].d?cs:0;
+        for (; j < this.shiftsReq[cw][cd].length; j++) {
           if (this.containsShiftIndexObject({w: cw, d: cd, s: j}, this.consIndexArray) == false) {
             canAddConsecutiveReq = false;
             break;
@@ -283,7 +285,7 @@ export class WorkPlanComponent implements OnInit {
   }
 
   getReqWithID(id: number) {
-    var relem = null;
+    let relem = null;
     this.requests.map((elem) => {
       if (elem.id == id) {
         relem = elem;

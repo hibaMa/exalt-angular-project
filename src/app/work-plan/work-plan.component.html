@@ -106,7 +106,7 @@
               <span class="slash">--</span>
               <span class="drop">Done</span>
 
-              <div class=" requestInShift "
+              <div class=" requestInShift " (drag)="requestDragged($event,req.id,i)"
                    [class.half1RequestInShift]="shiftsReq[w][d][s].firstR!=null && shiftsReq[w][d][s].firstR.shiftsLength==0.5"
                    [style.background-color]="shiftsReqColors[w][d][s].firstR"
                    *ngIf="shiftsReq[w][d][s].firstR!=null">
