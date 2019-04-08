@@ -383,7 +383,7 @@ export class WorkPlanComponent implements OnInit {
             }
           }
         }
-        
+
         this.fillRequestShiftIndex(oldRequest.shiftsLength, oldColor, oldRequest);
 
       } else {
